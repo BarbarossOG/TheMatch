@@ -1,0 +1,123 @@
+@{
+    ViewData["Title"] = "Register";
+    Layout = "_Layout";
+}
+
+<!-- ========== Login & Registation Section ========== -->
+<section class="log-reg">
+    <div class="top-menu-area">
+        <div class="container">
+            <div class="row">
+                <div class="col-lg-5">
+                    <a asp-controller="Home" asp-action="Index" class="backto-home"><i class="fas fa-chevron-left"></i> Back to TheMatch</a>
+                </div>
+                <div class="col-lg-7 ">
+                    <div class="logo">
+                        <img src="~/images/logo2.png" alt="logo">
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+    <div class="container">
+        <div class="row justify-content-end">
+            <div class="image">
+            </div>
+            <div class="col-lg-7">
+                <div class="log-reg-inner">
+                    <div class="section-header">
+                        <h2 class="title">
+                            Welcome to TheMatch
+                        </h2>
+                        <p>
+                            Let's create your profile. Already have an account? <a asp-controller="Account" asp-action="Login">Login</a>
+                        </p>
+                    </div>
+                    <div class="main-content">
+                        <form action="#">
+                            <h4 class="content-title">
+                                Account Details
+                            </h4>
+                            <div class="form-group">
+                                <label for="">Username*</label>
+                                <input type="text" class="my-form-control" placeholder="Enter Your Username">
+                            </div>
+                            <div class="form-group">
+                                <label for="">Email Address*</label>
+                                <input type="email" class="my-form-control" placeholder="Enter Your Email">
+                            </div>
+                            <div class="form-group">
+                                <label for="">Password*</label>
+                                <input type="password" class="my-form-control" placeholder="Enter Your Password">
+                            </div>
+                            <div class="form-group">
+                                <label for="">Confirm Password*</label>
+                                <input type="password" class="my-form-control" placeholder="Enter Your Password">
+                            </div>
+                            <h4 class="content-title mt-5">
+                                Profile Details
+                            </h4>
+                            <div class="form-group">
+                                <label for="">Name*</label>
+                                <input type="text" class="my-form-control" placeholder="Enter Your Full Name">
+                            </div>
+                            <div class="form-group">
+                                <label for="">Birthday*</label>
+                                <input type="date" class="my-form-control">
+                            </div>
+                            <div class="form-group">
+                                <label for="">I am a*</label>
+                                <div class="option">
+                                    <div class="s-input mr-3">
+                                        <input type="radio" name="gender" id="male"><label for="male">Male</label>
+                                    </div>
+                                    <div class="s-input">
+                                        <input type="radio" name="gender" id="female"><label for="female">Female</label>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="form-group">
+                                <label for="">Looking for a*</label>
+                                <div class="option">
+                                    <div class="s-input mr-3">
+                                        <input type="radio" name="gender-login" id="male-login"><label
+                                            for="male-login">Male</label>
+                                    </div>
+                                    <div class="s-input">
+                                        <input type="radio" name="gender-login" id="female-login"><label
+                                            for="female-login">Female</label>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="form-group">
+                                <label for="">Marital Status*</label>
+                                <div class="option">
+                                    <div class="s-input mr-3">
+                                        <input type="radio" name="marital" id="unmarried"><label for="unmarried">Unmarried</label>
+                                    </div>
+                                    <div class="s-input">
+                                        <input type="radio" name="marital" id="married"><label for="married">Married</label>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="form-group">
+                                <label for="">City*</label>
+                                <input type="text" class="my-form-control" placeholder="Enter Your City">
+                            </div>
+                            <div class="form-group">
+                                <label for="">State*</label>
+                                <input type="text" class="my-form-control" placeholder="Enter Your State">
+                            </div>
+                            <div class="form-group">
+                                <label for="">Zip Code*</label>
+                                <input type="text" class="my-form-control" placeholder="Enter Your Zip Code">
+                            </div>
+                            <button class="custom-button" type="submit">Register</button>
+                        </form>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</section>
+<!-- ========== Login & Registation Section ========== --> 

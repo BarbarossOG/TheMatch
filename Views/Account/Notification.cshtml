@@ -1,0 +1,245 @@
+@{
+    ViewData["Title"] = "Notifications";
+    Layout = "_Layout";
+}
+
+<!-- ==========Banner-Section========== -->
+<section class="banner-section">
+    <div class="container">
+        <div class="row">
+            <div class="col-lg-8 col-xl-6">
+                <div class="banner-content">
+                    <h1 class="title">Notifications</h1>
+                    <div class="breadcrumb-area">
+                        <nav aria-label="breadcrumb">
+                            <ol class="breadcrumb">
+                                <li class="breadcrumb-item"><a asp-controller="Home" asp-action="Index">Home</a></li>
+                                <li class="breadcrumb-item"><a asp-controller="Account" asp-action="Settings">Settings</a></li>
+                                <li class="breadcrumb-item active" aria-current="page">Notifications</li>
+                            </ol>
+                        </nav>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</section>
+<!-- ==========Banner-Section========== -->
+
+<!-- ==========Notification-Section========== -->
+<section class="account-section">
+    <div class="container">
+        <div class="row">
+            <div class="col-lg-4">
+                <div class="account-sidebar">
+                    <div class="account-sidebar-header">
+                        <div class="thumb">
+                            <img src="~/images/account/user.png" alt="account">
+                        </div>
+                        <div class="content">
+                            <h5 class="title">Welcome, John Doe</h5>
+                            <span>Last login: 10 hours ago</span>
+                        </div>
+                    </div>
+                    <ul class="account-sidebar-menu">
+                        <li>
+                            <a asp-controller="Account" asp-action="Settings"><i class="fas fa-cog"></i> Settings</a>
+                        </li>
+                        <li>
+                            <a asp-controller="Account" asp-action="AccountInfo"><i class="fas fa-user"></i> Account Info</a>
+                        </li>
+                        <li>
+                            <a asp-controller="Account" asp-action="PrivacySettings"><i class="fas fa-user-lock"></i> Privacy Settings</a>
+                        </li>
+                        <li>
+                            <a asp-controller="Account" asp-action="ChangePassword"><i class="fas fa-key"></i> Change Password</a>
+                        </li>
+                        <li>
+                            <a asp-controller="Account" asp-action="VerifyAccount"><i class="fas fa-user-check"></i> Verify Account</a>
+                        </li>
+                        <li>
+                            <a asp-controller="Account" asp-action="Notification" class="active"><i class="fas fa-bell"></i> Notifications</a>
+                        </li>
+                        <li>
+                            <a asp-controller="Account" asp-action="Badges"><i class="fas fa-medal"></i> Badges</a>
+                        </li>
+                        <li>
+                            <a asp-controller="Account" asp-action="FriendRequest"><i class="fas fa-user-plus"></i> Friend Requests</a>
+                        </li>
+                        <li>
+                            <a asp-controller="Account" asp-action="Billing"><i class="fas fa-file-invoice-dollar"></i> Billing Info</a>
+                        </li>
+                        <li>
+                            <a asp-controller="Account" asp-action="Plan"><i class="fas fa-gem"></i> Membership Plan</a>
+                        </li>
+                        <li>
+                            <a asp-controller="Account" asp-action="Purchase"><i class="fas fa-shopping-cart"></i> Purchase History</a>
+                        </li>
+                        <li>
+                            <a asp-controller="Account" asp-action="CloseAccount"><i class="fas fa-user-slash"></i> Close Account</a>
+                        </li>
+                    </ul>
+                </div>
+            </div>
+            <div class="col-lg-8">
+                <div class="account-wrapper">
+                    <div class="account-header">
+                        <h3 class="title">Notification Settings</h3>
+                        <p>Manage your notifications and alerts preferences</p>
+                    </div>
+                    <div class="account-content">
+                        <div class="notification-settings">
+                            <div class="settings-section">
+                                <h4 class="section-title">Email Notifications</h4>
+                                <div class="setting-item">
+                                    <div class="setting-label">
+                                        <h5>New matches</h5>
+                                        <p>Get notified when you match with someone</p>
+                                    </div>
+                                    <div class="setting-control">
+                                        <div class="toggle-switch">
+                                            <input type="checkbox" id="newMatches" checked>
+                                            <label for="newMatches"></label>
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="setting-item">
+                                    <div class="setting-label">
+                                        <h5>Messages</h5>
+                                        <p>Get notified when you receive new messages</p>
+                                    </div>
+                                    <div class="setting-control">
+                                        <div class="toggle-switch">
+                                            <input type="checkbox" id="newMessages" checked>
+                                            <label for="newMessages"></label>
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="setting-item">
+                                    <div class="setting-label">
+                                        <h5>Friend requests</h5>
+                                        <p>Get notified when someone sends you a friend request</p>
+                                    </div>
+                                    <div class="setting-control">
+                                        <div class="toggle-switch">
+                                            <input type="checkbox" id="friendRequests" checked>
+                                            <label for="friendRequests"></label>
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="setting-item">
+                                    <div class="setting-label">
+                                        <h5>Profile views</h5>
+                                        <p>Get notified when someone views your profile</p>
+                                    </div>
+                                    <div class="setting-control">
+                                        <div class="toggle-switch">
+                                            <input type="checkbox" id="profileViews">
+                                            <label for="profileViews"></label>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="settings-section">
+                                <h4 class="section-title">Push Notifications</h4>
+                                <div class="setting-item">
+                                    <div class="setting-label">
+                                        <h5>Enable push notifications</h5>
+                                        <p>Receive notifications on your device</p>
+                                    </div>
+                                    <div class="setting-control">
+                                        <div class="toggle-switch">
+                                            <input type="checkbox" id="pushNotifications" checked>
+                                            <label for="pushNotifications"></label>
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="nested-settings">
+                                    <div class="setting-item">
+                                        <div class="setting-label">
+                                            <h5>Messages</h5>
+                                            <p>Push notifications for new messages</p>
+                                        </div>
+                                        <div class="setting-control">
+                                            <div class="toggle-switch">
+                                                <input type="checkbox" id="pushMessages" checked>
+                                                <label for="pushMessages"></label>
+                                            </div>
+                                        </div>
+                                    </div>
+                                    <div class="setting-item">
+                                        <div class="setting-label">
+                                            <h5>Matches</h5>
+                                            <p>Push notifications for new matches</p>
+                                        </div>
+                                        <div class="setting-control">
+                                            <div class="toggle-switch">
+                                                <input type="checkbox" id="pushMatches" checked>
+                                                <label for="pushMatches"></label>
+                                            </div>
+                                        </div>
+                                    </div>
+                                    <div class="setting-item">
+                                        <div class="setting-label">
+                                            <h5>Community activity</h5>
+                                            <p>Push notifications for community updates</p>
+                                        </div>
+                                        <div class="setting-control">
+                                            <div class="toggle-switch">
+                                                <input type="checkbox" id="pushCommunity">
+                                                <label for="pushCommunity"></label>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="settings-section">
+                                <h4 class="section-title">Marketing Communications</h4>
+                                <div class="setting-item">
+                                    <div class="setting-label">
+                                        <h5>Special offers</h5>
+                                        <p>Receive emails about special offers and promotions</p>
+                                    </div>
+                                    <div class="setting-control">
+                                        <div class="toggle-switch">
+                                            <input type="checkbox" id="specialOffers">
+                                            <label for="specialOffers"></label>
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="setting-item">
+                                    <div class="setting-label">
+                                        <h5>Site updates</h5>
+                                        <p>Receive emails about new features and updates</p>
+                                    </div>
+                                    <div class="setting-control">
+                                        <div class="toggle-switch">
+                                            <input type="checkbox" id="siteUpdates" checked>
+                                            <label for="siteUpdates"></label>
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="setting-item">
+                                    <div class="setting-label">
+                                        <h5>Dating tips</h5>
+                                        <p>Receive emails with dating advice and tips</p>
+                                    </div>
+                                    <div class="setting-control">
+                                        <div class="toggle-switch">
+                                            <input type="checkbox" id="datingTips">
+                                            <label for="datingTips"></label>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="form-group mt-4">
+                                <button type="submit" class="custom-button">Save Settings</button>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</section>
+<!-- ==========Notification-Section========== --> 

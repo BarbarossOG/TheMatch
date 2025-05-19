@@ -1,0 +1,243 @@
+@{
+    ViewData["Title"] = "Страница сообщества";
+    Layout = "_Layout";
+}
+
+<!-- ==========Banner-Section========== -->
+<section class="banner-section">
+    <div class="container">
+        <div class="row">
+            <div class="col-lg-8 col-xl-6">
+                <div class="banner-content">
+                    <h1 class="title">Страница сообщества</h1>
+                    <div class="breadcrumb-area">
+                        <nav aria-label="breadcrumb">
+                            <ol class="breadcrumb">
+                                <li class="breadcrumb-item"><a asp-controller="Home" asp-action="Index">Главная</a></li>
+                                <li class="breadcrumb-item"><a asp-controller="Community" asp-action="Index">Сообщество</a></li>
+                                <li class="breadcrumb-item active" aria-current="page">Поиск любви после развода</li>
+                            </ol>
+                        </nav>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</section>
+<!-- ==========Banner-Section========== -->
+
+<!-- ==========Community-Single========== -->
+<section class="community-single-section">
+    <div class="container">
+        <div class="row">
+            <div class="col-lg-8">
+                <div class="community-wrapper">
+                    <div class="community-single">
+                        <div class="community-thumb">
+                            <img src="~/images/community/community-single.jpg" alt="community">
+                        </div>
+                        <div class="community-content">
+                            <div class="community-header">
+                                <h3 class="title">Поиск любви после развода</h3>
+                                <span class="meta-date"><i class="fas fa-calendar-alt"></i>Создано 25 декабря 2025</span>
+                            </div>
+                            <div class="community-description">
+                                <p>
+                                    Добро пожаловать в наше поддерживающее сообщество, посвященное тем, кто находится в пути поиска любви после развода. Развод может быть одним из самых сложных переходных периодов в жизни, но он также предоставляет возможность для личностного роста и нового начала в вашей романтической жизни.
+                                </p>
+                                <p>
+                                    В этом сообществе вы сможете общаться с другими людьми, которые понимают, через что вы проходите. Вместе мы будем делиться опытом, оказывать поддержку и исследовать стратегии исцеления от прошлых отношений и открытия своего сердца для новых возможностей.
+                                </p>
+                                <h4>Цели нашего сообщества</h4>
+                                <div class="community-list">
+                                    <ul>
+                                        <li>
+                                            <i class="fas fa-check"></i>
+                                            <span>Оказание эмоциональной поддержки в процессе исцеления</span>
+                                        </li>
+                                        <li>
+                                            <i class="fas fa-check"></i>
+                                            <span>Обмен личными историями и извлеченными уроками</span>
+                                        </li>
+                                        <li>
+                                            <i class="fas fa-check"></i>
+                                            <span>Обсуждение стратегий знакомств для разведенных людей</span>
+                                        </li>
+                                        <li>
+                                            <i class="fas fa-check"></i>
+                                            <span>Советы по знакомству детей с новыми партнерами</span>
+                                        </li>
+                                        <li>
+                                            <i class="fas fa-check"></i>
+                                            <span>Создание свободной от осуждения зоны для вопросов и обсуждений</span>
+                                        </li>
+                                    </ul>
+                                </div>
+                                <h4>Правила сообщества</h4>
+                                <p>
+                                    Мы хотим, чтобы это было безопасное, поддерживающее пространство для всех. Пожалуйста, следуйте этим правилам при участии:
+                                </p>
+                                <ul>
+                                    <li>Относитесь ко всем участникам с уважением и добротой</li>
+                                    <li>Сохраняйте конфиденциальность - то, чем делятся здесь, остается здесь</li>
+                                    <li>Сосредоточьтесь на конструктивных советах, а не на критике</li>
+                                    <li>Избегайте пренебрежительных комментариев о бывших партнерах</li>
+                                    <li>Помните, что у каждого свой уникальный путь</li>
+                                </ul>
+                                <div class="join-box">
+                                    <div class="join-header">
+                                        <h4 class="title">Присоединяйтесь к нашему сообществу</h4>
+                                        <p>
+                                            Общайтесь с 52 участниками, которые понимают, через что вы проходите, и готовы поддержать вас на пути к новой любви.
+                                        </p>
+                                    </div>
+                                    <a href="#" class="custom-button">Присоединиться сейчас</a>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="community-forum">
+                        <h4 class="title">Последние обсуждения</h4>
+                        <div class="forum-wrapper">
+                            <div class="forum-item">
+                                <div class="forum-thumb">
+                                    <a href="#"><img src="~/images/community/forum1.jpg" alt="community"></a>
+                                </div>
+                                <div class="forum-content">
+                                    <h5 class="title"><a href="#">Как вы поняли, что готовы снова встречаться?</a></h5>
+                                    <div class="meta-post">
+                                        <span><i class="fas fa-user"></i>Опубликовано Анной Смирновой</span>
+                                        <span><i class="fas fa-calendar-alt"></i>2 дня назад</span>
+                                    </div>
+                                    <p>
+                                        Я в разводе уже около года, и я начинаю задумываться о новых знакомствах. Но как узнать, когда вы действительно готовы? Я всё еще чувствую...
+                                    </p>
+                                    <div class="forum-footer">
+                                        <a href="#" class="reply"><i class="fas fa-reply"></i>15 ответов</a>
+                                        <a href="#" class="view"><i class="fas fa-eye"></i>124 просмотра</a>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="forum-item">
+                                <div class="forum-thumb">
+                                    <a href="#"><img src="~/images/community/forum2.jpg" alt="community"></a>
+                                </div>
+                                <div class="forum-content">
+                                    <h5 class="title"><a href="#">Приложения для знакомств после 40: какие работают лучше?</a></h5>
+                                    <div class="meta-post">
+                                        <span><i class="fas fa-user"></i>Опубликовано Михаилом Ивановым</span>
+                                        <span><i class="fas fa-calendar-alt"></i>5 дней назад</span>
+                                    </div>
+                                    <p>
+                                        Я пытаюсь ориентироваться в мире приложений для знакомств, но это кажется ошеломляющим. Были ли у кого-нибудь успехи с определенными приложениями, ориентированными на нашу возрастную группу? Ищу...
+                                    </p>
+                                    <div class="forum-footer">
+                                        <a href="#" class="reply"><i class="fas fa-reply"></i>22 ответа</a>
+                                        <a href="#" class="view"><i class="fas fa-eye"></i>198 просмотров</a>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="forum-item">
+                                <div class="forum-thumb">
+                                    <a href="#"><img src="~/images/community/forum3.jpg" alt="community"></a>
+                                </div>
+                                <div class="forum-content">
+                                    <h5 class="title"><a href="#">Знакомство детей с новым партнером: время и советы</a></h5>
+                                    <div class="meta-post">
+                                        <span><i class="fas fa-user"></i>Опубликовано Еленой Петровой</span>
+                                        <span><i class="fas fa-calendar-alt"></i>1 неделю назад</span>
+                                    </div>
+                                    <p>
+                                        Я встречаюсь с кем-то уже три месяца, и отношения становятся серьезными. У меня двое детей (8 и 11 лет), и я размышляю о правильном времени для...
+                                    </p>
+                                    <div class="forum-footer">
+                                        <a href="#" class="reply"><i class="fas fa-reply"></i>18 ответов</a>
+                                        <a href="#" class="view"><i class="fas fa-eye"></i>156 просмотров</a>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div class="col-lg-4">
+                <div class="community-sidebar">
+                    <div class="widget widget-about">
+                        <div class="widget-header">
+                            <h4 class="title">О сообществе</h4>
+                        </div>
+                        <div class="widget-body">
+                            <ul class="info-list">
+                                <li>
+                                    <span class="info-name"><i class="fas fa-users"></i>Участники:</span>
+                                    <span class="info-value">52</span>
+                                </li>
+                                <li>
+                                    <span class="info-name"><i class="fas fa-calendar-alt"></i>Создано:</span>
+                                    <span class="info-value">25 декабря 2025</span>
+                                </li>
+                                <li>
+                                    <span class="info-name"><i class="fas fa-user"></i>Создатель:</span>
+                                    <span class="info-value">Анна Смирнова</span>
+                                </li>
+                                <li>
+                                    <span class="info-name"><i class="fas fa-comments"></i>Темы:</span>
+                                    <span class="info-value">37</span>
+                                </li>
+                            </ul>
+                        </div>
+                    </div>
+                    <div class="widget widget-categories">
+                        <h4 class="widget-title">Похожие сообщества</h4>
+                        <ul>
+                            <li><a href="#">Знакомства для одиноких родителей</a></li>
+                            <li><a href="#">Начать заново после 40</a></li>
+                            <li><a href="#">Смешанные семьи</a></li>
+                            <li><a href="#">Исцеление от сердечной боли</a></li>
+                            <li><a href="#">Построение здоровых отношений</a></li>
+                        </ul>
+                    </div>
+                    <div class="widget widget-post">
+                        <h4 class="widget-title">Популярные темы</h4>
+                        <ul class="small-post-list">
+                            <li>
+                                <div class="small-post-thumb">
+                                    <a href="#"><img src="~/images/community/post01.jpg" alt="community"></a>
+                                </div>
+                                <div class="small-post-content">
+                                    <h6><a href="#">Воспитание детей после развода</a></h6>
+                                    <ul class="meta-post">
+                                        <li><a href="#"><i class="fas fa-user"></i>Дмитрий Сергеев</a></li>
+                                    </ul>
+                                </div>
+                            </li>
+                            <li>
+                                <div class="small-post-thumb">
+                                    <a href="#"><img src="~/images/community/post02.jpg" alt="community"></a>
+                                </div>
+                                <div class="small-post-content">
+                                    <h6><a href="#">Финансовое восстановление</a></h6>
+                                    <ul class="meta-post">
+                                        <li><a href="#"><i class="fas fa-user"></i>Елизавета Борисова</a></li>
+                                    </ul>
+                                </div>
+                            </li>
+                            <li>
+                                <div class="small-post-thumb">
+                                    <a href="#"><img src="~/images/community/post03.jpg" alt="community"></a>
+                                </div>
+                                <div class="small-post-content">
+                                    <h6><a href="#">Признаки готовности к новым отношениям</a></h6>
+                                    <ul class="meta-post">
+                                        <li><a href="#"><i class="fas fa-user"></i>Михаил Иванов</a></li>
+                                    </ul>
+                                </div>
+                            </li>
+                        </ul>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</section>
+<!-- ==========Community-Single========== --> 

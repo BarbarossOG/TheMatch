@@ -1,0 +1,217 @@
+﻿<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+
+    <link rel="stylesheet" href="~/css/bootstrap.min.css">
+    <link rel="stylesheet" href="~/css/all.min.css">
+    <link rel="stylesheet" href="~/css/animate.css">
+    <link rel="stylesheet" href="~/css/flaticon.css">
+    <link rel="stylesheet" href="~/css/magnific-popup.css">
+    <link rel="stylesheet" href="~/css/odometer.css">
+    <link rel="stylesheet" href="~/css/owl.carousel.min.css">
+    <link rel="stylesheet" href="~/css/owl.theme.default.min.css">
+    <link rel="stylesheet" href="~/css/nice-select.css">
+    <link rel="stylesheet" href="~/css/jquery.animatedheadline.css">
+    <link rel="stylesheet" href="~/css/main.css">
+    <link rel="stylesheet" href="~/css/responsive.css">
+    <!-- <link rel="stylesheet" href="~/css/dark.css"> -->
+
+    <link rel="shortcut icon" href="~/images/favicon.png" type="image/x-icon">
+
+    <title>@ViewData["Title"] - TheMatch</title>
+</head>
+
+<body>
+    <!-- ==========Preloader========== -->
+    <div class="preloader">
+        <div class="preloader-inner">
+            <div class="preloader-icon">
+                <span></span>
+                <span></span>
+            </div>
+        </div>
+    </div>
+    <!-- ==========Preloader========== -->
+
+    <!-- ==========Overlay========== -->
+    <div class="overlay"></div>
+    <a href="#" class="scrollToTop">
+        <i class="fas fa-angle-up"></i>
+    </a>
+    <!-- ==========Overlay========== -->
+
+    <!-- ==========Header-Section========== -->
+    <header class="header-section">
+        <div class="container">
+            <div class="header-wrapper">
+                <div class="logo">
+                    <a asp-controller="Home" asp-action="Index">
+                        <img src="~/images/logo/logo.png" alt="logo">
+                    </a>
+                </div>
+                <ul class="menu">
+                    <li>
+                        <a href="#" class="active">Главная</a>
+                        <ul class="submenu">
+                            <li>
+                                <a asp-controller="Home" asp-action="Index" class="active">Главная</a>
+                            </li>
+                        </ul>
+                    </li>
+                    <li>
+                        <a asp-controller="Community" asp-action="Index">Сообщество</a>
+                    </li>
+                    <li>
+                        <a href="#">Страницы</a>
+                        <ul class="submenu">
+                            <li>
+                                <a asp-controller="Account" asp-action="Settings">Панель пользователя</a>
+                            </li>
+                            <li>
+                                <a asp-controller="Home" asp-action="About">О нас</a>
+                            </li>
+                            <li>
+                                <a asp-controller="Community" asp-action="Single">Сообщество</a>
+                            </li>
+                            <li>
+                                <a asp-controller="Home" asp-action="Contact">Контакты</a>
+                            </li>
+                            <li>
+                                <a asp-controller="Account" asp-action="Login">Вход</a>
+                            </li>
+                            <li>
+                                <a asp-controller="Account" asp-action="Register">Регистрация</a>
+                            </li>
+                            <li>
+                                <a asp-controller="Home" asp-action="Error404">404</a>
+                            </li>
+                            <li>
+                                <a asp-controller="Home" asp-action="Error503">503</a>
+                            </li>
+                        </ul>
+                    </li>
+                    <li class="separator">
+                        <span>|</span>
+                    </li>
+                    <li>
+                        <div class="serch-icon">
+                            <i class="fas fa-search"></i>
+                        </div>
+                    </li>
+                    <li>
+                        <div class="language-select">
+                            <select class="select-bar">
+                                <option value="">RU</option>
+                                <option value="">EN</option>
+                            </select>
+                        </div>
+                    </li>
+                    <li class="user-profile">
+                        <a href="#">
+                            <img src="~/images/user-demo.png" alt="">
+                        </a>
+                        <ul class="submenu">
+                            <li>
+                                <a asp-controller="Account" asp-action="AccountInfo">Профиль</a>
+                            </li>
+                            <li>
+                                <a href="#">Выход</a>
+                            </li>
+                        </ul>
+                    </li>
+                </ul>
+                <div class="header-bar d-lg-none">
+                    <span></span>
+                    <span></span>
+                    <span></span>
+                </div>
+            </div>
+        </div>
+    </header>
+    <div class="search-overlay">
+        <div class="close"><i class="fas fa-times"></i></div>
+        <form action="#">
+            <input type="text" placeholder="Write what you want..">
+        </form>
+    </div>
+    <!-- ==========Header-Section========== -->
+
+    @RenderBody()
+
+    <!-- ==========Footer-Section========== -->
+    <footer class="footer-section">
+        <img class="shape1" src="~/images/footer/f-shape.png" alt="">
+        <div class="container">
+            <div class="footer-top">
+                <div class="logo">
+                    <a href="index.html">
+                        <img src="~/images/logo/logo.png" alt="logo">
+                    </a>
+                </div>
+                <ul class="social-icons">
+                    <li>
+                        <a href="#"><i class="fab fa-facebook-f"></i></a>
+                    </li>
+                    <li>
+                        <a href="#" class="active"><i class="fab fa-twitter"></i></a>
+                    </li>
+                    <li>
+                        <a href="#"><i class="fab fa-pinterest-p"></i></a>
+                    </li>
+                    <li>
+                        <a href="#"><i class="fab fa-google"></i></a>
+                    </li>
+                    <li>
+                        <a href="#"><i class="fab fa-instagram"></i></a>
+                    </li>
+                </ul>
+            </div>
+            <div class="footer-bottom">
+                <div class="footer-bottom-area">
+                    <div class="left">
+                        <p>&copy; 2025 <a asp-controller="Home" asp-action="Index">TheMatch</a> - Сайт знакомств</p>
+                    </div>
+                    <ul class="links">
+                        <li>
+                            <a asp-controller="Home" asp-action="About">О нас</a>
+                        </li>
+                        <li>
+                            <a asp-controller="Home" asp-action="Privacy">Конфиденциальность</a>
+                        </li>
+                        <li>
+                            <a asp-controller="Home" asp-action="Contact">Контакты</a>
+                        </li>
+                        <li>
+                            <a href="#">Условия</a>
+                        </li>
+                        <li>
+                            <a href="#">Карта сайта</a>
+                        </li>
+                    </ul>
+                </div>
+            </div>
+        </div>
+    </footer>
+    <!-- ==========Footer-Section========== -->
+
+    <script src="~/js/jquery-3.3.1.min.js"></script>
+    <script src="~/js/modernizr-3.6.0.min.js"></script>
+    <script src="~/js/plugins.js"></script>
+    <script src="~/js/bootstrap.min.js"></script>
+    <script src="~/js/isotope.pkgd.min.js"></script>
+    <script src="~/js/jquery.ripples-min.js"></script>
+    <script src="~/js/lightcase.js"></script>
+    <script src="~/js/swiper.min.js"></script>
+    <script src="~/js/wow.min.js"></script>
+    <script src="~/js/countdown.min.js"></script>
+    <script src="~/js/odometer.min.js"></script>
+    <script src="~/js/viewport.jquery.js"></script>
+    <script src="~/js/nice-select.js"></script>
+    <script src="~/js/owl.min.js"></script>
+    <script src="~/js/main.js"></script>
+    @await RenderSectionAsync("Scripts", required: false)
+</body>
+</html>

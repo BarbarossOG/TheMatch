@@ -1,0 +1,152 @@
+/*Banner-Section Starts Here*/
+
+.banner-section {
+    padding: 189px 0 120px;
+    position: relative;
+    background: url('../images/banner/hero-banner.png');
+    background-repeat: no-repeat;
+    background-position: bottom;
+    background-size: cover;
+    position: relative;
+    overflow: hidden;
+    .img1{
+        position: absolute;
+        right: 10%;
+        animation: leftRight 5s linear infinite;
+    }
+    .img2{
+        position: absolute;
+        right: 17%;
+        bottom: 20%;
+        animation: upDown 5s linear infinite;
+    }
+
+    .main-title{
+        font-size: 60px;
+        line-height: 70px;
+        font-weight: 700;
+        text-transform: uppercase;
+        color: #fff;
+        text-align: center;
+        margin-bottom: 15px;
+    }
+
+    .join-now-box{
+        background: #fff;
+        padding: 23px 0px 60px;
+        border-radius: 30px;
+        box-shadow: 0px 3px 10px 0px rgba(0, 0, 0, 0.1);
+        .single-option{
+            display: flex;
+            border-bottom: 1px solid rgba(0, 0, 0, 0.1);
+            padding: 22px 20px 15px;
+            &.last{
+                border-bottom: 0px!important;
+                padding: 29px 20px 28px;
+                .title{
+                    top: 4px;
+                }
+                .select-bar{
+                    width: 190px;
+                    height: 40px!important;
+                    line-height: 40px!important;
+                }
+            }
+            &.gender{
+                padding: 17px 20px 17px;
+            }
+            &.age{
+                padding: 21px 20px 20px;
+                .select-bar{
+                    width: 70px;
+                }
+            }
+            .title{
+                position: relative;
+                font-size: 18px;
+                line-height: 28px;
+                font-weight: 700;
+                margin-right: 20px;
+                position: relative;
+                top: 7px;
+            }
+            .option {
+                @extend %flex;
+                align-items: center;
+                input {
+                    display: inline-block;
+                    width: 14px;
+                    height: 14px;
+                    border-radius: 50%;
+                    opacity: 0;
+                    z-index: -9;
+                    text-align: center;
+                    &:checked ~ label::before {
+                        color: $theme-color ;
+                        content: "\f111";
+                        font-family: "Font Awesome 5 Free";
+                        font-weight: 600;
+                        font-size: 8px;
+                        line-height: 13px;
+                        text-align: center;
+                    }
+                }
+                label {
+                    display: inline-block;
+                    margin: 0;
+                    width: calc(100% - 14px);
+                    padding-left: 10px;
+                    position: relative;
+                    font-size: 18px;
+                    line-height: 28px;
+                    font-weight: 400;
+                    text-transform: uppercase;
+                    &::before {
+                        @extend %pa;
+                        width: 14px;
+                        height: 14px;
+                        border-radius: 50%;
+                        border: 1px solid $theme-color;
+                        left: -14px;
+                        text-align: center;
+                        top: 7px;
+                    }
+                }
+                .s-input{
+                    .nice-select {
+                        background: transparent;
+                        border: none;
+                        line-height: 26px;
+                        border-radius: 50px;
+                        padding: 0px 30px 0px 15px;
+                        border: 1px solid rgba(0, 0, 0, 0.1);
+                        height: auto;
+                        .list{
+                            li{
+                                color: #222;
+                                padding: 0px 10px;
+                                line-height: 20px;
+                            }
+                        }
+                    }
+                }
+            }
+        }
+        .joun-button{
+            text-align: center;
+            .custom-button{
+                padding: 13px 45px;
+            }
+        }
+    }
+    &.home2{
+        background-image: url('../images/banner/hero-banner2.jpg')!important;
+        padding: 189px 0 220px;
+        .img3{
+            position: absolute;
+            right: 5%;
+            animation: leftRight 4s linear infinite;
+        }
+    }
+    
+}

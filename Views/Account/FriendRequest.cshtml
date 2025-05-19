@@ -1,0 +1,253 @@
+@{
+    ViewData["Title"] = "Friend Requests";
+    Layout = "_Layout";
+}
+
+<!-- ==========Banner-Section========== -->
+<section class="banner-section">
+    <div class="container">
+        <div class="row">
+            <div class="col-lg-8 col-xl-6">
+                <div class="banner-content">
+                    <h1 class="title">Friend Requests</h1>
+                    <div class="breadcrumb-area">
+                        <nav aria-label="breadcrumb">
+                            <ol class="breadcrumb">
+                                <li class="breadcrumb-item"><a asp-controller="Home" asp-action="Index">Home</a></li>
+                                <li class="breadcrumb-item"><a asp-controller="Account" asp-action="Settings">Settings</a></li>
+                                <li class="breadcrumb-item active" aria-current="page">Friend Requests</li>
+                            </ol>
+                        </nav>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</section>
+<!-- ==========Banner-Section========== -->
+
+<!-- ==========Friend-Request-Section========== -->
+<section class="account-section">
+    <div class="container">
+        <div class="row">
+            <div class="col-lg-4">
+                <div class="account-sidebar">
+                    <div class="account-sidebar-header">
+                        <div class="thumb">
+                            <img src="~/images/account/user.png" alt="account">
+                        </div>
+                        <div class="content">
+                            <h5 class="title">Welcome, John Doe</h5>
+                            <span>Last login: 10 hours ago</span>
+                        </div>
+                    </div>
+                    <ul class="account-sidebar-menu">
+                        <li>
+                            <a asp-controller="Account" asp-action="Settings"><i class="fas fa-cog"></i> Settings</a>
+                        </li>
+                        <li>
+                            <a asp-controller="Account" asp-action="AccountInfo"><i class="fas fa-user"></i> Account Info</a>
+                        </li>
+                        <li>
+                            <a asp-controller="Account" asp-action="PrivacySettings"><i class="fas fa-user-lock"></i> Privacy Settings</a>
+                        </li>
+                        <li>
+                            <a asp-controller="Account" asp-action="ChangePassword"><i class="fas fa-key"></i> Change Password</a>
+                        </li>
+                        <li>
+                            <a asp-controller="Account" asp-action="VerifyAccount"><i class="fas fa-user-check"></i> Verify Account</a>
+                        </li>
+                        <li>
+                            <a asp-controller="Account" asp-action="Notification"><i class="fas fa-bell"></i> Notifications</a>
+                        </li>
+                        <li>
+                            <a asp-controller="Account" asp-action="Badges"><i class="fas fa-medal"></i> Badges</a>
+                        </li>
+                        <li>
+                            <a asp-controller="Account" asp-action="FriendRequest" class="active"><i class="fas fa-user-plus"></i> Friend Requests</a>
+                        </li>
+                        <li>
+                            <a asp-controller="Account" asp-action="Billing"><i class="fas fa-file-invoice-dollar"></i> Billing Info</a>
+                        </li>
+                        <li>
+                            <a asp-controller="Account" asp-action="Plan"><i class="fas fa-gem"></i> Membership Plan</a>
+                        </li>
+                        <li>
+                            <a asp-controller="Account" asp-action="Purchase"><i class="fas fa-shopping-cart"></i> Purchase History</a>
+                        </li>
+                        <li>
+                            <a asp-controller="Account" asp-action="CloseAccount"><i class="fas fa-user-slash"></i> Close Account</a>
+                        </li>
+                    </ul>
+                </div>
+            </div>
+            <div class="col-lg-8">
+                <div class="account-wrapper">
+                    <div class="account-header">
+                        <h3 class="title">Friend Requests</h3>
+                        <p>Manage your connection requests</p>
+                    </div>
+                    <div class="account-content">
+                        <ul class="nav nav-tabs request-tabs" id="requestTabs" role="tablist">
+                            <li class="nav-item">
+                                <a class="nav-link active" id="pending-tab" data-toggle="tab" href="#pending" role="tab" aria-controls="pending" aria-selected="true">
+                                    Pending <span class="badge badge-primary">3</span>
+                                </a>
+                            </li>
+                            <li class="nav-item">
+                                <a class="nav-link" id="sent-tab" data-toggle="tab" href="#sent" role="tab" aria-controls="sent" aria-selected="false">
+                                    Sent <span class="badge badge-light">2</span>
+                                </a>
+                            </li>
+                            <li class="nav-item">
+                                <a class="nav-link" id="connections-tab" data-toggle="tab" href="#connections" role="tab" aria-controls="connections" aria-selected="false">
+                                    Connections <span class="badge badge-light">12</span>
+                                </a>
+                            </li>
+                        </ul>
+                        <div class="tab-content" id="requestTabsContent">
+                            <div class="tab-pane fade show active" id="pending" role="tabpanel" aria-labelledby="pending-tab">
+                                <div class="friend-request-list">
+                                    <div class="friend-request-item">
+                                        <div class="request-avatar">
+                                            <img src="~/images/members/member1.jpg" alt="member">
+                                        </div>
+                                        <div class="request-content">
+                                            <h5 class="request-name">Emma Johnson</h5>
+                                            <p class="request-info">29 Years • New York, USA</p>
+                                            <span class="request-time">Sent 2 days ago</span>
+                                            <div class="request-actions">
+                                                <button class="custom-button accept-button">Accept</button>
+                                                <button class="custom-button reject-button">Decline</button>
+                                                <a asp-controller="Profile" asp-action="SingleProfile" class="view-profile">View Profile</a>
+                                            </div>
+                                        </div>
+                                    </div>
+                                    <div class="friend-request-item">
+                                        <div class="request-avatar">
+                                            <img src="~/images/members/member4.jpg" alt="member">
+                                        </div>
+                                        <div class="request-content">
+                                            <h5 class="request-name">Michael Brown</h5>
+                                            <p class="request-info">31 Years • Houston, USA</p>
+                                            <span class="request-time">Sent 3 days ago</span>
+                                            <div class="request-actions">
+                                                <button class="custom-button accept-button">Accept</button>
+                                                <button class="custom-button reject-button">Decline</button>
+                                                <a asp-controller="Profile" asp-action="SingleProfile" class="view-profile">View Profile</a>
+                                            </div>
+                                        </div>
+                                    </div>
+                                    <div class="friend-request-item">
+                                        <div class="request-avatar">
+                                            <img src="~/images/members/member5.jpg" alt="member">
+                                        </div>
+                                        <div class="request-content">
+                                            <h5 class="request-name">Olivia Taylor</h5>
+                                            <p class="request-info">26 Years • Miami, USA</p>
+                                            <span class="request-time">Sent 5 days ago</span>
+                                            <div class="request-actions">
+                                                <button class="custom-button accept-button">Accept</button>
+                                                <button class="custom-button reject-button">Decline</button>
+                                                <a asp-controller="Profile" asp-action="SingleProfile" class="view-profile">View Profile</a>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="tab-pane fade" id="sent" role="tabpanel" aria-labelledby="sent-tab">
+                                <div class="friend-request-list">
+                                    <div class="friend-request-item">
+                                        <div class="request-avatar">
+                                            <img src="~/images/members/member2.jpg" alt="member">
+                                        </div>
+                                        <div class="request-content">
+                                            <h5 class="request-name">David Wilson</h5>
+                                            <p class="request-info">34 Years • Los Angeles, USA</p>
+                                            <span class="request-time">Sent 1 day ago</span>
+                                            <div class="request-actions">
+                                                <button class="custom-button cancel-button">Cancel Request</button>
+                                                <a asp-controller="Profile" asp-action="SingleProfile" class="view-profile">View Profile</a>
+                                            </div>
+                                        </div>
+                                    </div>
+                                    <div class="friend-request-item">
+                                        <div class="request-avatar">
+                                            <img src="~/images/members/member7.jpg" alt="member">
+                                        </div>
+                                        <div class="request-content">
+                                            <h5 class="request-name">Isabella Garcia</h5>
+                                            <p class="request-info">28 Years • Boston, USA</p>
+                                            <span class="request-time">Sent 4 days ago</span>
+                                            <div class="request-actions">
+                                                <button class="custom-button cancel-button">Cancel Request</button>
+                                                <a asp-controller="Profile" asp-action="SingleProfile" class="view-profile">View Profile</a>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="tab-pane fade" id="connections" role="tabpanel" aria-labelledby="connections-tab">
+                                <div class="connections-filter mb-3">
+                                    <div class="row align-items-center">
+                                        <div class="col-md-6">
+                                            <div class="search-box">
+                                                <input type="text" class="form-control" placeholder="Search connections...">
+                                                <button type="button" class="search-button"><i class="fas fa-search"></i></button>
+                                            </div>
+                                        </div>
+                                        <div class="col-md-6 text-md-right mt-3 mt-md-0">
+                                            <select class="form-control custom-select w-auto">
+                                                <option value="recent">Recently Added</option>
+                                                <option value="name">Name (A-Z)</option>
+                                                <option value="location">Location</option>
+                                            </select>
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="connections-grid">
+                                    <div class="row">
+                                        <div class="col-md-6">
+                                            <div class="connection-item">
+                                                <div class="connection-avatar">
+                                                    <img src="~/images/members/member3.jpg" alt="member">
+                                                </div>
+                                                <div class="connection-content">
+                                                    <h5 class="connection-name">Sophia Martinez</h5>
+                                                    <p class="connection-info">Chicago, USA</p>
+                                                    <div class="connection-actions">
+                                                        <a href="#" class="custom-button message-button"><i class="fas fa-envelope"></i> Message</a>
+                                                        <button class="remove-button" title="Remove Connection"><i class="fas fa-times"></i></button>
+                                                    </div>
+                                                </div>
+                                            </div>
+                                        </div>
+                                        <div class="col-md-6">
+                                            <div class="connection-item">
+                                                <div class="connection-avatar">
+                                                    <img src="~/images/members/member6.jpg" alt="member">
+                                                </div>
+                                                <div class="connection-content">
+                                                    <h5 class="connection-name">James Anderson</h5>
+                                                    <p class="connection-info">Seattle, USA</p>
+                                                    <div class="connection-actions">
+                                                        <a href="#" class="custom-button message-button"><i class="fas fa-envelope"></i> Message</a>
+                                                        <button class="remove-button" title="Remove Connection"><i class="fas fa-times"></i></button>
+                                                    </div>
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="text-center mt-4">
+                                    <a href="#" class="custom-button">Load More</a>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</section>
+<!-- ==========Friend-Request-Section========== --> 

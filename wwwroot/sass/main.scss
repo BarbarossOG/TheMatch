@@ -1,0 +1,31 @@
+@import url('https://fonts.googleapis.com/css?family=Fira+Sans:300,400,500,600,700|Muli:300,400,500,600,700&display=swap');
+
+
+/*
+///// CSS Index \\
+1. Reset CSS Start
+2. General CSS
+3. 
+---------------------------
+*/
+@import '_abstracts/_mixins';
+@import '_abstracts/_variables';
+@import '_base/_reset';
+@import '_base/_global';
+@import '_base/_typography';
+@import '_components/_buttons';
+@import '_base/_about';
+@import '_layout/_footer';
+@import '_layout/_forms';
+@import '_layout/_header';
+@import '_layout/_banner';
+@import '_layout/_navigation';
+@import '_layout/_sidebar';
+@import '_layout/_section';
+@import '_layout/_blog';
+@import '_layout/_profile';
+@import '_layout/_inner-pages';
+@import '_layout/_shoping';
+@import '_layout/_log-reg';
+@import '_layout/_user_setting';
+@import '_layout/_chat_widget';

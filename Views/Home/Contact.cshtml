@@ -1,0 +1,104 @@
+@{
+    ViewData["Title"] = "Контакты";
+    Layout = "_Layout";
+}
+
+<!-- ==========Banner-Section========== -->
+<section class="banner-section">
+    <div class="container">
+        <div class="row">
+            <div class="col-lg-8 col-xl-6">
+                <div class="banner-content">
+                    <h1 class="title">Свяжитесь с нами</h1>
+                    <div class="breadcrumb-area">
+                        <nav aria-label="breadcrumb">
+                            <ol class="breadcrumb">
+                                <li class="breadcrumb-item"><a asp-controller="Home" asp-action="Index">Главная</a></li>
+                                <li class="breadcrumb-item active" aria-current="page">Контакты</li>
+                            </ol>
+                        </nav>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</section>
+<!-- ==========Banner-Section========== -->
+
+<!-- ==========Contact-Content========== -->
+<section class="contact-page">
+    <div class="container">
+        <div class="row contact-padding">
+            <div class="col-lg-8">
+                <div class="contact-form-wrapper">
+                    <div class="section-header">
+                        <h2 class="title">Напишите нам</h2>
+                        <p>Мы здесь, чтобы помочь. Отправьте нам сообщение, и мы ответим как можно скорее.</p>
+                    </div>
+                    <form class="contact-form">
+                        <div class="form-group">
+                            <label for="name">Ваше имя</label>
+                            <input type="text" id="name" placeholder="Введите ваше имя">
+                        </div>
+                        <div class="form-group">
+                            <label for="email">Ваш email</label>
+                            <input type="text" id="email" placeholder="Введите ваш email">
+                        </div>
+                        <div class="form-group">
+                            <label for="message">Ваше сообщение</label>
+                            <textarea id="message" placeholder="Введите ваше сообщение"></textarea>
+                        </div>
+                        <div class="form-group">
+                            <input type="submit" value="Отправить сообщение">
+                        </div>
+                    </form>
+                </div>
+            </div>
+            <div class="col-lg-4">
+                <div class="contact-info-side">
+                    <h3 class="title">Наши контакты</h3>
+                    <div class="contact-info">
+                        <div class="contact-info-item">
+                            <div class="thumb">
+                                <i class="fa fa-map-marker-alt"></i>
+                            </div>
+                            <div class="content">
+                                <h4 class="title">Адрес офиса</h4>
+                                <p>123 Цифровая улица, Технологический центр, Здание 5, Этаж 3</p>
+                            </div>
+                        </div>
+                        <div class="contact-info-item">
+                            <div class="thumb">
+                                <i class="fa fa-phone"></i>
+                            </div>
+                            <div class="content">
+                                <h4 class="title">Номер телефона</h4>
+                                <p><a href="Tel:+012344560606">+01 234 456 0606</a></p>
+                            </div>
+                        </div>
+                        <div class="contact-info-item">
+                            <div class="thumb">
+                                <i class="fa fa-envelope"></i>
+                            </div>
+                            <div class="content">
+                                <h4 class="title">Email адрес</h4>
+                                <p><a href="mailto:info@thematch.com">info@thematch.com</a></p>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</section>
+<!-- ==========Contact-Content========== -->
+
+<!-- ==========Map-Section========== -->
+<div class="map-section">
+    <div class="container-fluid p-0">
+        <div class="banner-map">
+            <iframe src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d3677.6962663570607!2d37.56197491537753!3d55.71745138054022!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x46b54cf65f5c8955%3A0x694710ccd55501e!2sDigital%20Center!5e0!3m2!1sen!2sru!4v1640179217175!5m2!1sen!2sru" allowfullscreen="" loading="lazy"></iframe>
+        </div>
+    </div>
+</div>
+<!-- ==========Map-Section========== --> 

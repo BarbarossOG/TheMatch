@@ -66,22 +66,25 @@
                         <a href="#">Страницы</a>
                         <ul class="submenu">
                             <li>
-                                <a asp-controller="Account" asp-action="Settings">Панель пользователя</a>
+                                <a asp-controller="Account" asp-action="Settings">Настройки аккаунта</a>
                             </li>
                             <li>
-                                <a asp-controller="Home" asp-action="About">О нас</a>
-                            </li>
-                            <li>
-                                <a asp-controller="Community" asp-action="Single">Сообщество</a>
-                            </li>
-                            <li>
-                                <a asp-controller="Home" asp-action="Contact">Контакты</a>
+                                <a asp-controller="Profile" asp-action="Members">Анкеты</a>
                             </li>
                             <li>
                                 <a asp-controller="Account" asp-action="Login">Вход</a>
                             </li>
                             <li>
                                 <a asp-controller="Account" asp-action="Register">Регистрация</a>
+                            </li>
+                            <li>
+                                <a asp-controller="Home" asp-action="About">О нас</a>
+                            </li>
+                            <li>
+                                <a asp-controller="Home" asp-action="Contact">Контакты</a>
+                            </li>
+                            <li>
+                                <a asp-controller="Home" asp-action="Privacy">Приватность</a>
                             </li>
                             <li>
                                 <a asp-controller="Home" asp-action="Error404">404</a>
@@ -141,9 +144,9 @@
 
     <!-- ==========Footer-Section========== -->
     <footer class="footer-section">
-        <img class="shape1" src="assets/images/footer/f-shape.png" alt="">
-        <img class="shape2" src="assets/images/footer/flower01.png" alt="">
-        <img class="shape3" src="assets/images/footer/right-shape.png" alt="">
+        <img class="shape1" src="~/images/footer/f-shape.png" alt="">
+        <img class="shape2" src="~/images/footer/flower01.png" alt="">
+        <img class="shape3" src="~/images/footer/right-shape.png" alt="">
         <div class="newslater-section">
             <div class="container">
                 <div class="row justify-content-center">
@@ -151,7 +154,7 @@
                         <div class="newslater-container">
                             <div class="newslater-wrapper">
                                 <div class="icon">
-                                    <img src="assets/images/footer/n-icon.png" alt="">
+                                    <img src="~/images/footer/n-icon.png" alt="">
                                 </div>
                                 <p class="text">Подпишитесь на ежемесячную рассылку последних новостей!</p>
                                 <form class="newslater-form">
@@ -299,8 +302,17 @@
                     </div>
                 </div>
                 <div class="row">
-                    
-                    <div class="col-lg-6">
+                    <div class="row">
+                        <div class="col-lg-6 align-self-center">
+                            <div class="copyr-text">
+                                <span>
+                                    Copyright © 2025.All Rights Reserved By
+                                </span>
+                                <a href="#">TheMatch</a>
+                            </div>
+                        </div>
+
+                        <div class="col-lg-6">
                         <ul class="footer-social-links">
                             <li>
                                 <a href="#">

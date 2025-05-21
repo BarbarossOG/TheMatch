@@ -3,296 +3,203 @@
     Layout = "_Layout";
 }
 
-<!-- ==========Banner-Section========== -->
-<section class="banner-section">
+<!-- ==========Breadcrumb-Section========== -->
+<section class="breadcrumb-area profile-bc-area">
     <div class="container">
-        <div class="row">
-            <div class="col-lg-8 col-xl-6">
-                <div class="banner-content">
-                    <h1 class="title">Сообщество</h1>
-                    <div class="breadcrumb-area">
-                        <nav aria-label="breadcrumb">
-                            <ol class="breadcrumb">
-                                <li class="breadcrumb-item"><a asp-controller="Home" asp-action="Index">Главная</a></li>
-                                <li class="breadcrumb-item active" aria-current="page">Сообщество</li>
-                            </ol>
-                        </nav>
-                    </div>
-                </div>
-            </div>
+        <div class="content">
+            <h2 class="title extra-padding">
+                Знакомства
+            </h2>
+            <ul class="breadcrumb-list extra-padding">
+                <li class="breadcrumb-item"><a asp-controller="Home" asp-action="Index">Главная</a></li>
+                <li>
+                    Знакомства
+                </li>
+            </ul>
         </div>
     </div>
 </section>
-<!-- ==========Banner-Section========== -->
-
+<!-- ==========Breadcrumb-Section========== -->
 <!-- ==========Community-Section========== -->
-<section class="community-section">
+<section class="community-section inner-page">
     <div class="container">
         <div class="row">
-            <div class="col-lg-8">
-                <div class="community-wrapper">
-                    <div class="community-slider owl-carousel">
-                        <div class="community-item">
-                            <div class="community-thumb">
-                                <a asp-controller="Community" asp-action="Single">
-                                    <img src="~/images/community/community1.jpg" alt="community">
-                                </a>
-                            </div>
-                            <div class="community-content">
-                                <div class="community-header">
-                                    <h4 class="title">
-                                        <a asp-controller="Community" asp-action="Single">Поиск любви после развода</a>
-                                    </h4>
-                                    <div class="meta-post">
-                                        <a href="#"><i class="fas fa-user"></i>Анна Смирнова</a>
-                                        <a href="#"><i class="fas fa-calendar-alt"></i>25 декабря 2025</a>
-                                    </div>
-                                </div>
-                                <div class="community-footer">
-                                    <div class="left">
-                                        <span><i class="fas fa-users"></i>52 участника</span>
-                                    </div>
-                                    <div class="right">
-                                        <a href="#" class="join-btn">Присоединиться</a>
-                                    </div>
-                                </div>
-                            </div>
-                        </div>
-                        <div class="community-item">
-                            <div class="community-thumb">
-                                <a asp-controller="Community" asp-action="Single">
-                                    <img src="~/images/community/community2.jpg" alt="community">
-                                </a>
-                            </div>
-                            <div class="community-content">
-                                <div class="community-header">
-                                    <h4 class="title">
-                                        <a asp-controller="Community" asp-action="Single">Знакомства в 30+</a>
-                                    </h4>
-                                    <div class="meta-post">
-                                        <a href="#"><i class="fas fa-user"></i>Михаил Иванов</a>
-                                        <a href="#"><i class="fas fa-calendar-alt"></i>20 декабря 2025</a>
-                                    </div>
-                                </div>
-                                <div class="community-footer">
-                                    <div class="left">
-                                        <span><i class="fas fa-users"></i>78 участников</span>
-                                    </div>
-                                    <div class="right">
-                                        <a href="#" class="join-btn">Присоединиться</a>
-                                    </div>
-                                </div>
-                            </div>
-                        </div>
+            <div class="col-lg-12">
+                <div class="top-filter">
+                    <div class="left">
+                        <a href="#" data-toggle="modal" data-target="#exampleModalCenter">
+                            <i class="fas fa-sliders-h"></i>  Фильтр
+                        </a>
                     </div>
-                    <div class="community-list">
-                        <div class="community-item">
-                            <div class="community-thumb">
-                                <a asp-controller="Community" asp-action="Single">
-                                    <img src="~/images/community/community3.jpg" alt="community">
-                                </a>
-                            </div>
-                            <div class="community-content">
-                                <div class="community-header">
-                                    <h4 class="title">
-                                        <a asp-controller="Community" asp-action="Single">Отношения на расстоянии</a>
-                                    </h4>
-                                    <div class="meta-post">
-                                        <a href="#"><i class="fas fa-user"></i>Елена Петрова</a>
-                                        <a href="#"><i class="fas fa-calendar-alt"></i>18 декабря 2025</a>
-                                    </div>
-                                    <p>
-                                        Сообщество для тех, кто сталкивается с трудностями отношений на расстоянии. Поделитесь своим опытом, советами и поддержкой с другими, кто понимает уникальные сложности любви на расстоянии.
-                                    </p>
-                                </div>
-                                <div class="community-footer">
-                                    <div class="left">
-                                        <span><i class="fas fa-users"></i>45 участников</span>
-                                    </div>
-                                    <div class="right">
-                                        <a href="#" class="join-btn">Присоединиться</a>
-                                    </div>
-                                </div>
-                            </div>
-                        </div>
-                        <div class="community-item">
-                            <div class="community-thumb">
-                                <a asp-controller="Community" asp-action="Single">
-                                    <img src="~/images/community/community4.jpg" alt="community">
-                                </a>
-                            </div>
-                            <div class="community-content">
-                                <div class="community-header">
-                                    <h4 class="title">
-                                        <a asp-controller="Community" asp-action="Single">Знакомства для родителей</a>
-                                    </h4>
-                                    <div class="meta-post">
-                                        <a href="#"><i class="fas fa-user"></i>Дмитрий Сергеев</a>
-                                        <a href="#"><i class="fas fa-calendar-alt"></i>15 декабря 2025</a>
-                                    </div>
-                                    <p>
-                                        Группа поддержки для одиноких родителей, которые ищут новые знакомства. Делитесь советами, опытом и проблемами с теми, кто понимает уникальный баланс между родительством и знакомствами.
-                                    </p>
-                                </div>
-                                <div class="community-footer">
-                                    <div class="left">
-                                        <span><i class="fas fa-users"></i>68 участников</span>
-                                    </div>
-                                    <div class="right">
-                                        <a href="#" class="join-btn">Присоединиться</a>
-                                    </div>
-                                </div>
-                            </div>
-                        </div>
-                        <div class="community-item">
-                            <div class="community-thumb">
-                                <a asp-controller="Community" asp-action="Single">
-                                    <img src="~/images/community/community5.jpg" alt="community">
-                                </a>
-                            </div>
-                            <div class="community-content">
-                                <div class="community-header">
-                                    <h4 class="title">
-                                        <a asp-controller="Community" asp-action="Single">ЛГБТК+ знакомства</a>
-                                    </h4>
-                                    <div class="meta-post">
-                                        <a href="#"><i class="fas fa-user"></i>Алекс Тейлор</a>
-                                        <a href="#"><i class="fas fa-calendar-alt"></i>10 декабря 2025</a>
-                                    </div>
-                                    <p>
-                                        Дружелюбное сообщество для ЛГБТК+ людей, ищущих общение, поддержку и советы в поиске отношений. Обсуждайте опыт, делитесь историями и создавайте значимые связи в безопасном пространстве.
-                                    </p>
-                                </div>
-                                <div class="community-footer">
-                                    <div class="left">
-                                        <span><i class="fas fa-users"></i>92 участника</span>
-                                    </div>
-                                    <div class="right">
-                                        <a href="#" class="join-btn">Присоединиться</a>
-                                    </div>
-                                </div>
-                            </div>
-                        </div>
-                        <div class="community-item">
-                            <div class="community-thumb">
-                                <a asp-controller="Community" asp-action="Single">
-                                    <img src="~/images/community/community6.jpg" alt="community">
-                                </a>
-                            </div>
-                            <div class="community-content">
-                                <div class="community-header">
-                                    <h4 class="title">
-                                        <a asp-controller="Community" asp-action="Single">Знакомства для старшего поколения</a>
-                                    </h4>
-                                    <div class="meta-post">
-                                        <a href="#"><i class="fas fa-user"></i>Елизавета Борисова</a>
-                                        <a href="#"><i class="fas fa-calendar-alt"></i>5 декабря 2025</a>
-                                    </div>
-                                    <p>
-                                        Сообщество для людей старшего возраста, ищущих компанию, романтику или дружбу. Делитесь своим опытом, задавайте вопросы и общайтесь с людьми вашей возрастной группы, которые также находятся в поиске значимых связей.
-                                    </p>
-                                </div>
-                                <div class="community-footer">
-                                    <div class="left">
-                                        <span><i class="fas fa-users"></i>65 участников</span>
-                                    </div>
-                                    <div class="right">
-                                        <a href="#" class="join-btn">Присоединиться</a>
-                                    </div>
-                                </div>
-                            </div>
-                        </div>
-                    </div>
-                </div>
-                <div class="pagination-area">
-                    <ul class="pagination justify-content-center">
-                        <li><a href="#"><i class="fas fa-angle-double-left"></i></a></li>
-                        <li class="active"><a href="#">1</a></li>
-                        <li><a href="#">2</a></li>
-                        <li><a href="#">3</a></li>
-                        <li><a href="#"><i class="fas fa-angle-double-right"></i></a></li>
-                    </ul>
                 </div>
             </div>
-            <div class="col-lg-4">
-                <div class="sidebar">
-                    <div class="widget widget-categories">
-                        <h5 class="title">Категории</h5>
-                        <ul>
-                            <li><a href="#">Новые знакомства</a></li>
-                            <li><a href="#">Советы по отношениям</a></li>
-                            <li><a href="#">Истории успеха</a></li>
-                            <li><a href="#">Свидания и встречи</a></li>
-                            <li><a href="#">Преодоление сложностей</a></li>
-                        </ul>
+        </div>
+        <div class="row">
+            <div class="col-lg-6">
+                <div class="single-friend">
+                    <img src="assets/images/profile/friend1.png" alt="">
+                    <div class="content">
+                        <a href="single-profile.html" class="name">
+                            Валя Карнавал
+                            <span class="isvarify">
+                                <i class="fas fa-check-circle"></i>
+                            </span>
+                        </a>
+                        <p class="date">
+                            день назад
+                        </p>
+                        <a href="single-profile.html" class="connnect-btn">
+                            Связаться
+                        </a>
                     </div>
-                    <div class="widget widget-search">
-                        <h5 class="title">Поиск по сообществам</h5>
-                        <form class="search-form">
-                            <input type="text" placeholder="Поиск..." required>
-                            <button type="submit"><i class="fas fa-search"></i></button>
-                        </form>
+                </div>
+            </div>
+            <div class="col-lg-6">
+                <div class="single-friend">
+                    <img src="assets/images/profile/friend2.png" alt="">
+                    <div class="content">
+                        <a href="single-profile.html" class="name">
+                            Лиза Рязанская
+                            <span class="isvarify">
+                                <i class="fas fa-check-circle"></i>
+                            </span>
+                        </a>
+                        <p class="date">
+                            день назад
+                        </p>
+                        <a href="single-profile.html" class="connnect-btn">
+                            Связаться
+                        </a>
                     </div>
-                    <div class="widget widget-popular">
-                        <h5 class="title">Популярные сообщества</h5>
-                        <div class="widget-slider owl-carousel">
-                            <div class="item">
-                                <div class="thumb">
-                                    <a href="#">
-                                        <img src="~/images/community/cs01.jpg" alt="community">
-                                    </a>
-                                </div>
-                                <div class="content">
-                                    <h6 class="title"><a href="#">Творческие знакомства</a></h6>
-                                    <div class="meta">
-                                        <span><i class="fas fa-users"></i>125 участников</span>
-                                    </div>
-                                </div>
-                            </div>
-                            <div class="item">
-                                <div class="thumb">
-                                    <a href="#">
-                                        <img src="~/images/community/cs02.jpg" alt="community">
-                                    </a>
-                                </div>
-                                <div class="content">
-                                    <h6 class="title"><a href="#">Любители путешествий</a></h6>
-                                    <div class="meta">
-                                        <span><i class="fas fa-users"></i>87 участников</span>
-                                    </div>
-                                </div>
-                            </div>
-                            <div class="item">
-                                <div class="thumb">
-                                    <a href="#">
-                                        <img src="~/images/community/cs03.jpg" alt="community">
-                                    </a>
-                                </div>
-                                <div class="content">
-                                    <h6 class="title"><a href="#">Спортивные знакомства</a></h6>
-                                    <div class="meta">
-                                        <span><i class="fas fa-users"></i>103 участника</span>
-                                    </div>
-                                </div>
-                            </div>
-                        </div>
+                </div>
+            </div>
+            <div class="col-lg-6">
+                <div class="single-friend">
+                    <img src="assets/images/profile/friend3.png" alt="">
+                    <div class="content">
+                        <a href="single-profile.html" class="name">
+                            Вика Воробьёва
+                            <span class="isvarify">
+                                <i class="fas fa-check-circle"></i>
+                            </span>
+                        </a>
+                        <p class="date">
+                            месяц назад
+                        </p>
+                        <a href="single-profile.html" class="connnect-btn">
+                            Связаться
+                        </a>
                     </div>
-                    <div class="widget widget-tags">
-                        <h5 class="title">Популярные теги</h5>
-                        <ul>
-                            <li><a href="#">любовь</a></li>
-                            <li><a href="#">отношения</a></li>
-                            <li><a href="#">знакомства</a></li>
-                            <li><a href="#">советы</a></li>
-                            <li><a href="#">свидания</a></li>
-                            <li><a href="#">поддержка</a></li>
-                            <li><a href="#">общение</a></li>
-                            <li><a href="#">доверие</a></li>
-                        </ul>
+                </div>
+            </div>
+            <div class="col-lg-6">
+                <div class="single-friend">
+                    <img src="assets/images/profile/friend4.png" alt="">
+                    <div class="content">
+                        <a href="single-profile.html" class="name">
+                            Дарья Доскова
+                            <span class="isvarify">
+                                <i class="fas fa-check-circle"></i>
+                            </span>
+                        </a>
+                        <p class="date">
+                            час назад
+                        </p>
+                        <a href="single-profile.html" class="connnect-btn">
+                            Связаться
+                        </a>
                     </div>
+                </div>
+            </div>
+        </div>
+        <div class="row">
+            <div class="col-lg-12">
+                <div class="pagination-area text-center">
+                    <a href="#"><i class="fas fa-angle-double-left"></i><span></span></a>
+                    <a href="#">1</a>
+                    <a href="#">2</a>
+                    <a href="#" class="active">3</a>
+                    <a href="#">4</a>
+                    <a href="#">5</a>
+                    <a href="#"><i class="fas fa-angle-double-right"></i></a>
                 </div>
             </div>
         </div>
     </div>
 </section>
-<!-- ==========Community-Section========== --> 
+<!-- ==========Community-Sectionn========== -->
+
+<!-- Filter Modal -->
+<div class="modal fade filter-p" id="exampleModalCenter" tabindex="-1" role="dialog" aria-labelledby="exampleModalCenterTitle" aria-hidden="true">
+    <div class="modal-dialog modal-dialog-centered" role="document">
+        <div class="modal-content">
+            <div class="modal-header justify-content-between">
+                <h6 class="modal-title" id="exampleModalCenterTitle">Фильтр</h6>
+                <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                    <span aria-hidden="true">&times;</span>
+                </button>
+            </div>
+            <div class="modal-body">
+                <div class="join-now-box">
+                    <div class="single-option age">
+                        <p class="title">
+                            Возраст :
+                        </p>
+                        <div class="option">
+                            <div class="s-input mr-3">
+                                <select class="select-bar">
+                                    <option value="">18</option>
+                                    <option value="">25</option>
+                                    <option value="">30</option>
+                                </select>
+                            </div>
+                            <div class="separator">
+                                -
+                            </div>
+                            <div class="s-input ml-3">
+                                <select class="select-bar">
+                                    <option value="">24</option>
+                                    <option value="">30</option>
+                                    <option value="">35</option>
+                                </select>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="single-option last">
+                        <p class="title">
+                            Из какой страны :
+                        </p>
+                        <div class="option">
+                            <div class="s-input country">
+                                <select class="select-bar">
+                                    <option>Выберите страну</option>
+                                    <option value="">Россия</option>
+                                    <option value="">Япония</option>
+                                    <option value="">Без разницы</option>
+                                </select>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="single-option last">
+                        <p class="title">
+                            Из какого города :
+                        </p>
+                        <div class="option">
+                            <div class="s-input city">
+                                <select class="select-bar">
+                                    <option>Выберите город</option>
+                                    <option value="">Рязань</option>
+                                    <option value="">Москва</option>
+                                    <option value="">Без разницы</option>
+                                </select>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="joun-button">
+                        <button class="custom-button">Поиск</button>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>

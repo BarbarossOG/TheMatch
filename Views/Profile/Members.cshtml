@@ -3,27 +3,23 @@
     Layout = "_Layout";
 }
 
-<!-- ==========Banner-Section========== -->
-<section class="banner-section">
+<!-- ==========Breadcrumb-Section========== -->
+<section class="breadcrumb-area profile-bc-area">
     <div class="container">
-        <div class="row">
-            <div class="col-lg-8 col-xl-6">
-                <div class="banner-content">
-                    <h1 class="title">Members</h1>
-                    <div class="breadcrumb-area">
-                        <nav aria-label="breadcrumb">
-                            <ol class="breadcrumb">
-                                <li class="breadcrumb-item"><a asp-controller="Home" asp-action="Index">Home</a></li>
-                                <li class="breadcrumb-item active" aria-current="page">Members</li>
-                            </ol>
-                        </nav>
-                    </div>
-                </div>
-            </div>
+        <div class="content">
+            <h2 class="title extra-padding">
+                Анкеты
+            </h2>
+            <ul class="breadcrumb-list extra-padding">
+                <li class="breadcrumb-item"><a asp-controller="Home" asp-action="Index">Главная</a></li>
+                <li>
+                    Анкеты
+                </li>
+            </ul>
         </div>
     </div>
 </section>
-<!-- ==========Banner-Section========== -->
+<!-- ==========Breadcrumb-Section========== -->
 
 <!-- ==========Member-Section========== -->
 <section class="member-section">

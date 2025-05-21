@@ -1,123 +1,172 @@
 @{
-    ViewData["Title"] = "Register";
-    Layout = "_Layout";
+    ViewData["Title"] = "Регистрация";
+    Layout = null;
 }
 
-<!-- ========== Login & Registation Section ========== -->
-<section class="log-reg">
-    <div class="top-menu-area">
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+
+    <link rel="stylesheet" href="~/css/bootstrap.min.css">
+    <link rel="stylesheet" href="~/css/all.min.css">
+    <link rel="stylesheet" href="~/css/animate.css">
+    <link rel="stylesheet" href="~/css/flaticon.css">
+    <link rel="stylesheet" href="~/css/magnific-popup.css">
+    <link rel="stylesheet" href="~/css/odometer.css">
+    <link rel="stylesheet" href="~/css/owl.carousel.min.css">
+    <link rel="stylesheet" href="~/css/owl.theme.default.min.css">
+    <link rel="stylesheet" href="~/css/nice-select.css">
+    <link rel="stylesheet" href="~/css/jquery.animatedheadline.css">
+    <link rel="stylesheet" href="~/css/main.css">
+    <link rel="stylesheet" href="~/css/responsive.css">
+    <!-- <link rel="stylesheet" href="~/css/dark.css"> -->
+
+    <link rel="shortcut icon" href="~/images/favicon.png" type="image/x-icon">
+
+    <title>@ViewData["Title"] - TheMatch</title>
+</head>
+
+<body>
+    <!-- ==========Preloader========== -->
+    <div class="preloader">
+        <div class="preloader-inner">
+            <div class="preloader-icon">
+                <span></span>
+                <span></span>
+            </div>
+        </div>
+    </div>
+    <!-- ==========Preloader========== -->
+
+    <!-- ========== Login & Registation Section ========== -->
+    <section class="log-reg">
+        <div class="top-menu-area">
+            <div class="container">
+                <div class="row">
+                    <div class="col-lg-5">
+                        <a asp-controller="Home" asp-action="Index" class="backto-home"><i class="fas fa-chevron-left"></i> Вернуться на TheMatch</a>
+                    </div>
+                    <div class="col-lg-7 ">
+                        <div class="logo">
+                            <img src="~/images/logo/logotip3.png" alt="logo">
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
         <div class="container">
-            <div class="row">
-                <div class="col-lg-5">
-                    <a asp-controller="Home" asp-action="Index" class="backto-home"><i class="fas fa-chevron-left"></i> Back to TheMatch</a>
+            <div class="row justify-content-end">
+                <div class="image">
                 </div>
-                <div class="col-lg-7 ">
-                    <div class="logo">
-                        <img src="~/images/logo2.png" alt="logo">
+                <div class="col-lg-7">
+                    <div class="log-reg-inner">
+                        <div class="section-header">
+                            <h2 class="title">
+                                Добро пожаловать в TheMatch
+                            </h2>
+                            <p>
+                                Давайте создадим ваш профиль. Уже есть аккаунт? <a asp-controller="Account" asp-action="Login">Войти</a>
+                            </p>
+                        </div>
+                        <div class="main-content">
+                            <form action="#">
+                                <h4 class="content-title">
+                                    Детали учетной записи
+                                </h4>
+                                <div class="form-group">
+                                    <label for="">Имя пользователя*</label>
+                                    <input type="text" class="my-form-control" placeholder="Введите имя пользователя">
+                                </div>
+                                <div class="form-group">
+                                    <label for="">Электронная почта*</label>
+                                    <input type="email" class="my-form-control" placeholder="Введите вашу почту">
+                                </div>
+                                <div class="form-group">
+                                    <label for="">Пароль*</label>
+                                    <input type="password" class="my-form-control" placeholder="Введите пароль">
+                                </div>
+                                <div class="form-group">
+                                    <label for="">Подтвердите пароль*</label>
+                                    <input type="password" class="my-form-control" placeholder="Подтвердите пароль">
+                                </div>
+                                <h4 class="content-title mt-5">
+                                    Детали профиля
+                                </h4>
+                                <div class="form-group">
+                                    <label for="">Имя*</label>
+                                    <input type="text" class="my-form-control" placeholder="Введите ваше полное имя">
+                                </div>
+                                <div class="form-group">
+                                    <label for="">Дата рождения*</label>
+                                    <input type="date" class="my-form-control">
+                                </div>
+                                <div class="form-group">
+                                    <label for="">Я *</label>
+                                    <div class="option">
+                                        <div class="s-input mr-3">
+                                            <input type="radio" name="gender" id="male"><label for="male">Мужчина</label>
+                                        </div>
+                                        <div class="s-input">
+                                            <input type="radio" name="gender" id="female"><label for="female">Женщина</label>
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="form-group">
+                                    <label for="">Ищу *</label>
+                                    <div class="option">
+                                        <div class="s-input mr-3">
+                                            <input type="radio" name="gender-login" id="male-login"><label
+                                                for="male-login">Мужчину</label>
+                                        </div>
+                                        <div class="s-input">
+                                            <input type="radio" name="gender-login" id="female-login"><label
+                                                for="female-login">Женщину</label>
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="form-group">
+                                    <label for="">Семейное положение*</label>
+                                    <div class="option">
+                                        <div class="s-input mr-3">
+                                            <input type="radio" name="marital" id="unmarried"><label for="unmarried">Холост/Не замужем</label>
+                                        </div>
+                                        <div class="s-input">
+                                            <input type="radio" name="marital" id="married"><label for="married">Женат/Замужем</label>
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="form-group">
+                                    <label for="">Город*</label>
+                                    <input type="text" class="my-form-control" placeholder="Введите ваш город">
+                                </div>
+                                <button class="custom-button" type="submit">Зарегистрироваться</button>
+                            </form>
+                        </div>
                     </div>
                 </div>
             </div>
         </div>
-    </div>
-    <div class="container">
-        <div class="row justify-content-end">
-            <div class="image">
-            </div>
-            <div class="col-lg-7">
-                <div class="log-reg-inner">
-                    <div class="section-header">
-                        <h2 class="title">
-                            Welcome to TheMatch
-                        </h2>
-                        <p>
-                            Let's create your profile. Already have an account? <a asp-controller="Account" asp-action="Login">Login</a>
-                        </p>
-                    </div>
-                    <div class="main-content">
-                        <form action="#">
-                            <h4 class="content-title">
-                                Account Details
-                            </h4>
-                            <div class="form-group">
-                                <label for="">Username*</label>
-                                <input type="text" class="my-form-control" placeholder="Enter Your Username">
-                            </div>
-                            <div class="form-group">
-                                <label for="">Email Address*</label>
-                                <input type="email" class="my-form-control" placeholder="Enter Your Email">
-                            </div>
-                            <div class="form-group">
-                                <label for="">Password*</label>
-                                <input type="password" class="my-form-control" placeholder="Enter Your Password">
-                            </div>
-                            <div class="form-group">
-                                <label for="">Confirm Password*</label>
-                                <input type="password" class="my-form-control" placeholder="Enter Your Password">
-                            </div>
-                            <h4 class="content-title mt-5">
-                                Profile Details
-                            </h4>
-                            <div class="form-group">
-                                <label for="">Name*</label>
-                                <input type="text" class="my-form-control" placeholder="Enter Your Full Name">
-                            </div>
-                            <div class="form-group">
-                                <label for="">Birthday*</label>
-                                <input type="date" class="my-form-control">
-                            </div>
-                            <div class="form-group">
-                                <label for="">I am a*</label>
-                                <div class="option">
-                                    <div class="s-input mr-3">
-                                        <input type="radio" name="gender" id="male"><label for="male">Male</label>
-                                    </div>
-                                    <div class="s-input">
-                                        <input type="radio" name="gender" id="female"><label for="female">Female</label>
-                                    </div>
-                                </div>
-                            </div>
-                            <div class="form-group">
-                                <label for="">Looking for a*</label>
-                                <div class="option">
-                                    <div class="s-input mr-3">
-                                        <input type="radio" name="gender-login" id="male-login"><label
-                                            for="male-login">Male</label>
-                                    </div>
-                                    <div class="s-input">
-                                        <input type="radio" name="gender-login" id="female-login"><label
-                                            for="female-login">Female</label>
-                                    </div>
-                                </div>
-                            </div>
-                            <div class="form-group">
-                                <label for="">Marital Status*</label>
-                                <div class="option">
-                                    <div class="s-input mr-3">
-                                        <input type="radio" name="marital" id="unmarried"><label for="unmarried">Unmarried</label>
-                                    </div>
-                                    <div class="s-input">
-                                        <input type="radio" name="marital" id="married"><label for="married">Married</label>
-                                    </div>
-                                </div>
-                            </div>
-                            <div class="form-group">
-                                <label for="">City*</label>
-                                <input type="text" class="my-form-control" placeholder="Enter Your City">
-                            </div>
-                            <div class="form-group">
-                                <label for="">State*</label>
-                                <input type="text" class="my-form-control" placeholder="Enter Your State">
-                            </div>
-                            <div class="form-group">
-                                <label for="">Zip Code*</label>
-                                <input type="text" class="my-form-control" placeholder="Enter Your Zip Code">
-                            </div>
-                            <button class="custom-button" type="submit">Register</button>
-                        </form>
-                    </div>
-                </div>
-            </div>
-        </div>
-    </div>
-</section>
-<!-- ========== Login & Registation Section ========== --> 
+    </section>
+    <!-- ========== Login & Registation Section ========== -->
+
+    <script src="~/js/jquery-3.3.1.min.js"></script>
+    <script src="~/js/modernizr-3.6.0.min.js"></script>
+    <script src="~/js/plugins.js"></script>
+    <script src="~/js/bootstrap.min.js"></script>
+    <script src="~/js/heandline.js"></script>
+    <script src="~/js/isotope.pkgd.min.js"></script>
+    <script src="~/js/magnific-popup.min.js"></script>
+    <script src="~/js/owl.carousel.min.js"></script>
+    <script src="~/js/wow.min.js"></script>
+    <script src="~/js/countdown.min.js"></script>
+    <script src="~/js/odometer.min.js"></script>
+    <script src="~/js/viewport.jquery.js"></script>
+    <script src="~/js/nice-select.js"></script>
+    <script src="~/js/main.js"></script>
+</body>
+
+</html> 

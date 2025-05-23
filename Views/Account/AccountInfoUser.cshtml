@@ -1,5 +1,5 @@
 @{
-    ViewData["Title"] = "Account Info";
+    ViewData["Title"] = "Информация об аккаунте";
     Layout = "_Layout";
 }
 
@@ -8,16 +8,16 @@
     <div class="container">
         <div class="content">
             <h2 class="title extra-padding">
-                Setting
+                Информация об аккаунте
             </h2>
             <ul class="breadcrumb-list extra-padding">
                 <li>
                     <a asp-controller="Home" asp-action="Index">
-                        Home
+                        Главная
                     </a>
                 </li>
                 <li>
-                    Setting
+                    Информация об аккаунте
                 </li>
             </ul>
         </div>
@@ -34,43 +34,30 @@
             </div>
             <div class="col-xl-8 col-md-7 ">
                 <div class="page-title">
-                    Account Info
+                    Информация об аккаунте
                 </div>
-                
                 <div class="input-info-box mt-30">
                     <div class="header">
-                        Personal Info
+                        Основная информация
                     </div>
                     <div class="content">
                         <div class="row">
                             <div class="col-md-6">
                                 <div class="my-input-box">
-                                    <label for="">Profile Name</label>
-                                    <input type="text" placeholder="Profile Name">
+                                    <label for="">Статус аккаунта</label>
+                                    <div style="color: #22c55e; font-weight: 600;">Хорошая репутация</div>
                                 </div>
                             </div>
                             <div class="col-md-6">
                                 <div class="my-input-box">
-                                    <label for="">Public Email</label>
-                                    <input type="text" placeholder="Public Email">
+                                    <label for="">Текущий email</label>
+                                    <div style="color: #444; font-weight: 500;">user@example.com</div>
                                 </div>
                             </div>
                             <div class="col-md-6">
                                 <div class="my-input-box">
-                                    <label for="">Country</label>
-                                    <select name="" id="">
-                                        <option value="" disabled selected>Select Country</option>
-                                        <option value="">United State</option>
-                                    </select>
-                                </div>
-                            </div>
-                            <div class="col-md-6">
-                                <div class="my-input-box">
-                                    <label for="">City</label>
-                                    <select name="" id="">
-                                        <option value="" disabled selected>Select City</option>
-                                        <option value="">New Work</option>
-                                    </select>
+                                    <label for="">Текущий телефон</label>
+                                    <div style="color: #444; font-weight: 500;">+7 (999) 123-45-67</div>
                                 </div>
                             </div>
                         </div>
@@ -78,56 +65,43 @@
                 </div>
                 <div class="input-info-box mt-30">
                     <div class="header">
-                        Security Info
+                        Безопасность
                     </div>
                     <div class="content">
                         <div class="row">
                             <div class="col-md-6">
                                 <div class="my-input-box">
-                                    <label for="">Recovery Email</label>
-                                    <input type="email" placeholder="Recovery Email">
+                                    <label for="">Резервный email</label>
+                                    <input type="email" placeholder="Резервный email">
                                 </div>
                             </div>
                             <div class="col-md-6">
                                 <div class="my-input-box">
-                                    <label for="">Recovery Phone</label>
-                                    <input type="text" placeholder="Recovery Phone">
+                                    <label for="">Резервный телефон</label>
+                                    <input type="text" placeholder="Резервный телефон">
                                 </div>
                             </div>
                             <div class="col-md-6">
                                 <div class="my-input-box">
-                                    <label for="">Security Question 01</label>
+                                    <label for="">Секретный вопрос 1</label>
                                     <select name="" id="">
-                                        <option value="">What is your favorite movie?</option>
+                                        <option value="">Ваш любимый фильм?</option>
+                                        <option value="">Имя домашнего животного?</option>
                                     </select>
                                 </div>
                             </div>
                             <div class="col-md-6">
                                 <div class="my-input-box">
-                                    <label for="">Answer 01</label>
-                                    <input type="text" placeholder="Answer 01">
-                                </div>
-                            </div>
-                            <div class="col-md-6">
-                                <div class="my-input-box">
-                                    <label for="">Security Question 02</label>
-                                    <select name="" id="">
-                                        <option value="">In what town was your first job?</option>
-                                    </select>
-                                </div>
-                            </div>
-                            <div class="col-md-6">
-                                <div class="my-input-box">
-                                    <label for="">Answer 02</label>
-                                    <input type="text" placeholder="Answer 02">
+                                    <label for="">Ответ 1</label>
+                                    <input type="text" placeholder="Ответ 1">
                                 </div>
                             </div>
                         </div>
                     </div>
                 </div>
                 <div class="buttons  mt-30">
-                    <button type="submit" class="custom-button">Save Changes</button>
-                    <button class="custom-button2">Discard All</button>
+                    <button type="submit" class="custom-button">Сохранить изменения</button>
+                    <button class="custom-button2">Отменить</button>
                 </div>
             </div>
         </div>

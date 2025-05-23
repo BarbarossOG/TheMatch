@@ -1,135 +1,130 @@
 @{
-    ViewData["Title"] = "Verify Account";
+    ViewData["Title"] = "Верификация аккаунта";
     Layout = "_Layout";
 }
 
-<!-- ==========Banner-Section========== -->
-<section class="banner-section">
+<!-- ==========Breadcrumb-Section========== -->
+<section class="breadcrumb-area profile-bc-area">
     <div class="container">
-        <div class="row">
-            <div class="col-lg-8 col-xl-6">
-                <div class="banner-content">
-                    <h1 class="title">Verify Account</h1>
-                    <div class="breadcrumb-area">
-                        <nav aria-label="breadcrumb">
-                            <ol class="breadcrumb">
-                                <li class="breadcrumb-item"><a asp-controller="Home" asp-action="Index">Home</a></li>
-                                <li class="breadcrumb-item"><a asp-controller="Account" asp-action="Settings">Settings</a></li>
-                                <li class="breadcrumb-item active" aria-current="page">Verify Account</li>
-                            </ol>
-                        </nav>
-                    </div>
-                </div>
-            </div>
+        <div class="content">
+            <h2 class="title extra-padding">
+                Верификация аккаунта
+            </h2>
+            <ul class="breadcrumb-list extra-padding">
+                <li class="breadcrumb-item"><a asp-controller="Home" asp-action="Index">Главная</a></li>
+                <li>
+                    Верификация
+                </li>
+            </ul>
         </div>
     </div>
 </section>
-<!-- ==========Banner-Section========== -->
+<!-- ==========Breadcrumb-Section========== -->
 
-<!-- ==========Privacy-Settings========== -->
-<section class="account-section">
+<!-- ==========Verification-Section========== -->
+<section class="user-setting-section">
     <div class="container">
         <div class="row">
-            <div class="col-lg-4">
-                <div class="account-sidebar">
-                    <div class="account-sidebar-header">
-                        <div class="thumb">
-                            <img src="~/images/account/user.png" alt="account">
-                        </div>
-                        <div class="content">
-                            <h5 class="title">Welcome, John Doe</h5>
-                            <span>Last login: 10 hours ago</span>
-                        </div>
-                    </div>
-                    <ul class="account-sidebar-menu">
-                        <li>
-                            <a asp-controller="Account" asp-action="Settings"><i class="fas fa-cog"></i> Settings</a>
-                        </li>
-                        <li>
-                            <a asp-controller="Account" asp-action="AccountInfo"><i class="fas fa-user"></i> Account Info</a>
-                        </li>
-                        <li>
-                            <a asp-controller="Account" asp-action="PrivacySettings"><i class="fas fa-user-lock"></i> Privacy Settings</a>
-                        </li>
-                        <li>
-                            <a asp-controller="Account" asp-action="ChangePassword"><i class="fas fa-key"></i> Change Password</a>
-                        </li>
-                        <li>
-                            <a asp-controller="Account" asp-action="VerifyAccount" class="active"><i class="fas fa-user-check"></i> Verify Account</a>
-                        </li>
-                        <li>
-                            <a asp-controller="Account" asp-action="Notification"><i class="fas fa-bell"></i> Notifications</a>
-                        </li>
-                        <li>
-                            <a asp-controller="Account" asp-action="Badges"><i class="fas fa-medal"></i> Badges</a>
-                        </li>
-                        <li>
-                            <a asp-controller="Account" asp-action="FriendRequest"><i class="fas fa-user-plus"></i> Friend Requests</a>
-                        </li>
-                        <li>
-                            <a asp-controller="Account" asp-action="Billing"><i class="fas fa-file-invoice-dollar"></i> Billing Info</a>
-                        </li>
-                        <li>
-                            <a asp-controller="Account" asp-action="Plan"><i class="fas fa-gem"></i> Membership Plan</a>
-                        </li>
-                        <li>
-                            <a asp-controller="Account" asp-action="Purchase"><i class="fas fa-shopping-cart"></i> Purchase History</a>
-                        </li>
-                        <li>
-                            <a asp-controller="Account" asp-action="CloseAccount"><i class="fas fa-user-slash"></i> Close Account</a>
-                        </li>
-                    </ul>
-                </div>
+            <div class="col-xl-4 col-md-5">
+                @await Html.PartialAsync("_AccountSidebar")
             </div>
-            <div class="col-lg-8">
+            <div class="col-xl-8 col-md-7">
                 <div class="account-wrapper">
-                    <div class="account-header">
-                        <h3 class="title">Verify Your Account</h3>
-                        <p>Complete your verification to access all features of TheMatch</p>
+                    <div class="account-header mb-3">
+                        <h3 class="title">Верификация аккаунта</h3>
                     </div>
-                    <div class="account-content">
-                        <div class="verify-account-wrapper">
-                            <div class="verify-account-step complete">
-                                <div class="step-header">
-                                    <h5>Step 1: Email Verification</h5>
-                                    <span class="status text-success">Completed</span>
-                                </div>
-                                <div class="step-content">
-                                    <p>Your email has been successfully verified.</p>
-                                </div>
-                            </div>
-                            <div class="verify-account-step current">
-                                <div class="step-header">
-                                    <h5>Step 2: Phone Verification</h5>
-                                    <span class="status text-warning">Pending</span>
-                                </div>
-                                <div class="step-content">
-                                    <p>Please verify your phone number to increase your account security.</p>
-                                    <form class="verification-form">
-                                        <div class="form-group">
-                                            <label for="phone">Phone Number</label>
-                                            <input type="tel" id="phone" class="form-control" placeholder="+1 (___) ___-____">
-                                        </div>
-                                        <button type="submit" class="custom-button">Send Verification Code</button>
-                                    </form>
-                                </div>
-                            </div>
-                            <div class="verify-account-step">
-                                <div class="step-header">
-                                    <h5>Step 3: ID Verification</h5>
-                                    <span class="status text-muted">Not Started</span>
-                                </div>
-                                <div class="step-content">
-                                    <p>This step is optional but recommended. Verify your identity to earn a verification badge.</p>
-                                    <button class="custom-button disabled">Start ID Verification</button>
-                                    <small class="text-muted d-block mt-2">Complete phone verification first</small>
-                                </div>
-                            </div>
+                    <div class="mb-4">
+                        <div class="verify-section-title">Зачем нужна верификация?</div>
+                        <div class="verify-section-desc">
+                            Верификация профиля открывает доступ ко всем функциям TheMatch, повышает доверие к вашему аккаунту и обеспечивает дополнительную безопасность.
                         </div>
+                        <ul class="verify-section-list">
+                            <li>Доступ к расширенным возможностям платформы</li>
+                            <li>Больше доверия со стороны других пользователей</li>
+                            <li>Защита от мошенничества и фейковых аккаунтов</li>
+                        </ul>
+                        <div class="verify-section-title">Выберите удобный способ верификации:</div>
+                    </div>
+                    <div class="d-flex flex-column gap-4">
+                        <div class="mb-4">
+                            <span class="font-weight-bold text-dark">Госуслуги</span> — <span class="text-muted">быстро и удобно через ваш номер телефона. Мы запросим часть ваших данных и сравним ваше лицо с фото на документах и на фотографиях профиля.</span>
+                        </div>
+                        <button class="btn btn-verif mb-3 d-flex align-items-center justify-content-center" data-toggle="modal" data-target="#gosuslugiModal">
+                            <img src="/images/gosuslugi.png" alt="Госуслуги" style="height:28px;width:28px;object-fit:contain;margin-right:10px;"> <span class="font-weight-bold">Войти через Госуслуги</span>
+                        </button>
+                        <div class="mb-4">
+                            <span class="font-weight-bold text-dark">Telegram</span> — <span class="text-muted">наш сотрудник свяжется с вами для подтверждения личности по видеозвонку. Звонок займёт не больше минуты.</span>
+                        </div>
+                        <button class="btn btn-verif mb-3 d-flex align-items-center justify-content-center" data-toggle="modal" data-target="#telegramModal">
+                            <i class="fab fa-telegram-plane mr-2"></i> <span class="font-weight-bold">Верификация через Telegram</span>
+                        </button>
                     </div>
                 </div>
             </div>
         </div>
     </div>
 </section>
-<!-- ==========Privacy-Settings========== --> 
+
+<!-- Модальное окно Госуслуги -->
+<div class="modal fade" id="gosuslugiModal" tabindex="-1" role="dialog" aria-labelledby="gosuslugiModalLabel" aria-hidden="true">
+  <div class="modal-dialog" role="document">
+    <div class="modal-content">
+      <div class="modal-header">
+        <h5 class="modal-title" id="gosuslugiModalLabel">Вход через Госуслуги</h5>
+        <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+          <span aria-hidden="true">&times;</span>
+        </button>
+      </div>
+      <div class="modal-body">
+        <form id="gosuslugiForm">
+          <div class="form-group">
+            <label for="gosuslugiPhone">Телефон</label>
+            <input type="tel" class="form-control" id="gosuslugiPhone" placeholder="Введите телефон">
+          </div>
+          <div class="form-group d-none" id="smsCodeGroup">
+            <label for="gosuslugiCode">Код из SMS</label>
+            <div class="d-flex align-items-center">
+                <input type="text" class="form-control mr-2" id="gosuslugiCode" placeholder="Введите код">
+                <span id="timer" class="text-muted small"></span>
+            </div>
+          </div>
+          <button type="submit" class="btn btn-verif w-100" id="gosuslugiSendBtn">Получить код</button>
+        </form>
+      </div>
+    </div>
+  </div>
+</div>
+
+<!-- Модальное окно Telegram -->
+<div class="modal fade" id="telegramModal" tabindex="-1" role="dialog" aria-labelledby="telegramModalLabel" aria-hidden="true">
+  <div class="modal-dialog" role="document">
+    <div class="modal-content">
+      <div class="modal-header">
+        <h5 class="modal-title" id="telegramModalLabel">Верификация через Telegram</h5>
+        <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+          <span aria-hidden="true">&times;</span>
+        </button>
+      </div>
+      <div class="modal-body">
+        <form id="telegramForm">
+          <div class="form-group">
+            <label for="telegramUsername">Ваш Telegram username</label>
+            <input type="text" class="form-control" id="telegramUsername" placeholder="username">
+          </div>
+          <button type="submit" class="btn btn-verif w-100">Отправить</button>
+        </form>
+        <div id="telegramNotify" class="alert alert-info mt-3 d-none">
+          Скоро вам позвонит наш сотрудник и попросит включить камеру, ожидайте!
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+
+@section Scripts {
+    <script src="~/js/verifyaccount.js"></script>
+}
+
+@section Styles {
+    <link rel="stylesheet" href="~/css/verifyaccount.css" />
+} 

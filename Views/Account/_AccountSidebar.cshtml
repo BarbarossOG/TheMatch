@@ -1,0 +1,62 @@
+<div class="accordion" id="accordionExample">
+    <div class="card">
+        <div class="card-header" id="headingOne">
+            <button class="" data-toggle="collapse" data-target="#collapseOne" aria-expanded="true" aria-controls="collapseOne">
+                <div class="icon">
+                    <i class="fas fa-user"></i>
+                </div>
+                <span>Мой профиль</span>
+                <div class="t-icon">
+                    <i class="fas fa-plus"></i>
+                    <i class="fas fa-minus"></i>
+                </div>
+            </button>
+        </div>
+        <div id="collapseOne" class="collapse show" aria-labelledby="headingOne" data-parent="#accordionExample">
+            <div class="card-body">
+                <ul class="links">
+                    <li>
+                        <a asp-controller="Account" asp-action="Profileinfo">Информация профиля</a>
+                    </li>
+                    <li>
+                        <a href="user-setting.html">Тесты</a>
+                    </li>
+                </ul>
+            </div>
+        </div>
+    </div>
+    <div class="card">
+        <div class="card-header" id="headingTwo">
+            <button class="collapsed" type="button" data-toggle="collapse" data-target="#collapseTwo" aria-expanded="false" aria-controls="collapseTwo">
+                <div class="icon">
+                    <i class="fas fa-cogs"></i>
+                </div>
+                <span>
+                    Аккаунт
+                </span>
+                <div class="t-icon">
+                    <i class="fas fa-plus"></i>
+                    <i class="fas fa-minus"></i>
+                </div>
+            </button>
+        </div>
+        <div id="collapseTwo" class="collapse" aria-labelledby="headingTwo" data-parent="#accordionExample">
+            <div class="card-body">
+                <ul class="links">
+                    <li>
+                        <a asp-controller="Account" asp-action="AccountInfoUser">Информация об аккаунте</a>
+                    </li>
+                    <li>
+                        <a asp-controller="Account" asp-action="ChangePassword">Изменить пароль</a>
+                    </li>
+                    <li>
+                        <a asp-controller="Account" asp-action="VerifyAccount">Верификация</a>
+                    </li>
+                    <li>
+                        <a asp-controller="Account" asp-action="CloseAccount">Закрыть аккаунт</a>
+                    </li>
+                </ul>
+            </div>
+        </div>
+    </div>
+</div> 

@@ -1,0 +1,119 @@
+@{
+    ViewData["Title"] = "Members";
+    Layout = "_Layout";
+}
+
+<link rel="stylesheet" href="~/css/members-page.css" />
+
+<div class="member-main-container" style="margin-top: 100px;">
+    <!-- Фильтр -->
+    <form class="member-filter">
+        <div class="filter-title">Фильтр</div>
+        <div class="filter-group">
+            <label class="filter-label" for="ageRange">Возраст: <span id="ageValue">18-35</span></label>
+            <div class="filter-range">
+                <input type="range" id="ageMin" name="ageMin" min="18" max="60" value="18" oninput="updateAgeValue()">
+                <span>-</span>
+                <input type="range" id="ageMax" name="ageMax" min="18" max="60" value="35" oninput="updateAgeValue()">
+            </div>
+        </div>
+        <div class="filter-group">
+            <button type="button" class="filter-city-btn" data-toggle="modal" data-target="#cityModal">Город</button>
+        </div>
+        <div class="filter-group">
+            <button type="button" class="filter-interests-btn" data-toggle="modal" data-target="#interestsModal">Интересы</button>
+        </div>
+        <button type="submit" class="filter-apply-btn">Применить фильтр</button>
+    </form>
+
+    <!-- Карточка пользователя -->
+    <div class="member-card">
+        <div class="member-photo-block">
+            <img src="~/images/avatars/women13.png" alt="member" class="member-photo">
+            <div class="member-name-age">Дарья, 21</div>
+            <div class="member-actions">
+                <button class="member-action-btn skip" title="Пропустить"><span style="font-weight:bold;font-size:1.7rem;">&#10006;</span></button>
+                <button class="member-action-btn like" title="Лайк"><span style="font-weight:bold;font-size:1.7rem;">&#10084;</span></button>
+                <button class="member-action-btn dislike" title="Дизлайк"><span style="font-weight:bold;font-size:1.7rem;">&#128078;</span></button>
+            </div>
+        </div>
+        <div class="member-interests-block">
+            <div class="member-interests-title">Интересы</div>
+            <div class="member-interests-list">
+                <span class="member-interest">Путешествия</span>
+                <span class="member-interest">Музыка</span>
+                <span class="member-interest">Кино</span>
+                <span class="member-interest">Спорт</span>
+            </div>
+        </div>
+    </div>
+</div>
+
+<!-- Модальное окно для выбора интересов -->
+<div class="modal fade" id="interestsModal" tabindex="-1" role="dialog" aria-labelledby="interestsModalLabel" aria-hidden="true">
+  <div class="modal-dialog" role="document">
+    <div class="modal-content">
+      <div class="modal-header">
+        <h5 class="modal-title" id="interestsModalLabel">Выберите интересы</h5>
+        <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+          <span aria-hidden="true">&times;</span>
+        </button>
+      </div>
+      <div class="modal-body">
+        <div class="filter-checkboxes small-checkboxes">
+            <label><input type="checkbox" name="interests" value="Путешествия"> Путешествия</label>
+            <label><input type="checkbox" name="interests" value="Музыка"> Музыка</label>
+            <label><input type="checkbox" name="interests" value="Спорт"> Спорт</label>
+            <label><input type="checkbox" name="interests" value="Кино"> Кино</label>
+            <label><input type="checkbox" name="interests" value="Книги"> Книги</label>
+            <label><input type="checkbox" name="interests" value="Еда"> Еда</label>
+        </div>
+      </div>
+      <div class="modal-footer">
+        <button type="button" class="btn btn-secondary" data-dismiss="modal">Закрыть</button>
+        <button type="button" class="btn btn-primary" data-dismiss="modal">Сохранить</button>
+      </div>
+    </div>
+  </div>
+</div>
+
+<!-- Модальное окно для выбора города -->
+<div class="modal fade" id="cityModal" tabindex="-1" role="dialog" aria-labelledby="cityModalLabel" aria-hidden="true">
+  <div class="modal-dialog" role="document">
+    <div class="modal-content">
+      <div class="modal-header">
+        <h5 class="modal-title" id="cityModalLabel">Выберите город</h5>
+        <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+          <span aria-hidden="true">&times;</span>
+        </button>
+      </div>
+      <div class="modal-body">
+        <div class="filter-checkboxes small-checkboxes">
+            <label><input type="checkbox" name="cities" value="Москва"> Москва</label>
+            <label><input type="checkbox" name="cities" value="Санкт-Петербург"> Санкт-Петербург</label>
+            <label><input type="checkbox" name="cities" value="Рязань"> Рязань</label>
+        </div>
+      </div>
+      <div class="modal-footer">
+        <button type="button" class="btn btn-secondary" data-dismiss="modal">Закрыть</button>
+        <button type="button" class="btn btn-primary" data-dismiss="modal">Сохранить</button>
+      </div>
+    </div>
+  </div>
+</div>
+
+<script>
+function updateAgeValue() {
+    var min = document.getElementById('ageMin').value;
+    var max = document.getElementById('ageMax').value;
+    if (parseInt(min) > parseInt(max)) {
+        var t = min;
+        min = max;
+        max = t;
+    }
+    document.getElementById('ageValue').innerText = min + '-' + max;
+}
+document.getElementById('ageMin').addEventListener('input', updateAgeValue);
+document.getElementById('ageMax').addEventListener('input', updateAgeValue);
+window.onload = updateAgeValue;
+</script> 

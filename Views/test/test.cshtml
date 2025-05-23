@@ -33,7 +33,7 @@
                                 <div class="icon">
                                     <i class="fas fa-user"></i>
                                 </div>
-                                <span>My Profile</span>
+                                <span>Мой профиль</span>
                                 <div class="t-icon">
                                     <i class="fas fa-plus"></i>
                                     <i class="fas fa-minus"></i>
@@ -45,16 +45,10 @@
                             <div class="card-body">
                                 <ul class="links">
                                     <li>
-                                        <a class="active" href="user-setting.html">Profile Info</a>
+                                        <a asp-controller="Account" asp-action="Profileinfo">Информация профиля</a>
                                     </li>
                                     <li>
-                                        <a href="user-notification.html">Notifications</a>
-                                    </li>
-                                    <li>
-                                        <a href="user-friend-request.html">Friend Requests</a>
-                                    </li>
-                                    <li>
-                                        <a href="user-badges.html">Badges</a>
+                                        <a href="user-setting.html">Тесты</a>
                                     </li>
                                 </ul>
                             </div>
@@ -79,19 +73,16 @@
                             <div class="card-body">
                                 <ul class="links">
                                     <li>
-                                        <a href="user-account-info.html">Account Info</a>
+                                        <a href="user-account-info.html">Информация об аккаунте</a>
                                     </li>
                                     <li>
-                                        <a href="user-change-pass.html">Change Password</a>
+                                        <a asp-controller="Account" asp-action="ChangePassword">Изменить пароль</a>
                                     </li>
                                     <li>
-                                        <a href="user-privicy-setting.html">Privacy Settings</a>
+                                        <a asp-controller="Account" asp-action="VerifyAccount">Верификация</a>
                                     </li>
                                     <li>
-                                        <a href="user-verify-account.html">Verified account</a>
-                                    </li>
-                                    <li>
-                                        <a href="user-close-account.html">Close Account</a>
+                                        <a asp-controller="Account" asp-action="CloseAccount">Закрыть аккаунт</a>
                                     </li>
                                 </ul>
                             </div>

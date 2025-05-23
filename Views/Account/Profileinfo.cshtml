@@ -1,0 +1,235 @@
+@{
+    ViewData["Title"] = "Account Information";
+    Layout = "_Layout";
+}
+
+<!-- ==========Breadcrumb-Section========== -->
+<section class="breadcrumb-area profile-bc-area">
+    <div class="container">
+        <div class="content">
+            <h2 class="title extra-padding">
+                Управление профилем
+            </h2>
+            <ul class="breadcrumb-list extra-padding">
+                <li class="breadcrumb-item"><a asp-controller="Home" asp-action="Index">Главная</a></li>
+                <li>
+                    Информация о профиле
+                </li>
+            </ul>
+        </div>
+    </div>
+</section>
+<!-- ==========Breadcrumb-Section========== -->
+
+<!-- ========= Profile Section Start -->
+<section class="user-setting-section">
+    <div class="container">
+        <div class="row">
+            <div class="col-xl-4 col-md-5">
+                @await Html.PartialAsync("_AccountSidebar")
+            </div>
+            <div class="col-xl-8 col-md-7 ">
+                <div class="page-title">
+                    Информация профиля
+                </div>
+                <div class="row">
+                    <div class="col-lg-6">
+                        <div class="profile-about-box">
+                            <div class="p-inner-content">
+                                <div class="image-preview">
+                                    <img src="~/images/avatars/Women13.png" alt="profile" id="imagePreview">
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="col-lg-6">
+                        <div class="profile-photo-upload">
+                            <h5>Фото профиля</h5>
+                            <div class="upload-area">
+                                <div class="upload-actions">
+                                    <input type="file" id="profileImage" class="d-none">
+                                    <label for="profileImage" class="custom-button">Изменить</label>
+                                    <button type="button" class="custom-button remove-button">Удалить</button>
+                                </div>
+                                <p class="upload-info">Рекомендуемый размер: 300x300 пикселей. Максимальный размер файла: 2 МБ</p>
+                            </div>
+                        </div>
+
+                    </div>
+                </div>
+                <div class="input-info-box mt-30">
+                    <div class="header">
+                        О вашем профиле
+                    </div>
+                    <div class="content">
+                        <div class="row">
+                            <div class="col-md-6">
+                                <div class="my-input-box">
+                                    <label for="">Имя профиля</label>
+                                    <input type="text" placeholder="Имя профиля">
+                                </div>
+                            </div>
+                            <div class="col-md-6">
+                                <div class="my-input-box">
+                                    <label for="">Дата рождения</label>
+                                    <input type="date">
+                                </div>
+                            </div>
+                            <div class="col-md-12">
+                                <div class="my-input-box">
+                                    <textarea name="" placeholder="Напишите небольшое описание к вашему профилю..."></textarea>
+                                </div>
+                            </div>
+                            <div class="col-md-6">
+                                <div class="my-input-box">
+                                    <label for="">Страна</label>
+                                    <select name="" id="">
+                                        <option value="" disabled selected>Выберите вашу страну</option>
+                                        <option value="">Россия</option>
+                                    </select>
+                                </div>
+                            </div>
+                            <div class="col-md-6">
+                                <div class="my-input-box">
+                                    <label for="">Город</label>
+                                    <select name="" id="">
+                                        <option value="" disabled selected>Выберите ваш город</option>
+                                        <option value="">Рязань</option>
+                                        <option value="">Москва</option>
+                                        <option value="">Санкт-Петербург</option>
+                                    </select>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <div class="input-info-box mt-30">
+                    <div class="header">
+                        Интересы и личная информация
+                    </div>
+                    <div class="content">
+                        <div class="row">
+                            <div class="col-md-6">
+                                <div class="my-input-box">
+                                    <label for="height">Рост (см)</label>
+                                    <input type="number" id="height" name="height" placeholder="Рост" min="100" max="250">
+                                </div>
+                            </div>
+                            <div class="col-md-6">
+                                <div class="my-input-box">
+                                    <label for="income">Уровень заработка</label>
+                                    <select id="income" name="income">
+                                        <option value="">Выберите</option>
+                                        <option value="low">Маленький</option>
+                                        <option value="medium">Средний</option>
+                                        <option value="high">Высокий</option>
+                                    </select>
+                                </div>
+                            </div>
+                            <div class="col-md-6">
+                                <div class="my-input-box">
+                                    <label for="housing">Жильё</label>
+                                    <select id="housing" name="housing">
+                                        <option value="">Выберите</option>
+                                        <option value="own">Есть своё</option>
+                                        <option value="rent">Снимаю</option>
+                                        <option value="dorm">Общежитие</option>
+                                        <option value="none">Нет</option>
+                                    </select>
+                                </div>
+                            </div>
+                            <div class="col-md-6">
+                                <div class="my-input-box">
+                                    <label for="childs">Дети</label>
+                                    <select id="childs" name="childs">
+                                        <option value="">Нет</option>
+                                        <option value="own">Есть</option>
+                                    </select>
+                                </div>
+                            </div>
+                            <div class="col-md-6">
+                                <div class="my-input-box">
+                                    <label for="education">Уровень образования</label>
+                                    <select id="education" name="education">
+                                        <option value="">Выберите</option>
+                                        <option value="secondary">Среднее</option>
+                                        <option value="special">Средне-специальное</option>
+                                        <option value="higher">Высшее</option>
+                                        <option value="unfinished">Неоконченное высшее</option>
+                                    </select>
+                                </div>
+                            </div>
+                            <div class="col-md-6">
+                                <div class="my-input-box">
+                                    <label for="job">Работа</label>
+                                    <select id="job" name="job">
+                                        <option value="">Выберите</option>
+                                        <option value="works">Работаю</option>
+                                        <option value="notworks">Не работаю</option>
+                                        <option value="notworks">Студент</option>
+                                    </select>
+                                </div>
+                            </div>
+                            <div class="col-md-12">
+                                <div class="my-input-box">
+                                    <button type="button" class="custom-button" data-toggle="modal" data-target="#interestsModal">Выберите интересы</button>
+                                    <div id="selectedInterests" style="margin-top:10px;"></div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <div class="buttons  mt-30">
+                    <button type="submit" class="custom-button">Сохранить</button>
+                    <button class="custom-button2">Отменить</button>
+                </div>
+            </div>
+        </div>
+    </div>
+</section>
+
+<!-- ========= Profile Section Start -->
+
+<!-- Модальное окно для выбора интересов -->
+<div class="modal fade" id="interestsModal" tabindex="-1" role="dialog" aria-labelledby="interestsModalLabel" aria-hidden="true">
+  <div class="modal-dialog" role="document">
+    <div class="modal-content">
+      <div class="modal-header">
+        <h5 class="modal-title" id="interestsModalLabel">Выберите интересы</h5>
+        <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+          <span aria-hidden="true">&times;</span>
+        </button>
+      </div>
+      <div class="modal-body">
+        <div class="filter-checkboxes small-checkboxes">
+            <label><input type="checkbox" value="Путешествия"> Путешествия</label>
+            <label><input type="checkbox" value="Музыка"> Музыка</label>
+            <label><input type="checkbox" value="Спорт"> Спорт</label>
+            <label><input type="checkbox" value="Кино"> Кино</label>
+            <label><input type="checkbox" value="Книги"> Книги</label>
+            <label><input type="checkbox" value="Еда"> Еда</label>
+            <label><input type="checkbox" value="Танцы"> Танцы</label>
+            <label><input type="checkbox" value="Театр"> Театр</label>
+            <label><input type="checkbox" value="IT"> IT</label>
+        </div>
+      </div>
+      <div class="modal-footer">
+        <button type="button" class="btn btn-secondary" data-dismiss="modal">Закрыть</button>
+        <button type="button" class="btn btn-primary" id="saveInterestsBtn" data-dismiss="modal">Сохранить</button>
+      </div>
+    </div>
+  </div>
+</div>
+<script>
+// JS для отображения выбранных интересов
+document.addEventListener('DOMContentLoaded', function() {
+    var saveBtn = document.getElementById('saveInterestsBtn');
+    if (saveBtn) {
+        saveBtn.onclick = function() {
+            var checked = document.querySelectorAll('#interestsModal input[type=checkbox]:checked');
+            var selected = Array.from(checked).map(cb => cb.parentElement.textContent.trim());
+            document.getElementById('selectedInterests').innerHTML = selected.length ? 'Вы выбрали: ' + selected.join(', ') : '';
+        };
+    }
+});
+</script>

@@ -1,0 +1,209 @@
+/* Основной контейнер */
+.member-main-container {
+    display: flex;
+    justify-content: center;
+    align-items: flex-start;
+    gap: 40px;
+    margin-top: 100px;
+    margin-bottom: 40px;
+}
+.member-filter {
+    width: 320px;
+    background: #fff;
+    border-radius: 16px;
+    box-shadow: 0 2px 16px rgba(0,0,0,0.07);
+    padding: 32px 24px;
+}
+.member-card {
+    background: #fff;
+    border-radius: 16px;
+    box-shadow: 0 2px 16px rgba(0,0,0,0.07);
+    padding: 32px 24px;
+    display: flex;
+    align-items: flex-start;
+    gap: 32px;
+    min-width: 700px;
+}
+.member-photo-block {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    min-width: 320px;
+}
+.member-photo {
+    width: 300px;
+    height: 300px;
+    object-fit: cover;
+    border-radius: 16px;
+    box-shadow: 0 2px 8px rgba(0,0,0,0.08);
+    margin-bottom: 16px;
+}
+.member-name-age {
+    font-size: 1.5rem;
+    font-weight: 600;
+    margin-bottom: 12px;
+    text-align: center;
+}
+.member-actions {
+    display: flex;
+    justify-content: center;
+    gap: 24px;
+    margin-top: 16px;
+}
+.member-action-btn {
+    width: 56px;
+    height: 56px;
+    border-radius: 50%;
+    border: none;
+    background: #f5f5f5;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-size: 2rem;
+    transition: background 0.2s;
+    cursor: pointer;
+}
+.member-action-btn.like { color: #8e44ad; }
+.member-action-btn.dislike { color: #e74c3c; }
+.member-action-btn.skip { color: #888; }
+.member-action-btn:hover { background: #ececec; }
+.member-interests-block {
+    flex: 1;
+    padding-left: 16px;
+}
+.member-interests-title {
+    font-size: 1.1rem;
+    font-weight: 500;
+    margin-bottom: 10px;
+}
+.member-interests-list {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 10px;
+}
+.member-interest {
+    background: #f0f4fa;
+    color: #2d3a4a;
+    border-radius: 12px;
+    padding: 6px 16px;
+    font-size: 1rem;
+}
+
+/* Фильтр */
+.filter-title {
+    font-size: 1.2rem;
+    font-weight: 600;
+    margin-bottom: 18px;
+}
+.filter-group {
+    margin-bottom: 24px;
+}
+.filter-label {
+    font-size: 1rem;
+    margin-bottom: 8px;
+    display: block;
+}
+.filter-range {
+    display: flex;
+    align-items: center;
+    gap: 10px;
+}
+#ageValue {
+    font-weight: 600;
+    color: #2d3a4a;
+}
+.filter-interests-btn {
+    width: 100%;
+    background: #f0f4fa;
+    color: #2d3a4a;
+    border: none;
+    border-radius: 8px;
+    padding: 12px 0;
+    font-size: 1.1rem;
+    font-weight: 600;
+    cursor: pointer;
+    margin-bottom: 8px;
+    transition: background 0.2s;
+}
+.filter-interests-btn:hover {
+    background: #e0e6ef;
+}
+.filter-city-btn {
+    width: 100%;
+    background: #f0f4fa;
+    color: #2d3a4a;
+    border: none;
+    border-radius: 8px;
+    padding: 12px 0;
+    font-size: 1.1rem;
+    font-weight: 600;
+    cursor: pointer;
+    margin-bottom: 8px;
+    transition: background 0.2s;
+}
+.filter-city-btn:hover {
+    background: #e0e6ef;
+}
+.filter-apply-btn {
+    width: 100%;
+    margin-top: 16px;
+    background: #8e44ad;
+    color: #fff;
+    border: none;
+    border-radius: 8px;
+    padding: 12px 0;
+    font-size: 1.1rem;
+    font-weight: 600;
+    cursor: pointer;
+    transition: background 0.2s;
+}
+.filter-apply-btn:hover {
+    background: #6c3483;
+}
+
+/* Модальное окно интересов */
+#interestsModal .modal-content {
+    border-radius: 16px;
+}
+#interestsModal .modal-title {
+    font-weight: 600;
+}
+#interestsModal .filter-checkboxes {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 10px;
+    margin-top: 10px;
+}
+#interestsModal .filter-checkboxes label {
+    margin-right: 12px;
+    font-size: 1rem;
+}
+
+/* Меньше чекбоксы */
+.small-checkboxes label {
+    font-size: 0.95rem;
+    margin-right: 10px;
+}
+.small-checkboxes input[type="checkbox"] {
+    width: 16px;
+    height: 16px;
+    margin-right: 5px;
+}
+
+/* Модальное окно города */
+#cityModal .modal-content {
+    border-radius: 16px;
+}
+#cityModal .modal-title {
+    font-weight: 600;
+}
+#cityModal .filter-checkboxes {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 10px;
+    margin-top: 10px;
+}
+#cityModal .filter-checkboxes label {
+    margin-right: 12px;
+    font-size: 1rem;
+} 

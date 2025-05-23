@@ -28,7 +28,7 @@ namespace TheMatch.Controllers
             return View();
         }
 
-        public IActionResult AccountInfo()
+        public IActionResult Profileinfo()
         {
             return View();
         }
@@ -43,17 +43,7 @@ namespace TheMatch.Controllers
             return View();
         }
 
-        public IActionResult FriendRequest()
-        {
-            return View();
-        }
-
-        public IActionResult Notification()
-        {
-            return View();
-        }
-
-        public IActionResult PrivacySettings()
+        public IActionResult AccountInfoUser()
         {
             return View();
         }

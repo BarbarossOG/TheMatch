@@ -21,5 +21,15 @@ namespace TheMatch.Controllers
         {
             return View();
         }
+
+        public IActionResult Members()
+        {
+            return View();
+        }
+
+        public IActionResult Likes()
+        {
+            return View();
+        }
     }
 } 

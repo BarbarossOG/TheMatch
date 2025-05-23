@@ -56,17 +56,17 @@
                 <ul class="menu">
                     <li>
                     <li>
-                        <a asp-controller="Home" asp-action="Index" class="active">Главная</a>
+                        <a asp-controller="Home" asp-action="Index">Главная</a>
                     </li>
                     </li>
                     <li>
                         <a href="#">Знакомства</a>
                         <ul class="submenu">
                             <li>
-                                <a asp-controller="Profile" asp-action="Members">Анкеты</a>
+                                <a asp-controller="Community" asp-action="Members">Анкеты</a>
                             </li>
                             <li>
-                                 <a asp-controller="Community" asp-action="Index">Взаимные симпатии</a>
+                                <a asp-controller="Community" asp-action="Likes">Взаимные симпатии</a>
                             </li>
                         </ul>
                     </li>
@@ -80,7 +80,7 @@
                         <a href="#">Страницы</a>
                         <ul class="submenu">
                             <li>
-                                <a asp-controller="Account" asp-action="Settings">Настройки аккаунта</a>
+                                <a asp-controller="Account" asp-action="Settings">Настройки</a>
                             </li>
                             <li>
                                 <a asp-controller="Home" asp-action="About">О нас</a>
@@ -96,6 +96,9 @@
                             </li>
                             <li>
                                 <a asp-controller="Home" asp-action="Error503">503</a>
+                            </li>
+                            <li>
+                                <a asp-controller="Profile" asp-action="AccountInfoUser">Аккаунт</a>
                             </li>
                         </ul>
                     </li>
@@ -121,7 +124,7 @@
                         </a>
                         <ul class="submenu">
                             <li>
-                                <a asp-controller="Account" asp-action="AccountInfo">Профиль</a>
+                                <a asp-controller="Account" asp-action="Profileinfo">Профиль</a>
                             </li>
                             <li>
                                 <a href="#">Выход</a>

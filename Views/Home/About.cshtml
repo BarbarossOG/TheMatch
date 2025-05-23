@@ -3,123 +3,138 @@
     Layout = "_Layout";
 }
 
-<!-- ==========Banner-Section========== -->
-<section class="banner-section">
+<!-- ==========Breadcrumb-Section========== -->
+<section class="breadcrumb-area profile-bc-area">
     <div class="container">
-        <div class="row">
-            <div class="col-lg-8 col-xl-6">
-                <div class="banner-content">
-                    <h1 class="title">О нас</h1>
-                    <div class="breadcrumb-area">
-                        <nav aria-label="breadcrumb">
-                            <ol class="breadcrumb">
-                                <li class="breadcrumb-item"><a asp-controller="Home" asp-action="Index">Главная</a></li>
-                                <li class="breadcrumb-item active" aria-current="page">О нас</li>
-                            </ol>
-                        </nav>
-                    </div>
-                </div>
-            </div>
+        <div class="content">
+            <h2 class="title extra-padding">
+                О нас
+            </h2>
+            <ul class="breadcrumb-list extra-padding">
+                <li class="breadcrumb-item"><a asp-controller="Home" asp-action="Index">Главная</a></li>
+                <li>
+                    Раздел о нас
+                </li>
+            </ul>
         </div>
     </div>
 </section>
-<!-- ==========Banner-Section========== -->
+<!-- ==========Breadcrumb-Section========== -->
 
-<!-- ==========About-Us========== -->
-<section class="about-us">
+<!-- ==========Start-Flirting-Section========== -->
+<section class="flirting-section about-section">
     <div class="container">
         <div class="row">
-            <div class="col-lg-6">
-                <div class="left-content-area">
-                    <img src="~/images/about-us.png" alt="">
+            <div class="col-lg-6 align-self-center">
+                <div class="img">
+                    <img src="~/images/about/about-page-left.html.png" alt="">
                 </div>
             </div>
             <div class="col-lg-6">
-                <div class="right-content-area">
+                <div class="content">
                     <div class="section-header">
+                        <h6 class="sub-title">
+                            Узнайте больше
+                        </h6>
                         <h2 class="title">
-                            О TheMatch
+                            О нас
                         </h2>
-                        <p>В TheMatch мы понимаем, что вы ищете</p>
-                    </div>
-                    <div class="content">
                         <p>
-                            TheMatch - это онлайн-платформа для знакомств. Наша умная система подбора партнеров соединяет людей на основе их интересов, образа жизни и личных предпочтений.
+                            TheMatch - это онлайн-платформа для знакомств. Наша система подбора партнеров соединяет людей на основе их интересов, образа жизни и личных предпочтений.
                         </p>
-                        <p>
-                            Наша миссия - объединять одиноких людей, которые серьезно настроены на поиск значимых отношений. Мы верим, что каждый заслуживает любви, и мы работаем над созданием безопасной, гостеприимной средой, где могут создваться новые ячейки общества.
-                        </p>
-                        <p>
+                        <br>
+                        <p class="mb-0">
+                            Наша миссия - объединять одиноких людей, которые серьезно настроены на поиск значимых отношений. 
+                            Мы верим, что каждый заслуживает любви, и мы работаем над созданием безопасной, гостеприимной средой, где могут создваться новые ячейки общества.
                             Благодаря интуитивно понятному интерфейсу и функциям безопасности, мы делаем ваш путь к поиску любви максимально комфортным и приятным.
                         </p>
                     </div>
+
                 </div>
             </div>
         </div>
     </div>
 </section>
-<!-- ==========About-Us========== -->
+<!-- ==========Start-Flirting-Section========== -->
 
-<!-- ==========The-Approach========== -->
-<section class="approach-section">
+<!-- ========== w-c-u Section Starts ========== -->
+<section class="w-c-u-section">
     <div class="container">
         <div class="row justify-content-center">
-            <div class="col-lg-8">
-                <div class="section-header">
-                    <h2 class="title">
-                        Наш подход
-                    </h2>
+            <div class="col-lg-6">
+                <div class="content">
+                    <div class="section-header">
+                        <h6 class="sub-title">
+                            Чем мы отличаемся
+                        </h6>
+                        <h2 class="title extra-padding">
+                            Кто выбирает нас?
+                        </h2>
+                        <p class="text">
+                            Существует множество сайтов знакомств, что затрудняет
+                            выбрать тот, который может дать вам серьезного партнера.....
+                        </p>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <div class="row">
+            <div class="col-lg-3 col-md-6">
+                <div class="single-w-c-u-box">
+                    <div class="icon">
+                        <img src="~/images/e-c-u/icon1.png" alt="">
+                    </div>
+                    <h4 class="title">
+                        Свидания
+                    </h4>
                     <p>
-                        Наш уникальный подход сочетает передовые технологии с человеческим пониманием
+                        Свидания - это когда два человека, которых тянет друг к другу, проводят время вместе.
+                    </p>
+                </div>
+            </div>
+            <div class="col-lg-3 col-md-6">
+                <div class="single-w-c-u-box">
+                    <div class="icon">
+                        <img src="~/images/e-c-u/icon2.png" alt="">
+                    </div>
+                    <h4 class="title">
+                        Прекрасные советы
+                    </h4>
+                    <p>
+                        Мы создали для вас специальный руководства, которые помогут вам встретить вашу половинку!
+                    </p>
+                </div>
+            </div>
+            <div class="col-lg-3 col-md-6">
+                <div class="single-w-c-u-box">
+                    <div class="icon">
+                        <img src="~/images/e-c-u/icon3.png" alt="">
+                    </div>
+                    <h4 class="title">
+                        24/7 Поддержка
+                    </h4>
+                    <p>
+                        Наши специалисты всегда готовы вам помочь.
+                    </p>
+                </div>
+            </div>
+            <div class="col-lg-3 col-md-6">
+                <div class="single-w-c-u-box">
+                    <div class="icon">
+                        <img src="~/images/e-c-u/icon4.png" alt="">
+                    </div>
+                    <h4 class="title">
+                        Отношения
+                    </h4>
+                    <p>
+                        Задачей нашего приложения прежде всего является помочь вам найти партнёра!
                     </p>
                 </div>
             </div>
         </div>
-        <div class="row">
-            <div class="col-lg-6">
-                <div class="approach-item">
-                    <div class="approach-thumb">
-                        <img src="~/images/approach/approach1.png" alt="approach">
-                    </div>
-                    <div class="approach-content">
-                        <h4 class="title">Умный подбор</h4>
-                        <p>Наш алгоритм анализирует ваш профиль и предпочтения, чтобы предложить наиболее совместимые пары.</p>
-                    </div>
-                </div>
-            </div>
-            <div class="col-lg-6">
-                <div class="approach-item">
-                    <div class="approach-thumb">
-                        <img src="~/images/approach/approach2.png" alt="approach">
-                    </div>
-                    <div class="approach-content">
-                        <h4 class="title">Фокус на качестве</h4>
-                        <p>Мы отдаем приоритет качеству связей, а не количеству, помогая вам найти значимые отношения.</p>
-                    </div>
-                </div>
-            </div>
-            <div class="col-lg-6">
-                <div class="approach-item">
-                    <div class="approach-thumb">
-                        <img src="~/images/approach/approach3.png" alt="approach">
-                    </div>
-                    <div class="approach-content">
-                        <h4 class="title">Безопасная среда</h4>
-                        <p>Безопасность - наш приоритет. Мы проверяем профили и предоставляем инструменты для сообщения о неподобающем поведении.</p>
-                    </div>
-                </div>
-            </div>
-            <div class="col-lg-6">
-                <div class="approach-item">
-                    <div class="approach-thumb">
-                        <img src="~/images/approach/approach4.png" alt="approach">
-                    </div>
-                </div>
-            </div>
-        </div>
     </div>
 </section>
-<!-- ==========The-Approach========== -->
+<!-- ==========  w-c-u Section Starts ========== -->
 
 <!-- ==========Work-Section========== -->
 <section class="work-section">
@@ -140,7 +155,7 @@
             <div class="col-lg-4">
                 <div class="work-item">
                     <div class="work-thumb">
-                        <img src="~/images/work/work1.png" alt="work">
+                        <img src="~/images/membership/icon2.png" alt="work">
                     </div>
                     <div class="work-content">
                         <h4 class="title">Создайте свой профиль</h4>
@@ -153,7 +168,7 @@
             <div class="col-lg-4">
                 <div class="work-item">
                     <div class="work-thumb">
-                        <img src="~/images/work/work2.png" alt="work">
+                        <img src="~/images/membership/icon3.png" alt="work">
                     </div>
                     <div class="work-content">
                         <h4 class="title">Найдите совпадения</h4>
@@ -166,7 +181,7 @@
             <div class="col-lg-4">
                 <div class="work-item">
                     <div class="work-thumb">
-                        <img src="~/images/work/work3.png" alt="work">
+                        <img src="~/images/membership/icon4.png" alt="work">
                     </div>
                     <div class="work-content">
                         <h4 class="title">Начните общение</h4>

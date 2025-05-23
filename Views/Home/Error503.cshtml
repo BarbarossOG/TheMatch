@@ -3,21 +3,46 @@
     Layout = "_Layout";
 }
 
-<!-- ==========503-Section========== -->
-<div class="error-section">
-    <div class="container">
-        <div class="row justify-content-center">
-            <div class="col-lg-7 text-center">
-                <div class="error-content">
-                    <div class="error-thumb">
-                        <img src="~/images/503.png" alt="503">
+<!-- ==========Five-Not-Three-Section========== -->
+<section class="section-503">
+    <div class="wrapper ">
+        <div class="container ">
+            <div id="scene" class="scene" data-hover-only="false">
+                <div class="circle" data-depth="1.2"></div>
+                <div class="one" data-depth="0.9">
+                    <div class="content">
+                        <span class="piece"></span>
+                        <span class="piece"></span>
+                        <span class="piece"></span>
                     </div>
-                    <h2 class="title">Сервис недоступен</h2>
-                    <p>Извините, в настоящее время мы находимся на техническом обслуживании. Мы скоро вернемся. Пожалуйста, повторите попытку через некоторое время.</p>
-                    <a asp-controller="Home" asp-action="Index" class="custom-button">Вернуться назад</a>
                 </div>
+                <div class="two" data-depth="0.60">
+                    <div class="content">
+                        <span class="piece"></span>
+                        <span class="piece"></span>
+                        <span class="piece"></span>
+                    </div>
+                </div>
+                <div class="three" data-depth="0.40">
+                    <div class="content">
+                        <span class="piece"></span>
+                        <span class="piece"></span>
+                        <span class="piece"></span>
+                    </div>
+                </div>
+                <p class="p503" data-depth="0.50">503</p>
+                <p class="p503" data-depth="0.10">503</p>
             </div>
         </div>
     </div>
-</div>
-<!-- ==========503-Section========== --> 
+</section>
+
+
+<section class="section-404 area-503">
+    <div class="container">
+        <h3 class="title">Сервис недоступен </h3>
+        <a asp-controller="Home" asp-action="Index" class="custom-button">Вернуться назад</a>
+    </div>
+</section>
+
+<!-- ==========Five-Not-Three-Section========== -->

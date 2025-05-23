@@ -20,7 +20,7 @@
     <link rel="stylesheet" href="~/css/responsive.css">
     <!-- <link rel="stylesheet" href="~/css/dark.css"> -->
 
-    <link rel="shortcut icon" href="~/images/favicon.png" type="image/x-icon">
+    <link rel="shortcut icon" href="~/images/favicon2.png" type="image/x-icon">
 
     <title>@ViewData["Title"] - TheMatch</title>
 </head>
@@ -60,22 +60,27 @@
                     </li>
                     </li>
                     <li>
-                        <a asp-controller="Community" asp-action="Index">Знакомства</a>
+                        <a href="#">Знакомства</a>
+                        <ul class="submenu">
+                            <li>
+                                <a asp-controller="Profile" asp-action="Members">Анкеты</a>
+                            </li>
+                            <li>
+                                 <a asp-controller="Community" asp-action="Index">Взаимные симпатии</a>
+                            </li>
+                        </ul>
+                    </li>
+                    <li>
+                        <a asp-controller="Account" asp-action="Login">Вход</a>
+                    </li>
+                    <li>
+                        <a asp-controller="Account" asp-action="Register">Регистрация</a>
                     </li>
                     <li>
                         <a href="#">Страницы</a>
                         <ul class="submenu">
                             <li>
                                 <a asp-controller="Account" asp-action="Settings">Настройки аккаунта</a>
-                            </li>
-                            <li>
-                                <a asp-controller="Profile" asp-action="Members">Анкеты</a>
-                            </li>
-                            <li>
-                                <a asp-controller="Account" asp-action="Login">Вход</a>
-                            </li>
-                            <li>
-                                <a asp-controller="Account" asp-action="Register">Регистрация</a>
                             </li>
                             <li>
                                 <a asp-controller="Home" asp-action="About">О нас</a>

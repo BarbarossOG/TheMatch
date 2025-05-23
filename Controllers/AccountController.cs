@@ -52,5 +52,11 @@ namespace TheMatch.Controllers
         {
             return View();
         }
+
+        public IActionResult TestUser()
+        {
+            return View();
+        }
+
     }
 } 

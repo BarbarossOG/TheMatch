@@ -1,0 +1,16 @@
+/* Стилизация radio-кнопок для теста пользователя */
+.custom-control-input[type="radio"]:checked ~ .custom-control-label::before {
+    border-color: #7C3AED;
+    background-color: #7C3AED;
+}
+.custom-control-input[type="radio"]:checked ~ .custom-control-label::after {
+    background-color: #fff;
+    border-radius: 50%;
+    box-shadow: 0 0 0 2px #7C3AED;
+}
+.custom-control-label::before {
+    border: 2px solid #7C3AED;
+}
+.custom-control-label::after {
+    background-color: #fff;
+} 

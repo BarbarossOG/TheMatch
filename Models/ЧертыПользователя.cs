@@ -22,10 +22,10 @@ public partial class ЧертыПользователя
     public decimal Значение { get; set; }
 
     [ForeignKey("IdПользователя")]
-    [InverseProperty("ЧертыПользователяs")]
+    [InverseProperty("ЧертыПользователя")]
     public virtual Пользователи IdПользователяNavigation { get; set; } = null!;
 
     [ForeignKey("IdЧертыХарактера")]
-    [InverseProperty("ЧертыПользователяs")]
+    [InverseProperty("ЧертыПользователя")]
     public virtual ЧертыХарактера IdЧертыХарактераNavigation { get; set; } = null!;
 }

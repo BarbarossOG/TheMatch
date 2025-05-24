@@ -45,12 +45,9 @@ public partial class Пользователи
     [StringLength(255)]
     public string ЭлектроннаяПочта { get; set; } = null!;
 
-    [StringLength(30)]
+    [StringLength(64)]
     [Unicode(false)]
     public string Пароль { get; set; } = null!;
-
-    [InverseProperty("IdПользователяNavigation")]
-    public virtual ICollection<ЖурналДействий> ЖурналДействийs { get; set; } = new List<ЖурналДействий>();
 
     [InverseProperty("IdПользователя1Navigation")]
     public virtual ICollection<ЖурналПриложения> ЖурналПриложенияIdПользователя1Navigations { get; set; } = new List<ЖурналПриложения>();
@@ -58,16 +55,11 @@ public partial class Пользователи
     [InverseProperty("IdПользователя2Navigation")]
     public virtual ICollection<ЖурналПриложения> ЖурналПриложенияIdПользователя2Navigations { get; set; } = new List<ЖурналПриложения>();
 
-    [InverseProperty("IdПользователяNavigation")]
-    public virtual ICollection<КупленныеПодписки> КупленныеПодпискиs { get; set; } = new List<КупленныеПодписки>();
 
     [InverseProperty("IdПользователяNavigation")]
-    public virtual ICollection<СообщенияПользователей> СообщенияПользователейs { get; set; } = new List<СообщенияПользователей>();
-
-    [InverseProperty("IdПользователяNavigation")]
-    public virtual ICollection<ЧертыПользователя> ЧертыПользователяs { get; set; } = new List<ЧертыПользователя>();
+    public virtual ICollection<ЧертыПользователя> ЧертыПользователя { get; set; } = new List<ЧертыПользователя>();
 
     [ForeignKey("IdПользователя")]
-    [InverseProperty("IdПользователяs")]
-    public virtual ICollection<Увлечения> IdУвлеченияs { get; set; } = new List<Увлечения>();
+    [InverseProperty("IdПользователя")]
+    public virtual ICollection<Увлечения> IdУвлечения { get; set; } = new List<Увлечения>();
 }

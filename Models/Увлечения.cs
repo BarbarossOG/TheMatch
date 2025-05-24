@@ -18,6 +18,6 @@ public partial class Увлечения
     public string НазваниеУвлечения { get; set; } = null!;
 
     [ForeignKey("IdУвлечения")]
-    [InverseProperty("IdУвлеченияs")]
-    public virtual ICollection<Пользователи> IdПользователяs { get; set; } = new List<Пользователи>();
+    [InverseProperty("IdУвлечения")]
+    public virtual ICollection<Пользователи> IdПользователя { get; set; } = new List<Пользователи>();
 }

@@ -18,5 +18,5 @@ public partial class ЧертыХарактера
     public string НазваниеЧерты { get; set; } = null!;
 
     [InverseProperty("IdЧертыХарактераNavigation")]
-    public virtual ICollection<ЧертыПользователя> ЧертыПользователяs { get; set; } = new List<ЧертыПользователя>();
+    public virtual ICollection<ЧертыПользователя> ЧертыПользователя { get; set; } = new List<ЧертыПользователя>();
 }

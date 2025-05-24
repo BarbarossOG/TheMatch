@@ -35,6 +35,6 @@ public partial class ЖурналПриложения
     public virtual Пользователи IdПользователя2Navigation { get; set; } = null!;
 
     [ForeignKey("IdТипВзаимодействия")]
-    [InverseProperty("ЖурналПриложенияs")]
+    [InverseProperty("ЖурналПриложения")]
     public virtual ТипВзаимодействия IdТипВзаимодействияNavigation { get; set; } = null!;
 }

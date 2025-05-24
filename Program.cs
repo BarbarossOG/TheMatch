@@ -1,3 +1,6 @@
+using TheMatch.Data;
+using Microsoft.EntityFrameworkCore;
+
 namespace TheMatch
 {
     public class Program
@@ -8,6 +11,16 @@ namespace TheMatch
 
             // Add services to the container.
             builder.Services.AddControllersWithViews();
+            builder.Services.AddDbContext<TheMatchContext>(options =>
+                options.UseSqlServer(builder.Configuration.GetConnectionString("DefaultConnection")));
+            builder.Services.AddAuthentication("MyCookieAuth")
+                .AddCookie("MyCookieAuth", options =>
+                {
+                    options.LoginPath = "/Account/Login";
+                    options.LogoutPath = "/Account/Logout";
+                    options.Cookie.Name = "TheMatchAuth";
+                    options.ExpireTimeSpan = TimeSpan.FromDays(7);
+                });
 
             var app = builder.Build();
 
@@ -24,6 +37,7 @@ namespace TheMatch
 
             app.UseRouting();
 
+            app.UseAuthentication();
             app.UseAuthorization();
 
             app.MapControllerRoute(

@@ -18,5 +18,5 @@ public partial class ТипВзаимодействия
     public string НазваниеТипа { get; set; } = null!;
 
     [InverseProperty("IdТипВзаимодействияNavigation")]
-    public virtual ICollection<ЖурналПриложения> ЖурналПриложенияs { get; set; } = new List<ЖурналПриложения>();
+    public virtual ICollection<ЖурналПриложения> ЖурналПриложения { get; set; } = new List<ЖурналПриложения>();
 }

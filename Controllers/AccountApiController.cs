@@ -274,6 +274,38 @@ namespace TheMatch.Controllers
             return Ok();
         }
 
+        [HttpPost("changepassword")]
+        public async Task<IActionResult> ChangePassword([FromBody] ChangePasswordDto dto)
+        {
+            var email = User.FindFirstValue(ClaimTypes.Email);
+            if (string.IsNullOrEmpty(email)) return Unauthorized();
+            var user = await _context.Пользователи.FirstOrDefaultAsync(u => u.ЭлектроннаяПочта == email);
+            if (user == null) return NotFound();
+            if (user.Пароль != HashPassword(dto.OldPassword))
+                return BadRequest("Старый пароль неверен");
+            if (dto.NewPassword != dto.ConfirmPassword)
+                return BadRequest("Пароли не совпадают");
+            if (dto.NewPassword.Length < 6)
+                return BadRequest("Пароль должен быть не короче 6 символов");
+            user.Пароль = HashPassword(dto.NewPassword);
+            await _context.SaveChangesAsync();
+            return Ok();
+        }
+
+        [HttpPost("deleteaccount")]
+        public async Task<IActionResult> DeleteAccount([FromBody] DeleteAccountDto dto)
+        {
+            var email = User.FindFirstValue(ClaimTypes.Email);
+            if (string.IsNullOrEmpty(email)) return Unauthorized();
+            var user = await _context.Пользователи.FirstOrDefaultAsync(u => u.ЭлектроннаяПочта == email);
+            if (user == null) return NotFound();
+            // Можно сохранить причину удаления в отдельную таблицу, если нужно
+            _context.Пользователи.Remove(user);
+            await _context.SaveChangesAsync();
+            await HttpContext.SignOutAsync("MyCookieAuth");
+            return Ok();
+        }
+
         private string HashPassword(string password)
         {
             using (var sha256 = SHA256.Create())

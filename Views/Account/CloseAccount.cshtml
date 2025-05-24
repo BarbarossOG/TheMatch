@@ -38,7 +38,7 @@
                         <form id="closeAccountForm">
                             <div class="form-group">
                                 <label for="deleteReason">Причина удаления аккаунта</label>
-                                <select class="form-control custom-select" id="deleteReason">
+                                <select class="form-control custom-select" id="deleteReason" required>
                                     <option value="">Выберите причину</option>
                                     <option value="found_match">Я нашёл(ла) пару</option>
                                     <option value="taking_break">Хочу сделать перерыв</option>
@@ -54,7 +54,7 @@
                             </div>
                             <div class="form-group">
                                 <div class="custom-control custom-checkbox">
-                                    <input type="checkbox" class="custom-control-input" id="confirmClosure">
+                                    <input type="checkbox" class="custom-control-input" id="confirmClosure" required>
                                     <label class="custom-control-label" for="confirmClosure">Я подтверждаю, что понимаю: удаление аккаунта необратимо и все данные будут удалены навсегда</label>
                                 </div>
                             </div>
@@ -62,8 +62,7 @@
                                 <button type="submit" class="custom-button danger-button">Удалить аккаунт навсегда</button>
                             </div>
                         </form>
-                        <!-- Всплывающее уведомление -->
-                        <div id="closeAccountNotify" class="close-account-notify">В скором времени ваш аккаунт будет удалён</div>
+                        <div id="closeAccountMsg" style="margin-top:15px;"></div>
                     </div>
                 </div>
             </div>
@@ -73,5 +72,32 @@
 <!-- ==========Close-Account-Section========== -->
 
 @section Scripts {
-    <script src="~/js/closeaccount.js"></script>
+<script>
+document.getElementById('closeAccountForm').addEventListener('submit', function(e) {
+    e.preventDefault();
+    const reason = document.getElementById('deleteReason').value;
+    const description = document.getElementById('deleteDescription').value;
+    const confirm = document.getElementById('confirmClosure').checked;
+    if (!confirm) {
+        document.getElementById('closeAccountMsg').innerHTML = '<span style="color:red;">Вы должны подтвердить удаление аккаунта!</span>';
+        return;
+    }
+    fetch('/api/accountapi/deleteaccount', {
+        method: 'POST',
+        headers: { 'Content-Type': 'application/json' },
+        body: JSON.stringify({ reason, description, confirm })
+    })
+    .then(r => {
+        if (!r.ok) return r.text().then(t => { throw new Error(t); });
+        return r.text();
+    })
+    .then(() => {
+        document.getElementById('closeAccountMsg').innerHTML = '<span style="color:green;">Ваш аккаунт удалён. Перенаправление...</span>';
+        setTimeout(() => { window.location.href = '/'; }, 2000);
+    })
+    .catch(e => {
+        document.getElementById('closeAccountMsg').innerHTML = '<span style="color:red;">' + e.message + '</span>';
+    });
+});
+</script>
 } 

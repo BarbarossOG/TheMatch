@@ -1,5 +1,5 @@
 @{
-    ViewData["Title"] = "Account Information";
+    ViewData["Title"] = "Профиль";
     Layout = "_Layout";
 }
 
@@ -65,112 +65,49 @@
                         <div class="row">
                             <div class="col-md-6">
                                 <div class="my-input-box">
-                                    <label for="">Имя профиля</label>
-                                    <input type="text" placeholder="Имя профиля">
+                                    <label for="name">Имя профиля</label>
+                                    <input type="text" id="name" class="form-control" />
                                 </div>
                             </div>
                             <div class="col-md-6">
                                 <div class="my-input-box">
-                                    <label for="">Дата рождения</label>
-                                    <input type="date">
+                                    <label for="birthdate">Дата рождения</label>
+                                    <input type="date" id="birthdate" class="form-control" />
                                 </div>
                             </div>
                             <div class="col-md-12">
                                 <div class="my-input-box">
-                                    <textarea name="" placeholder="Напишите небольшое описание к вашему профилю..."></textarea>
+                                    <textarea id="description" class="form-control" placeholder="Напишите небольшое описание к вашему профилю..."></textarea>
                                 </div>
                             </div>
                             <div class="col-md-6">
                                 <div class="my-input-box">
-                                    <label for="">Страна</label>
-                                    <select name="" id="">
-                                        <option value="" disabled selected>Выберите вашу страну</option>
-                                        <option value="">Россия</option>
-                                    </select>
+                                    <label for="height">Рост</label>
+                                    <input type="number" id="height" class="form-control" />
                                 </div>
                             </div>
                             <div class="col-md-6">
                                 <div class="my-input-box">
-                                    <label for="">Город</label>
-                                    <select name="" id="">
-                                        <option value="" disabled selected>Выберите ваш город</option>
-                                        <option value="">Рязань</option>
-                                        <option value="">Москва</option>
-                                        <option value="">Санкт-Петербург</option>
-                                    </select>
-                                </div>
-                            </div>
-                        </div>
-                    </div>
-                </div>
-                <div class="input-info-box mt-30">
-                    <div class="header">
-                        Интересы и личная информация
-                    </div>
-                    <div class="content">
-                        <div class="row">
-                            <div class="col-md-6">
-                                <div class="my-input-box">
-                                    <label for="height">Рост (см)</label>
-                                    <input type="number" id="height" name="height" placeholder="Рост" min="100" max="250">
+                                    <label for="location">Местоположение</label>
+                                    <input type="text" id="location" class="form-control" />
                                 </div>
                             </div>
                             <div class="col-md-6">
                                 <div class="my-input-box">
                                     <label for="income">Уровень заработка</label>
-                                    <select id="income" name="income">
-                                        <option value="">Выберите</option>
-                                        <option value="none">Отсутствует</option>
-                                        <option value="low">Низкий</option>
-                                        <option value="low-medium">Ниже среднего</option>
-                                        <option value="medium">Средний</option>
-                                        <option value="high-medium">Выше среднего</option>
-                                        <option value="high">Высокий</option>
-                                    </select>
+                                    <input type="text" id="income" class="form-control" />
                                 </div>
                             </div>
                             <div class="col-md-6">
                                 <div class="my-input-box">
                                     <label for="housing">Жильё</label>
-                                    <select id="housing" name="housing">
-                                        <option value="">Выберите</option>
-                                        <option value="own">Есть своё</option>
-                                        <option value="rent">Арендую</option>
-                                        <option value="family">Живу с родителями</option>
-                                        <option value="none">Отсутствует</option>
-                                    </select>
+                                    <input type="text" id="housing" class="form-control" />
                                 </div>
                             </div>
                             <div class="col-md-6">
                                 <div class="my-input-box">
-                                    <label for="childs">Дети</label>
-                                    <select id="childs" name="childs">
-                                        <option value="">Нет</option>
-                                        <option value="own">Есть</option>
-                                    </select>
-                                </div>
-                            </div>
-                            <div class="col-md-6">
-                                <div class="my-input-box">
-                                    <label for="education">Уровень образования</label>
-                                    <select id="education" name="education">
-                                        <option value="">Выберите</option>
-                                        <option value="secondary">Среднее</option>
-                                        <option value="special">Средне-специальное</option>
-                                        <option value="higher">Высшее</option>
-                                        <option value="unfinished">Неоконченное высшее</option>
-                                    </select>
-                                </div>
-                            </div>
-                            <div class="col-md-6">
-                                <div class="my-input-box">
-                                    <label for="job">Работа</label>
-                                    <select id="job" name="job">
-                                        <option value="">Выберите</option>
-                                        <option value="works">Работаю</option>
-                                        <option value="notworks">Не работаю</option>
-                                        <option value="notworks">Студент</option>
-                                    </select>
+                                    <label for="children">Наличие детей</label>
+                                    <input type="text" id="children" class="form-control" />
                                 </div>
                             </div>
                             <div class="col-md-12">
@@ -183,7 +120,7 @@
                     </div>
                 </div>
                 <div class="buttons  mt-30">
-                    <button type="submit" class="custom-button">Сохранить</button>
+                    <button type="button" id="save-btn" class="custom-button">Сохранить</button>
                     <button class="custom-button2">Отменить</button>
                 </div>
             </div>
@@ -223,16 +160,4 @@
     </div>
   </div>
 </div>
-<script>
-// JS для отображения выбранных интересов
-document.addEventListener('DOMContentLoaded', function() {
-    var saveBtn = document.getElementById('saveInterestsBtn');
-    if (saveBtn) {
-        saveBtn.onclick = function() {
-            var checked = document.querySelectorAll('#interestsModal input[type=checkbox]:checked');
-            var selected = Array.from(checked).map(cb => cb.parentElement.textContent.trim());
-            document.getElementById('selectedInterests').innerHTML = selected.length ? 'Вы выбрали: ' + selected.join(', ') : '';
-        };
-    }
-});
-</script>
+<script src="~/js/profileinfo-api.js"></script>

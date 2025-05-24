@@ -30,6 +30,8 @@ public partial class TheMatchContext : DbContext
 
     public virtual DbSet<ЧертыХарактера> ЧертыХарактера { get; set; }
 
+    public virtual DbSet<УвлеченияПользователя> УвлеченияПользователяs { get; set; }
+
     
     protected override void OnModelCreating(ModelBuilder modelBuilder)
     {
@@ -53,23 +55,6 @@ public partial class TheMatchContext : DbContext
         modelBuilder.Entity<Пользователи>(entity =>
         {
             entity.ToTable("Пользователи", tb => tb.HasTrigger("SetUserDescription"));
-
-            entity.HasMany(d => d.IdУвлечения).WithMany(p => p.IdПользователя)
-                .UsingEntity<Dictionary<string, object>>(
-                    "УвлеченияПользователя",
-                    r => r.HasOne<Увлечения>().WithMany()
-                        .HasForeignKey("IdУвлечения")
-                        .HasConstraintName("FK_Увлечения_пользователя_ID_Увлечения"),
-                    l => l.HasOne<Пользователи>().WithMany()
-                        .HasForeignKey("IdПользователя")
-                        .HasConstraintName("FK_Увлечения_пользователя_ID_Пользователя"),
-                    j =>
-                    {
-                        j.HasKey("IdПользователя", "IdУвлечения");
-                        j.ToTable("Увлечения_пользователя");
-                        j.IndexerProperty<int>("IdПользователя").HasColumnName("ID_Пользователя");
-                        j.IndexerProperty<byte>("IdУвлечения").HasColumnName("ID_Увлечения");
-                    });
         });
 
         modelBuilder.Entity<ПользователиНазванияУвлечений>(entity =>
@@ -101,6 +86,22 @@ public partial class TheMatchContext : DbContext
             entity.HasKey(e => e.IdЧертыХарактера).HasName("PK__ЧертыХар__B20AA3E7C7FD4AEC");
 
             entity.Property(e => e.IdЧертыХарактера).ValueGeneratedOnAdd();
+        });
+
+        modelBuilder.Entity<УвлеченияПользователя>(entity =>
+        {
+            entity.HasKey(e => new { e.ID_Пользователя, e.ID_Увлечения });
+            entity.ToTable("Увлечения_пользователя");
+
+            entity.HasOne(e => e.Пользователь)
+                .WithMany(u => u.УвлеченияПользователяs)
+                .HasForeignKey(e => e.ID_Пользователя)
+                .OnDelete(DeleteBehavior.Cascade);
+
+            entity.HasOne(e => e.Увлечение)
+                .WithMany(h => h.UserHobbies)
+                .HasForeignKey(e => e.ID_Увлечения)
+                .OnDelete(DeleteBehavior.Cascade);
         });
 
         OnModelCreatingPartial(modelBuilder);

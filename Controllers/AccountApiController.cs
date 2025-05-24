@@ -8,6 +8,8 @@ using System.Security.Claims;
 using Microsoft.AspNetCore.Authentication;
 using Microsoft.AspNetCore.Authentication.Cookies;
 using TheMatch.Models.Dtos;
+using System.Drawing;
+using System.Linq;
 
 namespace TheMatch.Controllers
 {
@@ -169,6 +171,107 @@ namespace TheMatch.Controllers
                 .Select(x => x.НазваниеУвлечения)
                 .ToListAsync();
             return Ok(hobbies);
+        }
+
+        [HttpPost("uploadprofilephoto")]
+        public async Task<IActionResult> UploadProfilePhoto()
+        {
+            var email = User.FindFirstValue(ClaimTypes.Email);
+            if (string.IsNullOrEmpty(email)) return Unauthorized();
+            var user = await _context.Пользователи.FirstOrDefaultAsync(u => u.ЭлектроннаяПочта == email);
+            if (user == null) return NotFound();
+
+            var file = Request.Form.Files.FirstOrDefault();
+            if (file == null || file.Length == 0)
+                return BadRequest("Файл не выбран");
+            if (file.Length > 2 * 1024 * 1024)
+                return BadRequest("Максимальный размер файла 2 МБ");
+
+            // Проверка размера изображения (только 265x350) -- удалено, оставлена только JS-проверка
+
+            var ext = System.IO.Path.GetExtension(file.FileName).ToLower();
+            if (ext != ".jpg" && ext != ".jpeg" && ext != ".png")
+                return BadRequest("Только JPG/PNG");
+
+            // Определяем минимальный свободный номер фото (1 или 2)
+            var userPhotos = await _context.ИзображенияПрофиля.Where(x => x.ID_Пользователя == user.IdПользователя).ToListAsync();
+            var usedNums = userPhotos.Select(x => {
+                var fname = System.IO.Path.GetFileNameWithoutExtension(x.Ссылка);
+                var parts = fname.Split('_');
+                if (parts.Length == 2 && int.TryParse(parts[1], out int n)) return n; else return 0;
+            }).Where(n => n > 0).ToList();
+            int nextNum = Enumerable.Range(1, 2).First(n => !usedNums.Contains(n));
+            var fileName = $"{user.IdПользователя}_{nextNum}{ext}";
+            var savePath = Path.Combine(Directory.GetCurrentDirectory(), "wwwroot", "images", "profiles", fileName);
+            using (var stream = new FileStream(savePath, FileMode.Create))
+            {
+                await file.CopyToAsync(stream);
+            }
+            // Сбросить "основное" у других фото
+            foreach (var p in userPhotos) p.Основное = false;
+            // Добавить запись
+            var photo = new ИзображенияПрофиля
+            {
+                ID_Пользователя = user.IdПользователя,
+                Ссылка = $"/images/profiles/{fileName}",
+                Основное = true
+            };
+            _context.ИзображенияПрофиля.Add(photo);
+            await _context.SaveChangesAsync();
+            return Ok(new { url = photo.Ссылка });
+        }
+
+        [HttpGet("profilephoto")]
+        public async Task<IActionResult> GetProfilePhoto()
+        {
+            var email = User.FindFirstValue(ClaimTypes.Email);
+            if (string.IsNullOrEmpty(email)) return Unauthorized();
+            var user = await _context.Пользователи.FirstOrDefaultAsync(u => u.ЭлектроннаяПочта == email);
+            if (user == null) return NotFound();
+            var photo = await _context.ИзображенияПрофиля.FirstOrDefaultAsync(x => x.ID_Пользователя == user.IdПользователя && x.Основное);
+            if (photo == null)
+                return Ok(new { url = "/images/avatars/standart.png" }); // default
+            return Ok(new { url = photo.Ссылка });
+        }
+
+        [HttpGet("profilephotos")]
+        public async Task<IActionResult> GetProfilePhotos()
+        {
+            var email = User.FindFirstValue(ClaimTypes.Email);
+            if (string.IsNullOrEmpty(email)) return Unauthorized();
+            var user = await _context.Пользователи.FirstOrDefaultAsync(u => u.ЭлектроннаяПочта == email);
+            if (user == null) return NotFound();
+            var photos = await _context.ИзображенияПрофиля
+                .Where(x => x.ID_Пользователя == user.IdПользователя)
+                .OrderBy(x => x.ID_Изображения)
+                .Select(x => new { id = x.ID_Изображения, url = x.Ссылка, isMain = x.Основное })
+                .ToListAsync();
+            return Ok(photos);
+        }
+
+        [HttpPost("deleteprofilephoto")]
+        public async Task<IActionResult> DeleteProfilePhoto([FromBody] int photoId)
+        {
+            var email = User.FindFirstValue(ClaimTypes.Email);
+            if (string.IsNullOrEmpty(email)) return Unauthorized();
+            var user = await _context.Пользователи.FirstOrDefaultAsync(u => u.ЭлектроннаяПочта == email);
+            if (user == null) return NotFound();
+            var photo = await _context.ИзображенияПрофиля.FirstOrDefaultAsync(x => x.ID_Изображения == photoId && x.ID_Пользователя == user.IdПользователя);
+            if (photo == null) return NotFound();
+            // Удаляем файл физически
+            var filePath = Path.Combine(Directory.GetCurrentDirectory(), "wwwroot", photo.Ссылка.TrimStart('/').Replace('/', Path.DirectorySeparatorChar));
+            if (System.IO.File.Exists(filePath))
+                System.IO.File.Delete(filePath);
+            _context.ИзображенияПрофиля.Remove(photo);
+            await _context.SaveChangesAsync();
+            // Если удалили основное фото, сделать основным другое (если есть)
+            var other = await _context.ИзображенияПрофиля.FirstOrDefaultAsync(x => x.ID_Пользователя == user.IdПользователя);
+            if (other != null && !other.Основное)
+            {
+                other.Основное = true;
+                await _context.SaveChangesAsync();
+            }
+            return Ok();
         }
 
         private string HashPassword(string password)

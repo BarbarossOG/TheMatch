@@ -2,6 +2,10 @@ let allHobbies = [];
 let userInterests = [];
 let isEditMode = false;
 
+// === Слайдер фото профиля ===
+let profilePhotos = [];
+let currentPhotoIdx = 0;
+
 function setProfileFieldsDisabled(disabled) {
     document.getElementById('name').disabled = disabled;
     document.getElementById('height').disabled = disabled;
@@ -125,6 +129,48 @@ function saveProfile() {
     });
 }
 
+// === Загрузка и смена фото профиля ===
+function updateProfilePhotoPreview() {
+    fetch('/api/accountapi/profilephoto')
+        .then(r => r.json())
+        .then(obj => {
+            document.getElementById('imagePreview').src = obj.url;
+        });
+}
+
+function loadProfilePhotos() {
+    fetch('/api/accountapi/profilephotos')
+        .then(r => r.json())
+        .then(arr => {
+            profilePhotos = arr;
+            if (profilePhotos.length === 0) {
+                document.getElementById('imagePreview').src = '/images/avatars/standart.jpg';
+                document.getElementById('photo-prev').style.display = 'none';
+                document.getElementById('photo-next').style.display = 'none';
+            } else {
+                if (currentPhotoIdx >= profilePhotos.length) currentPhotoIdx = profilePhotos.length - 1;
+                showProfilePhoto(currentPhotoIdx);
+                document.getElementById('photo-prev').style.display = profilePhotos.length > 1 ? '' : 'none';
+                document.getElementById('photo-next').style.display = profilePhotos.length > 1 ? '' : 'none';
+            }
+        });
+}
+
+function showProfilePhoto(idx) {
+    if (profilePhotos.length === 0) {
+        document.getElementById('imagePreview').src = '/images/avatars/standart.jpg';
+        return;
+    }
+    currentPhotoIdx = idx;
+    document.getElementById('imagePreview').src = profilePhotos[idx].url + '?t=' + Date.now();
+    document.getElementById('photo-prev').style.display = profilePhotos.length > 1 ? '' : 'none';
+    document.getElementById('photo-next').style.display = profilePhotos.length > 1 ? '' : 'none';
+}
+
+function canUploadMorePhotos() {
+    return profilePhotos.length < 2;
+}
+
 document.addEventListener('DOMContentLoaded', () => {
     loadProfile();
     document.getElementById('edit-btn').addEventListener('click', e => {
@@ -152,5 +198,80 @@ document.addEventListener('DOMContentLoaded', () => {
         const selected = Array.from(document.querySelectorAll('.filter-checkboxes input[type=checkbox]:checked')).map(cb => cb.value);
         userInterests = selected;
         updateSelectedInterests(selected);
+    });
+    loadProfilePhotos();
+    // Стрелки
+    document.getElementById('photo-prev').addEventListener('click', function() {
+        if (profilePhotos.length > 1) {
+            currentPhotoIdx = (currentPhotoIdx - 1 + profilePhotos.length) % profilePhotos.length;
+            showProfilePhoto(currentPhotoIdx);
+        }
+    });
+    document.getElementById('photo-next').addEventListener('click', function() {
+        if (profilePhotos.length > 1) {
+            currentPhotoIdx = (currentPhotoIdx + 1) % profilePhotos.length;
+            showProfilePhoto(currentPhotoIdx);
+        }
+    });
+    // Кнопка удалить
+    document.querySelector('.remove-button').addEventListener('click', function() {
+        if (profilePhotos.length === 0) return;
+        const photoId = profilePhotos[currentPhotoIdx].id;
+        if (!confirm('Удалить это фото?')) return;
+        fetch('/api/accountapi/deleteprofilephoto', {
+            method: 'POST',
+            headers: {'Content-Type': 'application/json'},
+            body: JSON.stringify(photoId)
+        })
+        .then(r => {
+            if (!r.ok) return r.text().then(t => { throw new Error(t); });
+            return r.text();
+        })
+        .then(() => {
+            alert('Фото удалено!');
+            loadProfilePhotos();
+        })
+        .catch(e => alert('Ошибка удаления: ' + e.message));
+    });
+    // Обработка выбора файла (добавляем ограничение на 2 фото)
+    document.getElementById('profileImage').addEventListener('change', function() {
+        if (!canUploadMorePhotos()) {
+            alert('Можно загрузить только 2 фотографии!');
+            this.value = '';
+            return;
+        }
+        const file = this.files[0];
+        if (!file) return;
+        if (file.size > 2 * 1024 * 1024) {
+            alert('Максимальный размер файла 2 МБ');
+            return;
+        }
+        // Проверка размера изображения
+        const img = new Image();
+        img.onload = function() {
+            if (img.width !== 265 || img.height !== 350) {
+                alert('Фото должно быть размером ровно 265x350 пикселей!');
+                return;
+            }
+            const formData = new FormData();
+            formData.append('file', file);
+            fetch('/api/accountapi/uploadprofilephoto', {
+                method: 'POST',
+                body: formData
+            })
+            .then(r => {
+                if (!r.ok) return r.text().then(t => { throw new Error(t); });
+                return r.json();
+            })
+            .then(obj => {
+                alert('Фото успешно обновлено!');
+                loadProfilePhotos();
+            })
+            .catch(e => alert('Ошибка загрузки: ' + e.message));
+        };
+        img.onerror = function() {
+            alert('Ошибка чтения изображения!');
+        };
+        img.src = URL.createObjectURL(file);
     });
 }); 

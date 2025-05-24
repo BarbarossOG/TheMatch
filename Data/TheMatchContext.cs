@@ -32,6 +32,8 @@ public partial class TheMatchContext : DbContext
 
     public virtual DbSet<УвлеченияПользователя> УвлеченияПользователяs { get; set; }
 
+    public virtual DbSet<ИзображенияПрофиля> ИзображенияПрофиля { get; set; }
+
     
     protected override void OnModelCreating(ModelBuilder modelBuilder)
     {
@@ -102,6 +104,19 @@ public partial class TheMatchContext : DbContext
                 .WithMany(h => h.UserHobbies)
                 .HasForeignKey(e => e.ID_Увлечения)
                 .OnDelete(DeleteBehavior.Cascade);
+        });
+
+        modelBuilder.Entity<ИзображенияПрофиля>(entity =>
+        {
+            entity.ToTable("ИзображенияПрофиля");
+            entity.HasKey(e => e.ID_Изображения);
+            entity.Property(e => e.Ссылка).IsRequired().HasMaxLength(255);
+            entity.Property(e => e.Основное).HasDefaultValue(false);
+            entity.HasOne(e => e.Пользователь)
+                .WithMany(u => u.ИзображенияПрофиля)
+                .HasForeignKey(e => e.ID_Пользователя)
+                .OnDelete(DeleteBehavior.Cascade)
+                .HasConstraintName("FK_Изображения_Пользователь");
         });
 
         OnModelCreatingPartial(modelBuilder);

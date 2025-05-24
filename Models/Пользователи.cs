@@ -64,4 +64,6 @@ public partial class Пользователи
     public virtual ICollection<Увлечения> IdУвлечения { get; set; } = new List<Увлечения>();
 
     public virtual ICollection<УвлеченияПользователя> УвлеченияПользователяs { get; set; } = new List<УвлеченияПользователя>();
+
+    public virtual ICollection<ИзображенияПрофиля> ИзображенияПрофиля { get; set; } = new List<ИзображенияПрофиля>();
 }

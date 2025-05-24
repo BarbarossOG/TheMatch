@@ -40,8 +40,10 @@
                     <div class="col-lg-6">
                         <div class="profile-about-box">
                             <div class="p-inner-content">
-                                <div class="image-preview">
-                                    <img src="~/images/avatars/Women13.png" alt="profile" id="imagePreview">
+                                <div class="image-preview" style="position:relative; display:flex; align-items:center; justify-content:center;">
+                                    <button type="button" id="photo-prev" class="custom-button" style="position:absolute; left:-40px; top:50%; transform:translateY(-50%); display:none;">&#8592;</button>
+                                    <img src="~/images/avatars/standart.png" alt="profile" id="imagePreview" style="max-width:265px; max-height:350px; width:265px; height:350px; object-fit:cover; border-radius:8px; border:1px solid #ccc;">
+                                    <button type="button" id="photo-next" class="custom-button" style="position:absolute; right:-40px; top:50%; transform:translateY(-50%); display:none;">&#8594;</button>
                                 </div>
                             </div>
                         </div>
@@ -55,7 +57,7 @@
                                     <label for="profileImage" class="custom-button">Изменить</label>
                                     <button type="button" class="custom-button remove-button">Удалить</button>
                                 </div>
-                                <p class="upload-info">Рекомендуемый размер: 300x300 пикселей. Максимальный размер файла: 2 МБ</p>
+                                <p class="upload-info">Размер фото должен быть: 265x350 пикселей.</p>
                             </div>
                         </div>
 

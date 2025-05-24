@@ -3,6 +3,10 @@
     Layout = "_Layout";
 }
 
+<head>
+    <link rel="stylesheet" href="~/css/profileinfo.css">
+</head>
+
 <!-- ==========Breadcrumb-Section========== -->
 <section class="breadcrumb-area profile-bc-area">
     <div class="container">
@@ -66,61 +70,92 @@
                             <div class="col-md-6">
                                 <div class="my-input-box">
                                     <label for="name">Имя профиля</label>
-                                    <input type="text" id="name" class="form-control" />
+                                    <input type="text" id="name" class="form-control" disabled />
                                 </div>
                             </div>
                             <div class="col-md-6">
                                 <div class="my-input-box">
                                     <label for="birthdate">Дата рождения</label>
-                                    <input type="date" id="birthdate" class="form-control" />
+                                    <input type="date" id="birthdate" class="form-control" disabled />
                                 </div>
                             </div>
                             <div class="col-md-12">
                                 <div class="my-input-box">
-                                    <textarea id="description" class="form-control" placeholder="Напишите небольшое описание к вашему профилю..."></textarea>
+                                    <textarea id="description" class="form-control" placeholder="Напишите небольшое описание к вашему профилю..." disabled></textarea>
                                 </div>
                             </div>
                             <div class="col-md-6">
                                 <div class="my-input-box">
                                     <label for="height">Рост</label>
-                                    <input type="number" id="height" class="form-control" />
+                                    <input type="number" id="height" class="form-control" disabled />
                                 </div>
                             </div>
                             <div class="col-md-6">
                                 <div class="my-input-box">
                                     <label for="location">Местоположение</label>
-                                    <input type="text" id="location" class="form-control" />
+                                    <input type="text" id="location" class="form-control" disabled />
                                 </div>
                             </div>
                             <div class="col-md-6">
                                 <div class="my-input-box">
-                                    <label for="income">Уровень заработка</label>
-                                    <input type="text" id="income" class="form-control" />
+                                    <label for="income-select">Уровень заработка</label>
+                                    <select class="form-control" id="income-select">
+                                        <option value="">Выберите</option>
+                                        <option value="Отсутствует">Отсутствует</option>
+                                        <option value="Низкий">Низкий</option>
+                                        <option value="Ниже среднего">Ниже среднего</option>
+                                        <option value="Средний">Средний</option>
+                                        <option value="Выше среднего">Выше среднего</option>
+                                        <option value="Высокий">Высокий</option>
+                                    </select>
                                 </div>
                             </div>
                             <div class="col-md-6">
                                 <div class="my-input-box">
-                                    <label for="housing">Жильё</label>
-                                    <input type="text" id="housing" class="form-control" />
+                                    <label for="housing-select">Жильё</label>
+                                    <select class="form-control" id="housing-select">
+                                        <option value="">Выберите</option>
+                                        <option value="Есть своё">Есть своё</option>
+                                        <option value="Арендую">Арендую</option>
+                                        <option value="Живу с родителями">Живу с родителями</option>
+                                        <option value="Отсутствует">Отсутствует</option>
+                                    </select>
                                 </div>
                             </div>
                             <div class="col-md-6">
                                 <div class="my-input-box">
                                     <label for="children">Наличие детей</label>
-                                    <input type="text" id="children" class="form-control" />
-                                </div>
-                            </div>
-                            <div class="col-md-12">
-                                <div class="my-input-box">
-                                    <button type="button" class="custom-button" data-toggle="modal" data-target="#interestsModal">Выберите интересы</button>
-                                    <div id="selectedInterests" style="margin-top:10px;"></div>
+                                    <div id="children-radio">
+                                        <div class="option d-flex">
+                                            <div class="s-input mr-3">
+                                                <input type="radio" name="children_radio" id="children_no" value="Нет">
+                                                <label for="children_no">Нет</label>
+                                            </div>
+                                            <div class="s-input">
+                                                <input type="radio" name="children_radio" id="children_yes" value="Есть">
+                                                <label for="children_yes">Есть</label>
+                                            </div>
+                                        </div>
+                                    </div>
                                 </div>
                             </div>
                         </div>
                     </div>
                 </div>
-                <div class="buttons  mt-30">
-                    <button type="button" id="save-btn" class="custom-button">Сохранить</button>
+                <div class="input-info-box mt-30">
+                    <div class="header">
+                        Ваши интересы
+                    </div>
+                    <div class="content">
+                        <div class="member-interests-block">
+                            <div class="member-interests-list" id="interests-list-box"></div>
+                        </div>
+                        <button type="button" class="custom-button" id="choose-interests-btn" data-toggle="modal" data-target="#interestsModal">Выбрать интересы</button>
+                    </div>
+                </div>
+                <div class="buttons mt-30">
+                    <button type="button" id="edit-btn" class="custom-button">Изменить</button>
+                    <button type="button" id="save-btn" class="custom-button" style="display:none;">Сохранить</button>
                     <button class="custom-button2">Отменить</button>
                 </div>
             </div>
@@ -141,17 +176,7 @@
         </button>
       </div>
       <div class="modal-body">
-        <div class="filter-checkboxes small-checkboxes">
-            <label><input type="checkbox" value="Путешествия"> Путешествия</label>
-            <label><input type="checkbox" value="Музыка"> Музыка</label>
-            <label><input type="checkbox" value="Спорт"> Спорт</label>
-            <label><input type="checkbox" value="Кино"> Кино</label>
-            <label><input type="checkbox" value="Книги"> Книги</label>
-            <label><input type="checkbox" value="Еда"> Еда</label>
-            <label><input type="checkbox" value="Танцы"> Танцы</label>
-            <label><input type="checkbox" value="Театр"> Театр</label>
-            <label><input type="checkbox" value="IT"> IT</label>
-        </div>
+        <div class="filter-checkboxes small-checkboxes"></div>
       </div>
       <div class="modal-footer">
         <button type="button" class="btn btn-secondary" data-dismiss="modal">Закрыть</button>

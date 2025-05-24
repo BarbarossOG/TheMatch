@@ -1,0 +1,91 @@
+/* Стили для интересов пользователя (теги) */
+.member-interest {
+    display: inline-block;
+    border: 1px solid #bdbdbd;
+    border-radius: 8px;
+    padding: 3px 10px;
+    margin: 2px 6px 2px 0;
+    background: #f7f7f7;
+    font-size: 0.98em;
+    color: #333;
+}
+
+/* Маленькие чекбоксы в модалке */
+.filter-checkboxes input[type=checkbox] {
+    transform: scale(0.3);
+    margin-right: 2px;
+}
+/* Одинаковый размер радиокнопок для наличия детей */
+#children-radio input[type=radio] {
+    transform: scale(0.9);
+    margin-right: 5px;
+}
+#children-radio label {
+    font-size: 1em;
+    margin-right: 10px;
+}
+
+.custom-button-edit {
+    background: #7c32ff !important;
+    color: #fff !important;
+    border: none !important;
+    cursor: pointer;
+    opacity: 1;
+}
+.custom-button-disabled {
+    background: #cccccc !important;
+    color: #888 !important;
+    border: none !important;
+    cursor: not-allowed;
+    opacity: 0.7;
+}
+
+.interests-grid {
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    gap: 10px 10px;
+    margin-top: 10px;
+    margin-bottom: 10px;
+}
+.interests-grid label {
+    display: flex;
+    align-items: center;
+    font-size: 0.98em;
+    cursor: pointer;
+    user-select: none;
+    margin: 0;
+    word-break: break-word;
+    white-space: normal;
+    line-height: 1.2;
+}
+.interests-grid input[type=checkbox] {
+    appearance: none;
+    -webkit-appearance: none;
+    width: 42px;
+    height: 42px;
+    border: 2px solid #bdbdbd;
+    border-radius: 4px;
+    background: #fff;
+    margin-right: 8px;
+    display: inline-block;
+    vertical-align: middle;
+    position: relative;
+    cursor: pointer;
+    transition: border-color 0.2s, box-shadow 0.2s;
+}
+.interests-grid input[type=checkbox]:checked {
+    background: #7c32ff;
+    border-color: #7c32ff;
+}
+.interests-grid input[type=checkbox]:checked::after {
+    content: '';
+    display: block;
+    position: absolute;
+    left: 4px;
+    top: 1px;
+    width: 6px;
+    height: 12px;
+    border: solid #fff;
+    border-width: 0 3px 3px 0;
+    transform: rotate(45deg);
+} 

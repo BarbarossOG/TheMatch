@@ -130,7 +130,7 @@ namespace TheMatch.Controllers
             if (user == null) return NotFound();
 
             user.Имя = dto.Имя;
-            user.Рост = (byte)(dto.Рост ?? 0);
+            user.Рост = dto.Рост;
             user.ДатаРождения = dto.ДатаРождения.HasValue
                 ? DateOnly.FromDateTime(dto.ДатаРождения.Value)
                 : user.ДатаРождения;
@@ -143,16 +143,11 @@ namespace TheMatch.Controllers
             // --- Обновление интересов ---
             if (dto.Интересы != null)
             {
-                // Получаем все id увлечений по названиям
                 var allHobbies = await _context.Увлечения
                     .Where(h => dto.Интересы.Contains(h.НазваниеУвлечения))
                     .ToListAsync();
-
-                // Удаляем старые связи
                 var oldLinks = _context.УвлеченияПользователяs.Where(x => x.ID_Пользователя == user.IdПользователя);
                 _context.УвлеченияПользователяs.RemoveRange(oldLinks);
-
-                // Добавляем новые связи
                 foreach (var hobby in allHobbies)
                 {
                     _context.УвлеченияПользователяs.Add(new УвлеченияПользователя
@@ -162,7 +157,7 @@ namespace TheMatch.Controllers
                     });
                 }
             }
-
+            _context.Entry(user).State = EntityState.Modified;
             await _context.SaveChangesAsync();
             return Ok();
         }

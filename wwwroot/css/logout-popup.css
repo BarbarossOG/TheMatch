@@ -1,0 +1,37 @@
+/* Стили для всплывающего окна выхода */
+.logout-popup {
+    display: none;
+    position: fixed;
+    left: 0; right: 0; top: 0; bottom: 0;
+    background: rgba(0,0,0,0.4);
+    z-index: 9999;
+    align-items: center;
+    justify-content: center;
+}
+.logout-popup .popup-content {
+    background: #fff;
+    padding: 32px 24px;
+    border-radius: 12px;
+    text-align: center;
+    min-width: 280px;
+    box-shadow: 0 4px 24px rgba(0,0,0,0.12);
+}
+.logout-popup .custom-button {
+    margin-top: 18px;
+}
+
+.log-reg .logout-illustration {
+    background: url(../images/reg.jpg);
+    background-repeat: no-repeat;
+    background-position: center;
+    background-size: cover;
+    height: 100vh;
+    width: 43%;
+    position: absolute;
+    left: 0px;
+    top: 0px;
+    z-index: -1;
+}
+.log-reg .logout-illustration img {
+    display: none;
+} 

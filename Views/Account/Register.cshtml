@@ -73,10 +73,6 @@
                                     Детали учетной записи
                                 </h4>
                                 <div class="form-group">
-                                    <label for="">Имя пользователя*</label>
-                                    <input type="text" class="my-form-control" placeholder="Введите имя пользователя">
-                                </div>
-                                <div class="form-group">
                                     <label for="">Электронная почта*</label>
                                     <input type="email" class="my-form-control" placeholder="Введите вашу почту">
                                 </div>
@@ -100,7 +96,7 @@
                                     <input type="date" class="my-form-control">
                                 </div>
                                 <div class="form-group">
-                                    <label for="">Я *</label>
+                                    <label for="">Я*</label>
                                     <div class="option">
                                         <div class="s-input mr-3">
                                             <input type="radio" name="gender" id="male"><label for="male">Мужчина</label>
@@ -111,32 +107,47 @@
                                     </div>
                                 </div>
                                 <div class="form-group">
-                                    <label for="">Ищу *</label>
-                                    <div class="option">
-                                        <div class="s-input mr-3">
-                                            <input type="radio" name="gender-login" id="male-login"><label
-                                                for="male-login">Мужчину</label>
-                                        </div>
-                                        <div class="s-input">
-                                            <input type="radio" name="gender-login" id="female-login"><label
-                                                for="female-login">Женщину</label>
-                                        </div>
-                                    </div>
-                                </div>
-                                <div class="form-group">
-                                    <label for="">Семейное положение*</label>
-                                    <div class="option">
-                                        <div class="s-input mr-3">
-                                            <input type="radio" name="marital" id="unmarried"><label for="unmarried">Холост/Не замужем</label>
-                                        </div>
-                                        <div class="s-input">
-                                            <input type="radio" name="marital" id="married"><label for="married">Женат/Замужем</label>
-                                        </div>
-                                    </div>
-                                </div>
-                                <div class="form-group">
                                     <label for="">Город*</label>
                                     <input type="text" class="my-form-control" placeholder="Введите ваш город">
+                                </div>
+                                <div class="form-group">
+                                    <label for="height">Рост (см)*</label>
+                                    <input type="number" class="my-form-control" id="height" name="height" placeholder="Рост" min="100" max="250">
+                                </div>
+                                <div class="form-group">
+                                    <label for="income">Уровень заработка*</label>
+                                    <select class="my-form-control" id="income" name="income">
+                                        <option value="">Выберите</option>
+                                        <option value="none">Отсутствует</option>
+                                        <option value="low">Низкий</option>
+                                        <option value="low-medium">Ниже среднего</option>
+                                        <option value="medium">Средний</option>
+                                        <option value="high-medium">Выше среднего</option>
+                                        <option value="high">Высокий</option>
+                                    </select>
+                                </div>
+                                <div class="form-group">
+                                    <label for="housing">Жильё*</label>
+                                    <select class="my-form-control" id="housing" name="housing">
+                                        <option value="">Выберите</option>
+                                        <option value="own">Есть своё</option>
+                                        <option value="rent">Арендую</option>
+                                        <option value="family">Живу с родителями</option>
+                                        <option value="none">Отсутствует</option>
+                                    </select>
+                                </div>
+                                <div class="form-group">
+                                    <label for="childs">Наличие детей*</label>
+                                    <div class="option">
+                                        <div class="s-input mr-3">
+                                            <input type="radio" name="childs" id="childs_no" value="no">
+                                            <label for="childs_no">Нет</label>
+                                        </div>
+                                        <div class="s-input">
+                                            <input type="radio" name="childs" id="childs_yes" value="yes">
+                                            <label for="childs_yes">Есть</label>
+                                        </div>
+                                    </div>
                                 </div>
                                 <button class="custom-button" type="submit">Зарегистрироваться</button>
                             </form>

@@ -49,6 +49,14 @@ document.addEventListener('DOMContentLoaded', function() {
             const id = 'city_' + city.replace(/\s/g, '_');
             box.innerHTML += `<label><input type="radio" name="cityRadio" value="${city}" id="${id}"> ${city}</label>`;
         });
+        // Обновлять selectedCity сразу при выборе
+        box.querySelectorAll('input[type=radio]').forEach(rb => {
+            rb.addEventListener('change', function() {
+                selectedCity = this.value;
+                document.getElementById('selectedCity').innerText = selectedCity || 'Не выбран';
+                console.log('Выбран город (radio):', selectedCity);
+            });
+        });
     }
 
     // --- Сохранение выбранных интересов ---
@@ -63,6 +71,7 @@ document.addEventListener('DOMContentLoaded', function() {
         const checked = document.querySelector('#citiesCheckboxes input[type=radio]:checked');
         selectedCity = checked ? checked.value : '';
         document.getElementById('selectedCity').innerText = selectedCity || 'Не выбран';
+        console.log('Выбран город:', selectedCity);
     });
 
     // --- Фильтр ---
@@ -85,7 +94,7 @@ document.addEventListener('DOMContentLoaded', function() {
             HeightMax: heightMax,
             Interests: selectedInterests
         };
-        console.log('Отправляем фильтр:', filter);
+        console.log('Фильтр для поиска анкет:', filter);
         fetch('/api/accountapi/searchmembers', {
             method: 'POST',
             headers: { 'Content-Type': 'application/json' },
@@ -93,7 +102,7 @@ document.addEventListener('DOMContentLoaded', function() {
         })
         .then(r => r.json())
         .then(arr => {
-            console.log('Ответ с сервера (members):', arr);
+            console.log('Ответ сервера (анкеты):', arr);
             members = arr;
             currentIndex = 0;
             showCurrentMember();
@@ -109,7 +118,7 @@ document.addEventListener('DOMContentLoaded', function() {
             container.innerHTML = `
             <div class="member-card">
                 <div class="member-photo-block">
-                    <img src="/images/avatars/standart.png" alt="member" class="member-photo">
+                    <img src="/images/avatars/standart.jpg" alt="member" class="member-photo">
                     <div class="member-name-age">Имя не указано</div>
                     <div class="member-actions">
                         <button class="member-action-btn skip" title="Пропустить"><span style="font-weight:bold;font-size:1.7rem;">&#10006;</span></button>
@@ -143,6 +152,7 @@ document.addEventListener('DOMContentLoaded', function() {
                     <button class="member-action-btn skip" title="Пропустить"><span style="font-weight:bold;font-size:1.7rem;">&#10006;</span></button>
                     <button class="member-action-btn like" title="Лайк"><span style="font-weight:bold;font-size:1.7rem;">&#10084;</span></button>
                     <button class="member-action-btn dislike" title="Дизлайк"><span style="font-weight:bold;font-size:1.7rem;">&#128078;</span></button>
+                    <button class="member-action-btn block" title="Заблокировать" style="margin-left:10px;color:#c0392b;font-size:1.3em;">&#128683;</button>
                 </div>
             </div>
             <div class="member-interests-block">
@@ -151,6 +161,7 @@ document.addEventListener('DOMContentLoaded', function() {
                     ${m.интересы && m.интересы.length ? m.интересы.map(i => `<span class="member-interest">${i}</span>`).join('') : '<span style="color:#888;">Нет интересов</span>'}
                 </div>
                 <div style="margin-top:18px;font-size:1.08em;">
+                    <div><b>Описание:</b> ${m.описание || '—'}</div>
                     <div><b>Рост:</b> ${m.рост || '—'} см</div>
                     <div><b>Уровень заработка:</b> ${m.уровеньЗаработка || '—'}</div>
                     <div><b>Жильё:</b> ${m.жильё || '—'}</div>
@@ -161,8 +172,20 @@ document.addEventListener('DOMContentLoaded', function() {
         </div>`;
         // Навигация по анкетам
         container.querySelector('.member-action-btn.skip').onclick = nextMember;
-        container.querySelector('.member-action-btn.like').onclick = nextMember;
-        container.querySelector('.member-action-btn.dislike').onclick = nextMember;
+        container.querySelector('.member-action-btn.like').onclick = function() {
+            sendInteraction(m.id, 2); // Лайк
+            nextMember();
+        };
+        container.querySelector('.member-action-btn.dislike').onclick = function() {
+            sendInteraction(m.id, 3); // Дизлайк
+            nextMember();
+        };
+        container.querySelector('.member-action-btn.block').onclick = function() {
+            if (confirm('Заблокировать этого пользователя?')) {
+                sendInteraction(m.id, 6); // Блокировка
+                nextMember();
+            }
+        };
     }
     function nextMember() {
         currentIndex++;
@@ -177,4 +200,19 @@ document.addEventListener('DOMContentLoaded', function() {
     heightMinInput.max = '230';
     heightMaxInput.max = '230';
     if (parseInt(heightMaxInput.value) < 230) heightMaxInput.value = '230';
-}); 
+});
+
+function sendInteraction(targetUserId, interactionTypeId) {
+    fetch('/api/accountapi/userinteraction', {
+        method: 'POST',
+        headers: { 'Content-Type': 'application/json' },
+        body: JSON.stringify({ TargetUserId: targetUserId, InteractionTypeId: interactionTypeId })
+    })
+    .then(r => {
+        if (!r.ok) return r.text().then(t => { throw new Error(t); });
+        return r.text();
+    })
+    .catch(e => {
+        alert('Ошибка взаимодействия: ' + e.message);
+    });
+} 

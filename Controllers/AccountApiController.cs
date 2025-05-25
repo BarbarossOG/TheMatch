@@ -230,7 +230,7 @@ namespace TheMatch.Controllers
             if (user == null) return NotFound();
             var photo = await _context.ИзображенияПрофиля.FirstOrDefaultAsync(x => x.ID_Пользователя == user.IdПользователя && x.Основное);
             if (photo == null)
-                return Ok(new { url = "/images/avatars/standart.png" }); // default
+                return Ok(new { url = "/images/avatars/standart.jpg" }); // default
             return Ok(new { url = photo.Ссылка });
         }
 
@@ -382,7 +382,7 @@ namespace TheMatch.Controllers
                 var query = _context.Пользователи
                     .Where(u => u.Пол == oppositeGender && u.IdПользователя != currentUser.IdПользователя);
                 if (!string.IsNullOrEmpty(filter.City))
-                    query = query.Where(u => u.Местоположение == filter.City);
+                    query = query.Where(u => u.Местоположение.Trim().ToLower() == filter.City.Trim().ToLower());
                 if (filter.HeightMin > 0)
                     query = query.Where(u => u.Рост >= filter.HeightMin);
                 if (filter.HeightMax > 0)
@@ -403,7 +403,7 @@ namespace TheMatch.Controllers
                     int matchCount = 0;
                     if (filter.Interests != null && filter.Interests.Count > 0)
                         matchCount = interests.Intersect(filter.Interests).Count();
-                    var photo = photos.FirstOrDefault(p => p.ID_Пользователя == u.IdПользователя)?.Ссылка ?? "/images/avatars/standart.png";
+                    var photo = photos.FirstOrDefault(p => p.ID_Пользователя == u.IdПользователя)?.Ссылка ?? "/images/avatars/standart.jpg";
                     return new {
                         id = u.IdПользователя,
                         имя = u.Имя,
@@ -418,6 +418,21 @@ namespace TheMatch.Controllers
                         фото = photo
                     };
                 }).OrderByDescending(x => x.совпадениеИнтересов).ToList();
+                // --- В выборке анкет ---
+                var blockedIds = await _context.ЖурналПриложения
+                    .Where(x => x.IdПользователя1 == currentUser.IdПользователя && x.IdТипВзаимодействия == 6)
+                    .Select(x => x.IdПользователя2)
+                    .ToListAsync();
+                var disliked = await _context.ЖурналПриложения
+                    .Where(x => x.IdПользователя1 == currentUser.IdПользователя && x.IdТипВзаимодействия == 3)
+                    .ToListAsync();
+                var dislikedIds = disliked
+                    .Where(x => (DateTime.Now - x.ДатаИВремя).TotalDays < 3)
+                    .Select(x => x.IdПользователя2)
+                    .ToList();
+                users = users
+                    .Where(u => !blockedIds.Contains(u.IdПользователя) && !dislikedIds.Contains(u.IdПользователя))
+                    .ToList();
                 return Ok(result);
             }
             catch (Exception ex)
@@ -431,6 +446,43 @@ namespace TheMatch.Controllers
         {
             var cities = new List<string> { "Рязань", "Москва", "Санкт-Петербург" };
             return Ok(cities);
+        }
+
+        [HttpPost("userinteraction")]
+        public async Task<IActionResult> UserInteraction([FromBody] UserInteractionDto dto)
+        {
+            try
+            {
+                var email = User.FindFirstValue(ClaimTypes.Email);
+                if (string.IsNullOrEmpty(email)) return Unauthorized();
+                var user = await _context.Пользователи.FirstOrDefaultAsync(u => u.ЭлектроннаяПочта == email);
+                if (user == null) return NotFound();
+                var target = await _context.Пользователи.FirstOrDefaultAsync(u => u.IdПользователя == dto.TargetUserId);
+                if (target == null) return NotFound();
+                var now = DateTime.Now;
+                // Можно не дублировать одинаковые действия подряд (например, не писать 2 лайка подряд)
+                var last = await _context.ЖурналПриложения
+                    .Where(x => x.IdПользователя1 == user.IdПользователя && x.IdПользователя2 == target.IdПользователя)
+                    .OrderByDescending(x => x.ДатаИВремя)
+                    .FirstOrDefaultAsync();
+                if (last == null || last.IdТипВзаимодействия != dto.InteractionTypeId)
+                {
+                    var entry = new Models.ЖурналПриложения
+                    {
+                        IdПользователя1 = user.IdПользователя,
+                        IdПользователя2 = target.IdПользователя,
+                        IdТипВзаимодействия = dto.InteractionTypeId,
+                        ДатаИВремя = now
+                    };
+                    _context.ЖурналПриложения.Add(entry);
+                    await _context.SaveChangesAsync();
+                }
+                return Ok();
+            }
+            catch (Exception ex)
+            {
+                return StatusCode(500, ex.ToString());
+            }
         }
 
         private string HashPassword(string password)

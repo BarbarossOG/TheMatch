@@ -161,7 +161,8 @@ document.addEventListener('DOMContentLoaded', function() {
                     ${m.интересы && m.интересы.length ? m.интересы.map(i => `<span class="member-interest">${i}</span>`).join('') : '<span style="color:#888;">Нет интересов</span>'}
                 </div>
                 <div style="margin-top:18px;font-size:1.08em;">
-                    <div><b>Описание:</b> ${m.описание || '—'}</div>
+                    <div><b>Описание:</b></div>
+                    <div class="member-description-box">${m.описание ? m.описание : '—'}</div>
                     <div><b>Рост:</b> ${m.рост || '—'} см</div>
                     <div><b>Уровень заработка:</b> ${m.уровеньЗаработка || '—'}</div>
                     <div><b>Жильё:</b> ${m.жильё || '—'}</div>

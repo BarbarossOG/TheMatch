@@ -415,7 +415,8 @@ namespace TheMatch.Controllers
                         город = u.Местоположение,
                         возраст = today.Year - u.ДатаРождения.Year - (today.DayOfYear < u.ДатаРождения.DayOfYear ? 1 : 0),
                         совпадениеИнтересов = matchCount,
-                        фото = photo
+                        фото = photo,
+                        описание = u.Описание
                     };
                 }).OrderByDescending(x => x.совпадениеИнтересов).ToList();
                 // --- В выборке анкет ---

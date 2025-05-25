@@ -25,15 +25,41 @@ namespace TheMatch.Controllers
         {
             double totalWeight = 0;
             double weightedSum = 0;
-            foreach (var (traitA, traitB, weight, _) in TraitGroups)
+            foreach (var (traitA, traitB, weight, name) in TraitGroups)
             {
                 if (userTraits.TryGetValue(traitA, out var aA) && userTraits.TryGetValue(traitB, out var aB) &&
                     otherTraits.TryGetValue(traitA, out var bA) && otherTraits.TryGetValue(traitB, out var bB))
                 {
-                    // Преобразуем пару в одну шкалу: (A - B) + 10 (чтобы диапазон был 0-20)
                     var userValue = (double)(aA - aB) + 10;
                     var otherValue = (double)(bA - bB) + 10;
-                    double similarity = 1 - Math.Abs(userValue - otherValue) / 20.0;
+                    double similarity;
+                    // Универсальное условие: оба выбрали "не знаю" дважды
+                    if (aA == 5 && aB == 5 && bA == 5 && bB == 5)
+                    {
+                        // similarity = случайное значение от 0.70 до 0.80 с шагом 0.01
+                        var rnd = new Random();
+                        similarity = Math.Round(0.70 + rnd.Next(0, 11) * 0.01, 2);
+                    }
+                    else if (traitA == 9 && traitB == 10) // Лидерство/Сотрудничество
+                    {
+                        similarity = Math.Abs((double)aA - (double)bA) / 20.0;
+                    }
+                    else if (traitA == 11 && traitB == 12) // Проявление внимания/Ожидание заботы
+                    {
+                        // aA — проявление внимания пользователя, bA — проявление внимания анкеты
+                        if (aA >= 17 && bA >= 17)
+                            similarity = 1.0;
+                        else if ((aA >= 17 && bA <= 10) || (aA <= 10 && bA >= 17))
+                            similarity = 0.6;
+                        else if (aA < 11 && bA < 11)
+                            similarity = 0.3;
+                        else
+                            similarity = 0.5;
+                    }
+                    else
+                    {
+                        similarity = 1 - Math.Abs(userValue - otherValue) / 20.0;
+                    }
                     weightedSum += similarity * weight;
                     totalWeight += weight;
                 }

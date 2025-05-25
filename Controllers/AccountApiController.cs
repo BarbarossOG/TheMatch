@@ -434,6 +434,10 @@ namespace TheMatch.Controllers
                     double compatibility = 0;
                     if (traitsByUser.TryGetValue(u.IdПользователя, out var otherTraits))
                         compatibility = CompatibilityHelper.CalculateCompatibility(myTraits, otherTraits);
+                    var userPhotos = photos
+                        .Where(p => p.ID_Пользователя == u.IdПользователя)
+                        .Select(p => p.Ссылка)
+                        .ToList();
                     return new {
                         id = u.IdПользователя,
                         имя = u.Имя,
@@ -446,6 +450,7 @@ namespace TheMatch.Controllers
                         возраст = today.Year - u.ДатаРождения.Year - (today.DayOfYear < u.ДатаРождения.DayOfYear ? 1 : 0),
                         совпадениеИнтересов = matchCount,
                         фото = photo,
+                        фотографии = userPhotos,
                         описание = u.Описание,
                         совместимость = compatibility
                     };

@@ -143,10 +143,26 @@ document.addEventListener('DOMContentLoaded', function() {
         }
         noMore.style.display = 'none';
         const m = members[currentIndex];
+        // Определяем массив фото: если есть m.фотографии (массив), используем его, иначе одно фото
+        const photos = Array.isArray(m.фотографии) && m.фотографии.length ? m.фотографии : [m.фото];
+        let photoIndex = 0;
+        function renderPhotoBlock() {
+            return `
+                <div class="image-preview" style="position:relative; display:flex; align-items:center; justify-content:center;">
+                    <button type="button" class="photo-prev-btn" style="position:absolute; left:-32px; top:50%; transform:translateY(-50%); display:${photos.length > 1 ? 'block' : 'none'};">&#8592;</button>
+                    <img src="${photos[photoIndex]}" alt="member" class="member-photo">
+                    <button type="button" class="photo-next-btn" style="position:absolute; right:-32px; top:50%; transform:translateY(-50%); display:${photos.length > 1 ? 'block' : 'none'};">&#8594;</button>
+                </div>
+            `;
+        }
         container.innerHTML = `
         <div class="member-card">
-            <div class="member-photo-block">
-                <img src="${m.фото}" alt="member" class="member-photo">
+            <div class="member-photo-block" id="memberPhotoBlock">
+                ${renderPhotoBlock()}
+                <div class="compatibility-rect">
+                    <span>${m.совместимость !== undefined ? Math.round(m.совместимость) + '%' : '—'}</span>
+                    <div class="compatibility-label">Совместимость</div>
+                </div>
                 <div class="member-name-age">${m.имя}, ${m.возраст}</div>
                 <div class="member-actions">
                     <button class="member-action-btn skip" title="Пропустить"><span style="font-weight:bold;font-size:1.7rem;">&#10006;</span></button>
@@ -187,6 +203,19 @@ document.addEventListener('DOMContentLoaded', function() {
                 nextMember();
             }
         };
+        // Навигация по фото
+        const photoBlock = document.getElementById('memberPhotoBlock');
+        if (photoBlock) {
+            photoBlock.addEventListener('click', function(e) {
+                if (e.target.classList.contains('photo-prev-btn')) {
+                    photoIndex = (photoIndex - 1 + photos.length) % photos.length;
+                    photoBlock.innerHTML = renderPhotoBlock() + photoBlock.innerHTML.split('</div>')[1];
+                } else if (e.target.classList.contains('photo-next-btn')) {
+                    photoIndex = (photoIndex + 1) % photos.length;
+                    photoBlock.innerHTML = renderPhotoBlock() + photoBlock.innerHTML.split('</div>')[1];
+                }
+            });
+        }
     }
     function nextMember() {
         currentIndex++;

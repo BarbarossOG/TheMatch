@@ -368,6 +368,71 @@ namespace TheMatch.Controllers
             return Ok(traits);
         }
 
+        [HttpPost("searchmembers")]
+        public async Task<IActionResult> SearchMembers([FromBody] MemberSearchDto filter)
+        {
+            try
+            {
+                var email = User.FindFirstValue(ClaimTypes.Email);
+                if (string.IsNullOrEmpty(email)) return Unauthorized();
+                var currentUser = await _context.Пользователи.FirstOrDefaultAsync(u => u.ЭлектроннаяПочта == email);
+                if (currentUser == null) return NotFound();
+                var oppositeGender = currentUser.Пол == "М" ? "Ж" : "М";
+                var today = DateTime.Today;
+                var query = _context.Пользователи
+                    .Where(u => u.Пол == oppositeGender && u.IdПользователя != currentUser.IdПользователя);
+                if (!string.IsNullOrEmpty(filter.City))
+                    query = query.Where(u => u.Местоположение == filter.City);
+                if (filter.HeightMin > 0)
+                    query = query.Where(u => u.Рост >= filter.HeightMin);
+                if (filter.HeightMax > 0)
+                    query = query.Where(u => u.Рост <= filter.HeightMax);
+                var users = await query.ToListAsync();
+                if (filter.AgeMin > 0 && filter.AgeMax > 0)
+                {
+                    var minBirth = today.AddYears(-filter.AgeMax);
+                    var maxBirth = today.AddYears(-filter.AgeMin);
+                    users = users.Where(u => u.ДатаРождения.ToDateTime(TimeOnly.MinValue) >= minBirth && u.ДатаРождения.ToDateTime(TimeOnly.MinValue) <= maxBirth).ToList();
+                }
+                // Считаем совпадения по интересам
+                var userIds = users.Select(u => u.IdПользователя).ToList();
+                var userHobbies = await _context.ПользователиНазванияУвлечений.Where(x => userIds.Contains(x.IdПользователя)).ToListAsync();
+                var photos = await _context.ИзображенияПрофиля.Where(x => userIds.Contains(x.ID_Пользователя) && x.Основное).ToListAsync();
+                var result = users.Select(u => {
+                    var interests = userHobbies.Where(h => h.IdПользователя == u.IdПользователя).Select(h => h.НазваниеУвлечения).ToList();
+                    int matchCount = 0;
+                    if (filter.Interests != null && filter.Interests.Count > 0)
+                        matchCount = interests.Intersect(filter.Interests).Count();
+                    var photo = photos.FirstOrDefault(p => p.ID_Пользователя == u.IdПользователя)?.Ссылка ?? "/images/avatars/standart.png";
+                    return new {
+                        id = u.IdПользователя,
+                        имя = u.Имя,
+                        интересы = interests,
+                        рост = u.Рост,
+                        уровеньЗаработка = u.УровеньЗаработка,
+                        жильё = u.Жильё,
+                        наличиеДетей = u.НаличиеДетей ? "Есть" : "Нет",
+                        город = u.Местоположение,
+                        возраст = today.Year - u.ДатаРождения.Year - (today.DayOfYear < u.ДатаРождения.DayOfYear ? 1 : 0),
+                        совпадениеИнтересов = matchCount,
+                        фото = photo
+                    };
+                }).OrderByDescending(x => x.совпадениеИнтересов).ToList();
+                return Ok(result);
+            }
+            catch (Exception ex)
+            {
+                return StatusCode(500, ex.ToString());
+            }
+        }
+
+        [HttpGet("allcities")]
+        public IActionResult GetAllCities()
+        {
+            var cities = new List<string> { "Рязань", "Москва", "Санкт-Петербург" };
+            return Ok(cities);
+        }
+
         private string HashPassword(string password)
         {
             using (var sha256 = SHA256.Create())

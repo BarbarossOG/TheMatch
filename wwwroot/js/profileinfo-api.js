@@ -167,8 +167,11 @@ function showProfilePhoto(idx) {
     document.getElementById('photo-next').style.display = profilePhotos.length > 1 ? '' : 'none';
 }
 
-function canUploadMorePhotos() {
-    return profilePhotos.length < 2;
+// --- Новая асинхронная проверка лимита фото ---
+async function canUploadMorePhotos() {
+    const response = await fetch('/api/accountapi/profilephotos');
+    const arr = await response.json();
+    return arr.length < 2;
 }
 
 document.addEventListener('DOMContentLoaded', () => {
@@ -234,8 +237,8 @@ document.addEventListener('DOMContentLoaded', () => {
         .catch(e => alert('Ошибка удаления: ' + e.message));
     });
     // Обработка выбора файла (добавляем ограничение на 2 фото)
-    document.getElementById('profileImage').addEventListener('change', function() {
-        if (!canUploadMorePhotos()) {
+    document.getElementById('profileImage').addEventListener('change', async function() {
+        if (!await canUploadMorePhotos()) {
             alert('Можно загрузить только 2 фотографии!');
             this.value = '';
             return;
@@ -274,4 +277,12 @@ document.addEventListener('DOMContentLoaded', () => {
         };
         img.src = URL.createObjectURL(file);
     });
-}); 
+});
+
+// --- Экспортируем функции для других страниц ---
+window.getAllHobbies = function() {
+    return fetch('/api/accountapi/allhobbies').then(r => r.json());
+}
+window.getAllCities = function() {
+    return fetch('/api/accountapi/allcities').then(r => r.json());
+} 

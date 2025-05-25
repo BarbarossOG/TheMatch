@@ -1,0 +1,180 @@
+document.addEventListener('DOMContentLoaded', function() {
+    let allInterests = [];
+    let allCities = [];
+    let selectedInterests = [];
+    let selectedCity = '';
+    let members = [];
+    let currentIndex = 0;
+
+    // --- Подгружаем интересы ---
+    fetch('/api/accountapi/allhobbies')
+        .then(r => r.json())
+        .then(arr => {
+            allInterests = arr;
+            renderInterestsCheckboxes();
+        });
+
+    // --- Подгружаем города ---
+    fetch('/api/accountapi/allcities')
+        .then(r => r.json())
+        .then(arr => {
+            allCities = arr;
+            renderCitiesCheckboxes();
+        });
+
+    // --- Рендер чекбоксов интересов ---
+    function renderInterestsCheckboxes() {
+        const box = document.getElementById('interestsCheckboxes');
+        box.innerHTML = '';
+        allInterests.forEach(interest => {
+            const id = 'interest_' + interest.replace(/\s/g, '_');
+            box.innerHTML += `<label><input type="checkbox" value="${interest}" id="${id}"> ${interest}</label>`;
+        });
+        // Ограничение до 3
+        box.querySelectorAll('input[type=checkbox]').forEach(cb => {
+            cb.addEventListener('change', function() {
+                let checked = box.querySelectorAll('input[type=checkbox]:checked');
+                if (checked.length > 3) {
+                    this.checked = false;
+                }
+            });
+        });
+    }
+
+    // --- Рендер чекбоксов городов ---
+    function renderCitiesCheckboxes() {
+        const box = document.getElementById('citiesCheckboxes');
+        box.innerHTML = '';
+        allCities.forEach(city => {
+            const id = 'city_' + city.replace(/\s/g, '_');
+            box.innerHTML += `<label><input type="radio" name="cityRadio" value="${city}" id="${id}"> ${city}</label>`;
+        });
+    }
+
+    // --- Сохранение выбранных интересов ---
+    document.getElementById('saveInterestsBtn').addEventListener('click', function() {
+        const checked = Array.from(document.querySelectorAll('#interestsCheckboxes input[type=checkbox]:checked')).map(cb => cb.value);
+        selectedInterests = checked;
+        document.getElementById('selectedInterests').innerText = checked.length ? checked.join(', ') : 'Не выбрано';
+    });
+
+    // --- Сохранение выбранного города ---
+    document.getElementById('saveCityBtn').addEventListener('click', function() {
+        const checked = document.querySelector('#citiesCheckboxes input[type=radio]:checked');
+        selectedCity = checked ? checked.value : '';
+        document.getElementById('selectedCity').innerText = selectedCity || 'Не выбран';
+    });
+
+    // --- Фильтр ---
+    document.getElementById('memberFilterForm').addEventListener('submit', function(e) {
+        e.preventDefault();
+        loadMembers();
+    });
+
+    // --- Загрузка анкет ---
+    function loadMembers() {
+        const ageMin = parseInt(document.getElementById('ageMin').value);
+        const ageMax = parseInt(document.getElementById('ageMax').value);
+        const heightMin = parseInt(document.getElementById('heightMin').value);
+        const heightMax = parseInt(document.getElementById('heightMax').value);
+        const filter = {
+            City: selectedCity,
+            AgeMin: ageMin,
+            AgeMax: ageMax,
+            HeightMin: heightMin,
+            HeightMax: heightMax,
+            Interests: selectedInterests
+        };
+        console.log('Отправляем фильтр:', filter);
+        fetch('/api/accountapi/searchmembers', {
+            method: 'POST',
+            headers: { 'Content-Type': 'application/json' },
+            body: JSON.stringify(filter)
+        })
+        .then(r => r.json())
+        .then(arr => {
+            console.log('Ответ с сервера (members):', arr);
+            members = arr;
+            currentIndex = 0;
+            showCurrentMember();
+        });
+    }
+
+    // --- Показ текущей анкеты ---
+    function showCurrentMember() {
+        const container = document.getElementById('memberCardContainer');
+        const noMore = document.getElementById('noMoreMembers');
+        console.log('Показываем анкету, members:', members, 'currentIndex:', currentIndex);
+        if (!members.length) {
+            container.innerHTML = `
+            <div class="member-card">
+                <div class="member-photo-block">
+                    <img src="/images/avatars/standart.png" alt="member" class="member-photo">
+                    <div class="member-name-age">Имя не указано</div>
+                    <div class="member-actions">
+                        <button class="member-action-btn skip" title="Пропустить"><span style="font-weight:bold;font-size:1.7rem;">&#10006;</span></button>
+                        <button class="member-action-btn like" title="Лайк"><span style="font-weight:bold;font-size:1.7rem;">&#10084;</span></button>
+                        <button class="member-action-btn dislike" title="Дизлайк"><span style="font-weight:bold;font-size:1.7rem;">&#128078;</span></button>
+                    </div>
+                </div>
+                <div class="member-interests-block">
+                    <div class="member-interests-title">Интересы</div>
+                    <div class="member-interests-list">
+                        <span style='color:#888;'>Нет интересов</span>
+                    </div>
+                </div>
+            </div>`;
+            noMore.style.display = 'block';
+            return;
+        }
+        if (currentIndex >= members.length) {
+            container.innerHTML = '';
+            noMore.style.display = 'block';
+            return;
+        }
+        noMore.style.display = 'none';
+        const m = members[currentIndex];
+        container.innerHTML = `
+        <div class="member-card">
+            <div class="member-photo-block">
+                <img src="${m.фото}" alt="member" class="member-photo">
+                <div class="member-name-age">${m.имя}, ${m.возраст}</div>
+                <div class="member-actions">
+                    <button class="member-action-btn skip" title="Пропустить"><span style="font-weight:bold;font-size:1.7rem;">&#10006;</span></button>
+                    <button class="member-action-btn like" title="Лайк"><span style="font-weight:bold;font-size:1.7rem;">&#10084;</span></button>
+                    <button class="member-action-btn dislike" title="Дизлайк"><span style="font-weight:bold;font-size:1.7rem;">&#128078;</span></button>
+                </div>
+            </div>
+            <div class="member-interests-block">
+                <div class="member-interests-title">Интересы</div>
+                <div class="member-interests-list">
+                    ${m.интересы && m.интересы.length ? m.интересы.map(i => `<span class="member-interest">${i}</span>`).join('') : '<span style="color:#888;">Нет интересов</span>'}
+                </div>
+                <div style="margin-top:18px;font-size:1.08em;">
+                    <div><b>Рост:</b> ${m.рост || '—'} см</div>
+                    <div><b>Уровень заработка:</b> ${m.уровеньЗаработка || '—'}</div>
+                    <div><b>Жильё:</b> ${m.жильё || '—'}</div>
+                    <div><b>Дети:</b> ${m.наличиеДетей || '—'}</div>
+                    <div><b>Город:</b> ${m.город || '—'}</div>
+                </div>
+            </div>
+        </div>`;
+        // Навигация по анкетам
+        container.querySelector('.member-action-btn.skip').onclick = nextMember;
+        container.querySelector('.member-action-btn.like').onclick = nextMember;
+        container.querySelector('.member-action-btn.dislike').onclick = nextMember;
+    }
+    function nextMember() {
+        currentIndex++;
+        showCurrentMember();
+    }
+
+    // --- Автозагрузка при первом входе ---
+    loadMembers();
+
+    const heightMinInput = document.getElementById('heightMin');
+    const heightMaxInput = document.getElementById('heightMax');
+    heightMinInput.max = '230';
+    heightMaxInput.max = '230';
+    if (parseInt(heightMaxInput.value) < 230) heightMaxInput.value = '230';
+}); 

@@ -231,4 +231,6 @@
     color: #fff;
     opacity: 0.93;
     letter-spacing: 0.3px;
-} 
+}
+
+/* Удаляю стили для .photo-prev-btn и .photo-next-btn */ 

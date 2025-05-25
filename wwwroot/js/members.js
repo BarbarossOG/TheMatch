@@ -146,19 +146,14 @@ document.addEventListener('DOMContentLoaded', function() {
         // Определяем массив фото: если есть m.фотографии (массив), используем его, иначе одно фото
         const photos = Array.isArray(m.фотографии) && m.фотографии.length ? m.фотографии : [m.фото];
         let photoIndex = 0;
-        function renderPhotoBlock() {
-            return `
-                <div class="image-preview" style="position:relative; display:flex; align-items:center; justify-content:center;">
-                    <button type="button" class="photo-prev-btn" style="position:absolute; left:-32px; top:50%; transform:translateY(-50%); display:${photos.length > 1 ? 'block' : 'none'};">&#8592;</button>
-                    <img src="${photos[photoIndex]}" alt="member" class="member-photo">
-                    <button type="button" class="photo-next-btn" style="position:absolute; right:-32px; top:50%; transform:translateY(-50%); display:${photos.length > 1 ? 'block' : 'none'};">&#8594;</button>
-                </div>
-            `;
-        }
         container.innerHTML = `
         <div class="member-card">
             <div class="member-photo-block" id="memberPhotoBlock">
-                ${renderPhotoBlock()}
+                <div class="image-preview" style="position:relative; display:flex; align-items:center; justify-content:center;">
+                    <button type="button" class="custom-button photo-prev-btn" style="position:absolute; left:-40px; top:50%; transform:translateY(-50%);${photos.length > 1 ? '' : 'display:none;'};width:17px;text-align:center;vertical-align:middle;">&#8592;</button>
+                    <img src="${photos[photoIndex]}" alt="member" class="member-photo" id="memberPhotoImg" style="max-width:265px; max-height:350px; width:265px; height:350px; object-fit:cover; border-radius:8px; border:1px solid #ccc;">
+                    <button type="button" class="custom-button photo-next-btn" style="position:absolute; right:-40px; top:50%; transform:translateY(-50%);${photos.length > 1 ? '' : 'display:none;'};width:17px;text-align:center;vertical-align:middle;">&#8594;</button>
+                </div>
                 <div class="compatibility-rect">
                     <span>${m.совместимость !== undefined ? Math.round(m.совместимость) + '%' : '—'}</span>
                     <div class="compatibility-label">Совместимость</div>
@@ -203,18 +198,21 @@ document.addEventListener('DOMContentLoaded', function() {
                 nextMember();
             }
         };
-        // Навигация по фото
-        const photoBlock = document.getElementById('memberPhotoBlock');
-        if (photoBlock) {
-            photoBlock.addEventListener('click', function(e) {
-                if (e.target.classList.contains('photo-prev-btn')) {
-                    photoIndex = (photoIndex - 1 + photos.length) % photos.length;
-                    photoBlock.innerHTML = renderPhotoBlock() + photoBlock.innerHTML.split('</div>')[1];
-                } else if (e.target.classList.contains('photo-next-btn')) {
-                    photoIndex = (photoIndex + 1) % photos.length;
-                    photoBlock.innerHTML = renderPhotoBlock() + photoBlock.innerHTML.split('</div>')[1];
-                }
-            });
+        // Навигация по фото (только меняем src у <img>)
+        const photoImg = document.getElementById('memberPhotoImg');
+        const prevBtn = document.querySelector('.photo-prev-btn');
+        const nextBtn = document.querySelector('.photo-next-btn');
+        if (prevBtn) {
+            prevBtn.onclick = function() {
+                photoIndex = (photoIndex - 1 + photos.length) % photos.length;
+                photoImg.src = photos[photoIndex];
+            };
+        }
+        if (nextBtn) {
+            nextBtn.onclick = function() {
+                photoIndex = (photoIndex + 1) % photos.length;
+                photoImg.src = photos[photoIndex];
+            };
         }
     }
     function nextMember() {

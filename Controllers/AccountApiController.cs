@@ -414,7 +414,10 @@ namespace TheMatch.Controllers
                 // Считаем совпадения по интересам
                 var userIds = users.Select(u => u.IdПользователя).ToList();
                 var userHobbies = await _context.ПользователиНазванияУвлечений.Where(x => userIds.Contains(x.IdПользователя)).ToListAsync();
-                var photos = await _context.ИзображенияПрофиля.Where(x => userIds.Contains(x.ID_Пользователя) && x.Основное).ToListAsync();
+                var photos = await _context.ИзображенияПрофиля
+                    .Where(x => userIds.Contains(x.ID_Пользователя))
+                    .OrderBy(x => x.ID_Изображения)
+                    .ToListAsync();
                 // --- ЧЕРТЫ ХАРАКТЕРА ---
                 var myTraits = await _context.ЧертыПользователя
                     .Where(x => x.IdПользователя == currentUser.IdПользователя)

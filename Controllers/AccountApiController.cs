@@ -10,6 +10,8 @@ using Microsoft.AspNetCore.Authentication.Cookies;
 using TheMatch.Models.Dtos;
 using System.Drawing;
 using System.Linq;
+using System.Collections.Generic;
+using System;
 
 namespace TheMatch.Controllers
 {
@@ -394,31 +396,6 @@ namespace TheMatch.Controllers
                     var maxBirth = today.AddYears(-filter.AgeMin);
                     users = users.Where(u => u.ДатаРождения.ToDateTime(TimeOnly.MinValue) >= minBirth && u.ДатаРождения.ToDateTime(TimeOnly.MinValue) <= maxBirth).ToList();
                 }
-                // Считаем совпадения по интересам
-                var userIds = users.Select(u => u.IdПользователя).ToList();
-                var userHobbies = await _context.ПользователиНазванияУвлечений.Where(x => userIds.Contains(x.IdПользователя)).ToListAsync();
-                var photos = await _context.ИзображенияПрофиля.Where(x => userIds.Contains(x.ID_Пользователя) && x.Основное).ToListAsync();
-                var result = users.Select(u => {
-                    var interests = userHobbies.Where(h => h.IdПользователя == u.IdПользователя).Select(h => h.НазваниеУвлечения).ToList();
-                    int matchCount = 0;
-                    if (filter.Interests != null && filter.Interests.Count > 0)
-                        matchCount = interests.Intersect(filter.Interests).Count();
-                    var photo = photos.FirstOrDefault(p => p.ID_Пользователя == u.IdПользователя)?.Ссылка ?? "/images/avatars/standart.jpg";
-                    return new {
-                        id = u.IdПользователя,
-                        имя = u.Имя,
-                        интересы = interests,
-                        рост = u.Рост,
-                        уровеньЗаработка = u.УровеньЗаработка,
-                        жильё = u.Жильё,
-                        наличиеДетей = u.НаличиеДетей ? "Есть" : "Нет",
-                        город = u.Местоположение,
-                        возраст = today.Year - u.ДатаРождения.Year - (today.DayOfYear < u.ДатаРождения.DayOfYear ? 1 : 0),
-                        совпадениеИнтересов = matchCount,
-                        фото = photo,
-                        описание = u.Описание
-                    };
-                }).OrderByDescending(x => x.совпадениеИнтересов).ToList();
                 // --- В выборке анкет ---
                 var blockedIds = await _context.ЖурналПриложения
                     .Where(x => x.IdПользователя1 == currentUser.IdПользователя && x.IdТипВзаимодействия == 6)
@@ -434,6 +411,45 @@ namespace TheMatch.Controllers
                 users = users
                     .Where(u => !blockedIds.Contains(u.IdПользователя) && !dislikedIds.Contains(u.IdПользователя))
                     .ToList();
+                // Считаем совпадения по интересам
+                var userIds = users.Select(u => u.IdПользователя).ToList();
+                var userHobbies = await _context.ПользователиНазванияУвлечений.Where(x => userIds.Contains(x.IdПользователя)).ToListAsync();
+                var photos = await _context.ИзображенияПрофиля.Where(x => userIds.Contains(x.ID_Пользователя) && x.Основное).ToListAsync();
+                // --- ЧЕРТЫ ХАРАКТЕРА ---
+                var myTraits = await _context.ЧертыПользователя
+                    .Where(x => x.IdПользователя == currentUser.IdПользователя)
+                    .ToDictionaryAsync(x => x.IdЧертыХарактера, x => x.Значение);
+                var allTraits = await _context.ЧертыПользователя
+                    .Where(x => userIds.Contains(x.IdПользователя))
+                    .ToListAsync();
+                var traitsByUser = allTraits
+                    .GroupBy(x => x.IdПользователя)
+                    .ToDictionary(g => g.Key, g => g.ToDictionary(t => t.IdЧертыХарактера, t => t.Значение));
+                var result = users.Select(u => {
+                    var interests = userHobbies.Where(h => h.IdПользователя == u.IdПользователя).Select(h => h.НазваниеУвлечения).ToList();
+                    int matchCount = 0;
+                    if (filter.Interests != null && filter.Interests.Count > 0)
+                        matchCount = interests.Intersect(filter.Interests).Count();
+                    var photo = photos.FirstOrDefault(p => p.ID_Пользователя == u.IdПользователя)?.Ссылка ?? "/images/avatars/standart.jpg";
+                    double compatibility = 0;
+                    if (traitsByUser.TryGetValue(u.IdПользователя, out var otherTraits))
+                        compatibility = CompatibilityHelper.CalculateCompatibility(myTraits, otherTraits);
+                    return new {
+                        id = u.IdПользователя,
+                        имя = u.Имя,
+                        интересы = interests,
+                        рост = u.Рост,
+                        уровеньЗаработка = u.УровеньЗаработка,
+                        жильё = u.Жильё,
+                        наличиеДетей = u.НаличиеДетей ? "Есть" : "Нет",
+                        город = u.Местоположение,
+                        возраст = today.Year - u.ДатаРождения.Year - (today.DayOfYear < u.ДатаРождения.DayOfYear ? 1 : 0),
+                        совпадениеИнтересов = matchCount,
+                        фото = photo,
+                        описание = u.Описание,
+                        совместимость = compatibility
+                    };
+                }).OrderByDescending(x => x.совпадениеИнтересов).ToList();
                 return Ok(result);
             }
             catch (Exception ex)

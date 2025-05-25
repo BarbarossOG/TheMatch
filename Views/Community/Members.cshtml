@@ -112,4 +112,23 @@ document.getElementById('heightMax').addEventListener('input', updateHeightValue
 window.onload = function() { updateAgeValue(); updateHeightValue(); };
 </script>
 
-<script src="/js/members.js"></script> 
+<script src="/js/members.js"></script>
+
+<style>
+.compatibility-circle {
+  width: 70px; height: 70px;
+  border-radius: 50%;
+  background: linear-gradient(135deg, #8e44ad 60%, #f1c40f 100%);
+  display: flex; flex-direction: column; align-items: center; justify-content: center;
+  color: #fff; font-size: 1.5em; font-weight: bold;
+  box-shadow: 0 2px 8px rgba(142,68,173,0.2);
+  margin: 0 auto 10px auto;
+}
+.compatibility-label {
+  font-size: 0.7em;
+  font-weight: 400;
+  margin-top: 2px;
+  color: #fff;
+  opacity: 0.8;
+}
+</style> 

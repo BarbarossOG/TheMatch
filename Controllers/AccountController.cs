@@ -45,6 +45,8 @@ namespace TheMatch.Controllers
 
         public IActionResult AccountInfoUser()
         {
+            var email = User.FindFirst(System.Security.Claims.ClaimTypes.Email)?.Value;
+            ViewBag.Email = email;
             return View();
         }
 

@@ -306,6 +306,68 @@ namespace TheMatch.Controllers
             return Ok();
         }
 
+        [HttpGet("alltraits")]
+        public async Task<IActionResult> GetAllTraits()
+        {
+            var traits = await _context.ЧертыХарактера
+                .Select(x => new { id = x.IdЧертыХарактера, name = x.НазваниеЧерты })
+                .ToListAsync();
+            return Ok(traits);
+        }
+
+        public class TraitValueDto
+        {
+            public byte TraitId { get; set; }
+            public decimal Value { get; set; }
+        }
+
+        [HttpPost("savetesttraits")]
+        public async Task<IActionResult> SaveTestTraits([FromBody] List<TraitValueDto> traits)
+        {
+            var email = User.FindFirstValue(ClaimTypes.Email);
+            if (string.IsNullOrEmpty(email)) return Unauthorized();
+            var user = await _context.Пользователи.FirstOrDefaultAsync(u => u.ЭлектроннаяПочта == email);
+            if (user == null) return NotFound();
+
+            foreach (var t in traits)
+            {
+                var existing = await _context.ЧертыПользователя.FirstOrDefaultAsync(x => x.IdПользователя == user.IdПользователя && x.IdЧертыХарактера == t.TraitId);
+                if (existing != null)
+                {
+                    existing.Значение = t.Value;
+                    _context.Entry(existing).State = EntityState.Modified;
+                }
+                else
+                {
+                    _context.ЧертыПользователя.Add(new Models.ЧертыПользователя
+                    {
+                        IdПользователя = user.IdПользователя,
+                        IdЧертыХарактера = t.TraitId,
+                        Значение = t.Value
+                    });
+                }
+            }
+            await _context.SaveChangesAsync();
+            return Ok();
+        }
+
+        [HttpGet("usertraits")]
+        public async Task<IActionResult> GetUserTraits()
+        {
+            var email = User.FindFirstValue(ClaimTypes.Email);
+            if (string.IsNullOrEmpty(email)) return Unauthorized();
+            var user = await _context.Пользователи.FirstOrDefaultAsync(u => u.ЭлектроннаяПочта == email);
+            if (user == null) return NotFound();
+            var traits = await _context.ЧертыПользователя
+                .Where(x => x.IdПользователя == user.IdПользователя)
+                .Select(x => new {
+                    id = x.IdЧертыХарактера,
+                    name = x.IdЧертыХарактераNavigation.НазваниеЧерты,
+                    value = x.Значение
+                }).ToListAsync();
+            return Ok(traits);
+        }
+
         private string HashPassword(string password)
         {
             using (var sha256 = SHA256.Create())

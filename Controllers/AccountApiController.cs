@@ -556,6 +556,29 @@ namespace TheMatch.Controllers
             return Ok(result);
         }
 
+        public class ResetPasswordDto
+        {
+            public string Email { get; set; }
+            public string Password { get; set; }
+            public string Secret { get; set; }
+        }
+
+        [HttpPost("resetpassword")]
+        public async Task<IActionResult> ResetPassword([FromBody] ResetPasswordDto dto)
+        {
+            if (dto.Secret != "password")
+                return BadRequest("Секретное слово неверно");
+            var email = dto.Email?.Trim().ToLower();
+            var user = await _context.Пользователи.FirstOrDefaultAsync(u => u.ЭлектроннаяПочта.ToLower() == email);
+            if (user == null)
+                return BadRequest("Пользователь с таким email не найден");
+            if (string.IsNullOrWhiteSpace(dto.Password) || dto.Password.Length < 6)
+                return BadRequest("Пароль должен быть не короче 6 символов");
+            user.Пароль = HashPassword(dto.Password);
+            await _context.SaveChangesAsync();
+            return Ok();
+        }
+
         private string HashPassword(string password)
         {
             using (var sha256 = SHA256.Create())

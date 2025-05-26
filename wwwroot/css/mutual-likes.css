@@ -1,0 +1,87 @@
+/* Стили для карточек взаимных лайков и сетки */
+.single-friend.mutual-compact {
+    width: 100%;
+    margin: 18px auto;
+    border: 1px solid #eee;
+    border-radius: 16px;
+    background: #fff;
+    box-shadow: 0 2px 8px rgba(142,68,173,0.06);
+    display: flex;
+    align-items: center;
+    gap: 16px;
+    padding: 14px 18px;
+    overflow: hidden;
+}
+.single-friend.mutual-compact .profile-photo {
+    width: 56px;
+    height: 56px;
+    object-fit: cover;
+    border-radius: 50%;
+    border: 1px solid #ccc;
+    flex-shrink: 0;
+}
+.single-friend.mutual-compact .content {
+    flex: 1;
+    display: flex;
+    align-items: center;
+    gap: 12px;
+    min-width: 0;
+    flex-wrap: wrap;
+}
+.single-friend.mutual-compact .name {
+    font-size: 1.08em;
+    font-weight: 600;
+    white-space: nowrap;
+    overflow: hidden;
+    text-overflow: ellipsis;
+}
+.single-friend.mutual-compact .connnect-btn {
+    white-space: nowrap;
+    min-width: 0;
+    max-width: 100%;
+    overflow: hidden;
+    text-overflow: ellipsis;
+    padding: 6px 18px;
+    font-size: 1em;
+    border-radius: 20px;
+    border: 1px solid #8e44ad;
+    color: #8e44ad;
+    background: #fff;
+    transition: background 0.2s, color 0.2s;
+    margin-left: auto;
+}
+.single-friend.mutual-compact .connnect-btn:hover {
+    background: #8e44ad;
+    color: #fff;
+}
+
+/* Сетка 5 в ряд */
+.mutual-likes-row {
+    display: flex;
+    flex-wrap: wrap;
+    margin-left: -10px;
+    margin-right: -10px;
+}
+.col-1-5 {
+    width: 20%;
+    padding-left: 10px;
+    padding-right: 10px;
+    box-sizing: border-box;
+    display: flex;
+    justify-content: flex-start;
+}
+.col-1-5:only-child {
+    width: 100%;
+}
+@media (max-width: 1200px) {
+    .col-1-5 { width: 25%; }
+}
+@media (max-width: 900px) {
+    .col-1-5 { width: 33.3333%; }
+}
+@media (max-width: 700px) {
+    .col-1-5 { width: 50%; }
+}
+@media (max-width: 500px) {
+    .col-1-5 { width: 100%; }
+} 

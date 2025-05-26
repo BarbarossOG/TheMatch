@@ -12,6 +12,7 @@ using System.Drawing;
 using System.Linq;
 using System.Collections.Generic;
 using System;
+using Microsoft.Data.SqlClient;
 
 namespace TheMatch.Controllers
 {
@@ -508,6 +509,51 @@ namespace TheMatch.Controllers
             {
                 return StatusCode(500, ex.ToString());
             }
+        }
+
+        [HttpGet("mutuallikes")]
+        public async Task<IActionResult> GetMutualLikes()
+        {
+            var email = User.FindFirstValue(ClaimTypes.Email);
+            if (string.IsNullOrEmpty(email)) return Unauthorized();
+            var user = await _context.Пользователи.FirstOrDefaultAsync(u => u.ЭлектроннаяПочта == email);
+            if (user == null) return NotFound();
+
+            // Находим id пользователей, которым я поставил лайк (или суперлайк)
+            var myLikes = await _context.ЖурналПриложения
+                .Where(x => x.IdПользователя1 == user.IdПользователя && (x.IdТипВзаимодействия == 2 || x.IdТипВзаимодействия == 1))
+                .Select(x => x.IdПользователя2)
+                .ToListAsync();
+
+            // Находим id пользователей, которые поставили лайк (или суперлайк) мне
+            var likesToMe = await _context.ЖурналПриложения
+                .Where(x => x.IdПользователя2 == user.IdПользователя && (x.IdТипВзаимодействия == 2 || x.IdТипВзаимодействия == 1))
+                .Select(x => x.IdПользователя1)
+                .ToListAsync();
+
+            // Взаимные лайки — пересечение
+            var mutualIds = myLikes.Intersect(likesToMe).ToList();
+
+            if (!mutualIds.Any())
+                return Ok(new List<object>());
+
+            var users = await _context.Пользователи
+                .Where(u => mutualIds.Contains(u.IdПользователя))
+                .ToListAsync();
+
+            var photos = await _context.ИзображенияПрофиля
+                .Where(p => mutualIds.Contains(p.ID_Пользователя))
+                .GroupBy(p => p.ID_Пользователя)
+                .Select(g => new { Id = g.Key, Photo = g.OrderBy(p => p.ID_Изображения).FirstOrDefault().Ссылка })
+                .ToListAsync();
+
+            var result = users.Select(u => new {
+                id = u.IdПользователя,
+                имя = u.Имя,
+                фото = photos.FirstOrDefault(p => p.Id == u.IdПользователя)?.Photo ?? "/images/avatars/standart.jpg"
+            }).ToList();
+
+            return Ok(result);
         }
 
         private string HashPassword(string password)

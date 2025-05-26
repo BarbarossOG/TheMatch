@@ -34,6 +34,8 @@ public partial class TheMatchContext : DbContext
 
     public virtual DbSet<ИзображенияПрофиля> ИзображенияПрофиля { get; set; }
 
+    public virtual DbSet<Переписка> Переписка { get; set; }
+
     
     protected override void OnModelCreating(ModelBuilder modelBuilder)
     {

@@ -1,0 +1,48 @@
+@{
+    ViewData["Title"] = "Переписки";
+    Layout = "_Layout";
+}
+
+<!-- ==========Banner-Section========== -->
+<section class="breadcrumb-area profile-bc-area">
+    <div class="container">
+        <div class="content">
+            <h2 class="title extra-padding">
+                Переписки
+            </h2>
+            <ul class="breadcrumb-list extra-padding">
+                <li class="breadcrumb-item"><a asp-controller="Home" asp-action="Index">Главная</a></li>
+                <li>
+                    Переписки
+                </li>
+            </ul>
+        </div>
+    </div>
+</section>
+<!-- ==========Banner-Section========== -->
+
+<section class="community-section inner-page">
+    <div class="container">
+        <div class="row" style="min-height: 600px;">
+            <div class="col-lg-4 col-md-5 col-12">
+                <div class="chat-dialogs-list" id="chatDialogsList">
+                    <!-- Список диалогов подгружается через JS -->
+                </div>
+            </div>
+            <div class="col-lg-8 col-md-7 col-12">
+                <div class="chat-messages-block" id="chatMessagesBlock">
+                    <div class="chat-placeholder">Выберите диалог слева, чтобы начать переписку</div>
+                </div>
+                <form id="chatSendForm" class="chat-send-form d-none">
+                    <div class="input-group">
+                        <input type="text" class="form-control" id="chatMessageInput" maxlength="250" placeholder="Введите сообщение..." autocomplete="off">
+                        <button class="btn btn-primary" type="submit">Отправить</button>
+                    </div>
+                </form>
+            </div>
+        </div>
+    </div>
+</section>
+
+<link rel="stylesheet" href="~/css/chats.css">
+<script src="~/js/chats.js"></script> 

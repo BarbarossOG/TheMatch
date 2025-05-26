@@ -22,185 +22,21 @@
 <!-- ==========Breadcrumb-Section========== -->
 
 <!-- ==========Community-Section========== -->
-<section class="community-section inner-page">
+<section class="community-section inner-page" style="border-top: none;">
     <div class="container">
         <div class="row">
             <div class="col-lg-12">
                 <div class="top-filter">
-                    <div class="left">
-                        <a href="#" data-toggle="modal" data-target="#exampleModalCenter">
-                            <i class="fas fa-sliders-h"></i>  Фильтр
-                        </a>
-                    </div>
+                    <!-- Кнопка фильтра удалена -->
                 </div>
             </div>
         </div>
-        <div class="row">
-            <div class="col-lg-6">
-                <div class="single-friend">
-                    <img src="~/images/profile/friend1.png" alt="">
-                    <div class="content">
-                        <a href="single-profile.html" class="name">
-                            Валя Карнавал
-                            <span class="isvarify">
-                                <i class="fas fa-check-circle"></i>
-                            </span>
-                        </a>
-                        <p class="date">
-                            день назад
-                        </p>
-                        <a href="single-profile.html" class="connnect-btn">
-                            Связаться
-                        </a>
-                    </div>
-                </div>
-            </div>
-            <div class="col-lg-6">
-                <div class="single-friend">
-                    <img src="~/images/profile/friend2.png" alt="">
-                    <div class="content">
-                        <a href="single-profile.html" class="name">
-                            Лиза Рязанская
-                            <span class="isvarify">
-                                <i class="fas fa-check-circle"></i>
-                            </span>
-                        </a>
-                        <p class="date">
-                            день назад
-                        </p>
-                        <a href="single-profile.html" class="connnect-btn">
-                            Связаться
-                        </a>
-                    </div>
-                </div>
-            </div>
-            <div class="col-lg-6">
-                <div class="single-friend">
-                    <img src="~/images/profile/friend3.png" alt="">
-                    <div class="content">
-                        <a href="single-profile.html" class="name">
-                            Вика Воробьёва
-                            <span class="isvarify">
-                                <i class="fas fa-check-circle"></i>
-                            </span>
-                        </a>
-                        <p class="date">
-                            месяц назад
-                        </p>
-                        <a href="single-profile.html" class="connnect-btn">
-                            Связаться
-                        </a>
-                    </div>
-                </div>
-            </div>
-            <div class="col-lg-6">
-                <div class="single-friend">
-                    <img src="~/images/profile/friend4.png" alt="">
-                    <div class="content">
-                        <a href="single-profile.html" class="name">
-                            Дарья Доскова
-                            <span class="isvarify">
-                                <i class="fas fa-check-circle"></i>
-                            </span>
-                        </a>
-                        <p class="date">
-                            час назад
-                        </p>
-                        <a href="single-profile.html" class="connnect-btn">
-                            Связаться
-                        </a>
-                    </div>
-                </div>
-            </div>
-        </div>
-        <div class="row">
-            <div class="col-lg-12">
-                <div class="pagination-area text-center">
-                    <a href="#"><i class="fas fa-angle-double-left"></i><span></span></a>
-                    <a href="#">1</a>
-                    <a href="#">2</a>
-                    <a href="#" class="active">3</a>
-                    <a href="#">4</a>
-                    <a href="#">5</a>
-                    <a href="#"><i class="fas fa-angle-double-right"></i></a>
-                </div>
-            </div>
+        <div class="row" id="mutualLikesContainer">
+            <!-- Карточки пользователей будут подгружаться сюда -->
         </div>
     </div>
 </section>
 <!-- ==========Community-Sectionn========== -->
 
-<!-- Filter Modal -->
-<div class="modal fade filter-p" id="exampleModalCenter" tabindex="-1" role="dialog" aria-labelledby="exampleModalCenterTitle" aria-hidden="true">
-    <div class="modal-dialog modal-dialog-centered" role="document">
-        <div class="modal-content">
-            <div class="modal-header justify-content-between">
-                <h6 class="modal-title" id="exampleModalCenterTitle">Фильтр</h6>
-                <button type="button" class="close" data-dismiss="modal" aria-label="Close">
-                    <span aria-hidden="true">&times;</span>
-                </button>
-            </div>
-            <div class="modal-body">
-                <div class="join-now-box">
-                    <div class="single-option age">
-                        <p class="title">
-                            Возраст :
-                        </p>
-                        <div class="option">
-                            <div class="s-input mr-3">
-                                <select class="select-bar">
-                                    <option value="">18</option>
-                                    <option value="">25</option>
-                                    <option value="">30</option>
-                                </select>
-                            </div>
-                            <div class="separator">
-                                -
-                            </div>
-                            <div class="s-input ml-3">
-                                <select class="select-bar">
-                                    <option value="">24</option>
-                                    <option value="">30</option>
-                                    <option value="">35</option>
-                                </select>
-                            </div>
-                        </div>
-                    </div>
-                    <div class="single-option last">
-                        <p class="title">
-                            Из какой страны :
-                        </p>
-                        <div class="option">
-                            <div class="s-input country">
-                                <select class="select-bar">
-                                    <option>Выберите страну</option>
-                                    <option value="">Россия</option>
-                                    <option value="">Япония</option>
-                                    <option value="">Без разницы</option>
-                                </select>
-                            </div>
-                        </div>
-                    </div>
-                    <div class="single-option last">
-                        <p class="title">
-                            Из какого города :
-                        </p>
-                        <div class="option">
-                            <div class="s-input city">
-                                <select class="select-bar">
-                                    <option>Выберите город</option>
-                                    <option value="">Рязань</option>
-                                    <option value="">Москва</option>
-                                    <option value="">Без разницы</option>
-                                </select>
-                            </div>
-                        </div>
-                    </div>
-                    <div class="joun-button">
-                        <button class="custom-button">Поиск</button>
-                    </div>
-                </div>
-            </div>
-        </div>
-    </div>
-</div>
+<link rel="stylesheet" href="~/css/mutual-likes.css">
+<script src="~/js/mutual-likes.js"></script>

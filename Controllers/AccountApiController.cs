@@ -13,6 +13,7 @@ using System.Linq;
 using System.Collections.Generic;
 using System;
 using Microsoft.Data.SqlClient;
+using BCrypt.Net;
 
 namespace TheMatch.Controllers
 {
@@ -45,7 +46,7 @@ namespace TheMatch.Controllers
                 Жильё = dto.Жильё,
                 НаличиеДетей = dto.НаличиеДетей,
                 ЭлектроннаяПочта = dto.ЭлектроннаяПочта,
-                Пароль = HashPassword(dto.Пароль)
+                Пароль = BCrypt.Net.BCrypt.HashPassword(dto.Пароль)
             };
 
             try
@@ -69,7 +70,7 @@ namespace TheMatch.Controllers
             if (user == null)
                 return Unauthorized("Пользователь не найден");
 
-            if (user.Пароль != HashPassword(dto.Пароль))
+            if (!BCrypt.Net.BCrypt.Verify(dto.Пароль, user.Пароль))
                 return Unauthorized("Неверный пароль");
 
             // Создаём куку
@@ -284,13 +285,13 @@ namespace TheMatch.Controllers
             if (string.IsNullOrEmpty(email)) return Unauthorized();
             var user = await _context.Пользователи.FirstOrDefaultAsync(u => u.ЭлектроннаяПочта == email);
             if (user == null) return NotFound();
-            if (user.Пароль != HashPassword(dto.OldPassword))
+            if (!BCrypt.Net.BCrypt.Verify(dto.OldPassword, user.Пароль))
                 return BadRequest("Старый пароль неверен");
             if (dto.NewPassword != dto.ConfirmPassword)
                 return BadRequest("Пароли не совпадают");
             if (dto.NewPassword.Length < 6)
                 return BadRequest("Пароль должен быть не короче 6 символов");
-            user.Пароль = HashPassword(dto.NewPassword);
+            user.Пароль = BCrypt.Net.BCrypt.HashPassword(dto.NewPassword);
             await _context.SaveChangesAsync();
             return Ok();
         }
@@ -574,19 +575,9 @@ namespace TheMatch.Controllers
                 return BadRequest("Пользователь с таким email не найден");
             if (string.IsNullOrWhiteSpace(dto.Password) || dto.Password.Length < 6)
                 return BadRequest("Пароль должен быть не короче 6 символов");
-            user.Пароль = HashPassword(dto.Password);
+            user.Пароль = BCrypt.Net.BCrypt.HashPassword(dto.Password);
             await _context.SaveChangesAsync();
             return Ok();
-        }
-
-        private string HashPassword(string password)
-        {
-            using (var sha256 = SHA256.Create())
-            {
-                var bytes = Encoding.UTF8.GetBytes(password);
-                var hash = sha256.ComputeHash(bytes);
-                return Convert.ToBase64String(hash);
-            }
         }
     }
 } 

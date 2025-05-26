@@ -45,7 +45,7 @@ public partial class Пользователи
     [StringLength(255)]
     public string ЭлектроннаяПочта { get; set; } = null!;
 
-    [StringLength(64)]
+    [StringLength(100)]
     [Unicode(false)]
     public string Пароль { get; set; } = null!;
 

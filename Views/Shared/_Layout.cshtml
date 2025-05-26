@@ -58,30 +58,35 @@
                 </div>
                 <ul class="menu">
                     <li>
-                    <li>
                         <a asp-controller="Home" asp-action="Index">Главная</a>
                     </li>
-                    </li>
-                    <li>
-                        <a href="#">Знакомства</a>
-                        <ul class="submenu">
-                            <li>
-                                <a asp-controller="Community" asp-action="Members">Смотреть анкеты</a>
-                            </li>
-                            <li>
-                                <a asp-controller="Community" asp-action="Likes">Взаимные симпатии</a>
-                            </li>
-                            <li>
-                                <a asp-controller="Community" asp-action="Chats">Переписки</a>
-                            </li>
-                        </ul>
-                    </li>
-                    <li>
-                        <a asp-controller="Account" asp-action="Login">Вход</a>
-                    </li>
-                    <li>
-                        <a asp-controller="Account" asp-action="Register">Регистрация</a>
-                    </li>
+                    @{
+                        var isAuth = User?.Identity?.IsAuthenticated ?? false;
+                    }
+                    @if (isAuth) {
+                        <li>
+                            <a href="#">Знакомства</a>
+                            <ul class="submenu">
+                                <li>
+                                    <a asp-controller="Community" asp-action="Members">Смотреть анкеты</a>
+                                </li>
+                                <li>
+                                    <a asp-controller="Community" asp-action="Likes">Взаимные симпатии</a>
+                                </li>
+                                <li>
+                                    <a asp-controller="Community" asp-action="Chats">Переписки</a>
+                                </li>
+                            </ul>
+                        </li>
+                    }
+                    @if (!isAuth) {
+                        <li>
+                            <a asp-controller="Account" asp-action="Login">Вход</a>
+                        </li>
+                        <li>
+                            <a asp-controller="Account" asp-action="Register">Регистрация</a>
+                        </li>
+                    }
                     <li>
                         <a href="#">Страницы</a>
                         <ul class="submenu">

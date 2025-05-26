@@ -1,3 +1,7 @@
+@if (User?.Identity?.IsAuthenticated ?? false) {
+    <text><script>window.location='/';</script></text>
+}
+
 @{
     ViewData["Title"] = "Вход";
     Layout = null;

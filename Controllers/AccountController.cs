@@ -1,6 +1,7 @@
 using System.Diagnostics;
 using Microsoft.AspNetCore.Mvc;
 using TheMatch.Models;
+using TheMatch.Models.Dtos;
 
 namespace TheMatch.Controllers
 {

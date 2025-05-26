@@ -12,22 +12,17 @@ namespace TheMatch.Controllers
             _logger = logger;
         }
 
-        public IActionResult Index()
-        {
-            return View();
-        }
-
-        public IActionResult Single()
-        {
-            return View();
-        }
-
         public IActionResult Members()
         {
             return View();
         }
 
         public IActionResult Likes()
+        {
+            return View();
+        }
+
+        public IActionResult Chats()
         {
             return View();
         }

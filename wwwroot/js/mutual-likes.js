@@ -13,7 +13,7 @@ document.addEventListener('DOMContentLoaded', function() {
                         <img src=\"${u.фото}\" alt=\"\" class=\"profile-photo\">
                         <div class=\"content\">
                             <span class=\"name\">${u.имя}</span>
-                            <a href=\"#\" class=\"connnect-btn\">Связаться</a>
+                            <a href=\"/Community/Chats?userId=${u.id}\" class=\"connnect-btn\">Связаться</a>
                         </div>
                     </div>
                 </div>

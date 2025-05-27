@@ -579,5 +579,49 @@ namespace TheMatch.Controllers
             await _context.SaveChangesAsync();
             return Ok();
         }
+
+        [HttpGet("likedtome")]
+        public async Task<IActionResult> GetLikedToMe()
+        {
+            var email = User.FindFirstValue(ClaimTypes.Email);
+            if (string.IsNullOrEmpty(email)) return Unauthorized();
+            var user = await _context.Пользователи.FirstOrDefaultAsync(u => u.ЭлектроннаяПочта == email);
+            if (user == null) return NotFound();
+
+            // Пользователи, которые лайкнули меня (или суперлайк)
+            var likesToMe = await _context.ЖурналПриложения
+                .Where(x => x.IdПользователя2 == user.IdПользователя && (x.IdТипВзаимодействия == 2 || x.IdТипВзаимодействия == 1))
+                .Select(x => x.IdПользователя1)
+                .ToListAsync();
+
+            // Кому я уже поставил лайк/дизлайк/блокировку
+            var myActions = await _context.ЖурналПриложения
+                .Where(x => x.IdПользователя1 == user.IdПользователя && likesToMe.Contains(x.IdПользователя2) && (x.IdТипВзаимодействия == 2 || x.IdТипВзаимодействия == 3 || x.IdТипВзаимодействия == 6))
+                .Select(x => x.IdПользователя2)
+                .ToListAsync();
+
+            // Оставляем только тех, кому я ещё не ответил
+            var pendingIds = likesToMe.Except(myActions).ToList();
+            if (!pendingIds.Any())
+                return Ok(new List<object>());
+
+            var users = await _context.Пользователи
+                .Where(u => pendingIds.Contains(u.IdПользователя))
+                .ToListAsync();
+
+            var photos = await _context.ИзображенияПрофиля
+                .Where(p => pendingIds.Contains(p.ID_Пользователя))
+                .GroupBy(p => p.ID_Пользователя)
+                .Select(g => new { Id = g.Key, Photo = g.OrderBy(p => p.ID_Изображения).FirstOrDefault().Ссылка })
+                .ToListAsync();
+
+            var result = users.Select(u => new {
+                id = u.IdПользователя,
+                имя = u.Имя,
+                фото = photos.FirstOrDefault(p => p.Id == u.IdПользователя)?.Photo ?? "/images/avatars/standart.jpg"
+            }).ToList();
+
+            return Ok(result);
+        }
     }
 } 

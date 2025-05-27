@@ -13,7 +13,7 @@
             <ul class="breadcrumb-list extra-padding">
                 <li class="breadcrumb-item"><a asp-controller="Home" asp-action="Index">Главная</a></li>
                 <li>
-                    Взаимные симпатии
+                    Лайки
                 </li>
             </ul>
         </div>
@@ -21,22 +21,30 @@
 </section>
 <!-- ==========Breadcrumb-Section========== -->
 
+<!-- ==========Tabs========== -->
+<div class="likes-tabs-container" style="margin: 30px auto 0; max-width: 700px; display: flex; justify-content: center; gap: 18px;">
+    <button class="likes-tab-btn active" id="tabWhoLikedMe">Узнать кто лайкнул</button>
+    <button class="likes-tab-btn" id="tabMutualLikes">Взаимные симпатии</button>
+</div>
+
 <!-- ==========Community-Section========== -->
 <section class="community-section inner-page" style="border-top: none;">
     <div class="container">
         <div class="row">
             <div class="col-lg-12">
-                <div class="top-filter">
-                    <!-- Кнопка фильтра удалена -->
-                </div>
             </div>
         </div>
-        <div class="row" id="mutualLikesContainer">
-            <!-- Карточки пользователей будут подгружаться сюда -->
+        <div class="row" id="whoLikedMeContainer" style="display: block;">
+            <!-- Карточки пользователей, которые лайкнули меня -->
+        </div>
+        <div class="row" id="mutualLikesContainer" style="display: none;">
+            <!-- Карточки взаимных симпатий -->
         </div>
     </div>
 </section>
 <!-- ==========Community-Sectionn========== -->
 
 <link rel="stylesheet" href="~/css/mutual-likes.css">
-<script src="~/js/mutual-likes.js"></script>
+<link rel="stylesheet" href="~/css/members-page.css">
+<link rel="stylesheet" href="~/css/likes-tabs.css">
+<script src="~/js/likes-tabs.js"></script>

@@ -1,16 +1,18 @@
 /* Стили для карточек взаимных лайков и сетки */
 .single-friend.mutual-compact {
-    width: 100%;
+    min-width: 0;
     margin: 18px auto;
     border: 1px solid #eee;
     border-radius: 16px;
     background: #fff;
     box-shadow: 0 2px 8px rgba(142,68,173,0.06);
     display: flex;
-    align-items: center;
-    gap: 16px;
+    flex-direction: column;
+    align-items: stretch;
+    gap: 0;
     padding: 14px 18px;
     overflow: hidden;
+    min-height: 120px;
 }
 .single-friend.mutual-compact .profile-photo {
     width: 56px;
@@ -23,10 +25,12 @@
 .single-friend.mutual-compact .content {
     flex: 1;
     display: flex;
-    align-items: center;
-    gap: 12px;
+    flex-direction: column;
+    align-items: flex-start;
+    gap: 8px;
     min-width: 0;
     flex-wrap: wrap;
+    justify-content: flex-start;
 }
 .single-friend.mutual-compact .name {
     font-size: 1.08em;
@@ -34,6 +38,7 @@
     white-space: nowrap;
     overflow: hidden;
     text-overflow: ellipsis;
+    overflow-wrap: anywhere;
 }
 .single-friend.mutual-compact .connnect-btn {
     white-space: nowrap;
@@ -48,7 +53,11 @@
     color: #8e44ad;
     background: #fff;
     transition: background 0.2s, color 0.2s;
-    margin-left: auto;
+    margin-left: 0;
+    margin-top: 8px;
+    display: block;
+    width: auto;
+    overflow-wrap: anywhere;
 }
 .single-friend.mutual-compact .connnect-btn:hover {
     background: #8e44ad;
@@ -59,29 +68,38 @@
 .mutual-likes-row {
     display: flex;
     flex-wrap: wrap;
-    margin-left: -10px;
-    margin-right: -10px;
+    /* margin-left: -10px; */
+    /* margin-right: -10px; */
 }
 .col-1-5 {
-    width: 20%;
+    flex: 1 1 240px;
+    min-width: 220px;
+    max-width: 320px;
     padding-left: 10px;
     padding-right: 10px;
     box-sizing: border-box;
     display: flex;
+    flex-direction: column;
     justify-content: flex-start;
+    margin-bottom: 18px;
 }
 .col-1-5:only-child {
     width: 100%;
 }
 @media (max-width: 1200px) {
-    .col-1-5 { width: 25%; }
+    .col-1-5 { max-width: 350px; }
 }
 @media (max-width: 900px) {
-    .col-1-5 { width: 33.3333%; }
+    .col-1-5 { max-width: 400px; }
 }
 @media (max-width: 700px) {
-    .col-1-5 { width: 50%; }
+    .col-1-5 { max-width: 100%; }
 }
 @media (max-width: 500px) {
-    .col-1-5 { width: 100%; }
+    .col-1-5 { min-width: 100%; max-width: 100%; }
+}
+
+/* Убираем лишние полоски */
+.community-section.inner-page hr {
+    display: none;
 } 

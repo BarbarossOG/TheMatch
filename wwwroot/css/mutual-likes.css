@@ -7,6 +7,7 @@
     margin-left: 0;
     max-width: 700px;
 }
+
 .likes-tab-btn {
     padding: 7px 18px;
     font-size: 1em;
@@ -20,11 +21,12 @@
     transition: background 0.2s, color 0.2s, border 0.2s;
     outline: none;
 }
-.likes-tab-btn.active, .likes-tab-btn:hover {
-    background: #8e44ad;
-    color: #fff;
-    border-color: #8e44ad;
-}
+
+    .likes-tab-btn.active, .likes-tab-btn:hover {
+        background: #8e44ad;
+        color: #fff;
+        border-color: #8e44ad;
+    }
 
 /* Убираем лишние полоски (hr, border) */
 .community-section.inner-page {
@@ -34,7 +36,8 @@
 /* Стили для карточек взаимных лайков и сетки */
 .single-friend.mutual-compact {
     min-width: 0;
-    margin: 18px auto;
+    margin: 18px 0;
+    width: 100%;
     border: 1px solid #eee;
     border-radius: 16px;
     background: #fff;
@@ -48,42 +51,47 @@
     min-height: 80px;
     height: 100%;
 }
-.single-friend.mutual-compact .profile-photo {
-    width: 56px;
-    height: 56px;
-    object-fit: cover;
-    border-radius: 50%;
-    border: 1px solid #ccc;
-    flex-shrink: 0;
-}
-.single-friend.mutual-compact .content {
-    display: flex;
-    flex-direction: row;
-    align-items: center;
-    gap: 12px;
-    min-width: 0;
-    flex-wrap: nowrap;
-    justify-content: flex-start;
-}
-.single-friend.mutual-compact .name {
-    font-size: 1.08em;
-    font-weight: 600;
-    white-space: nowrap;
-    overflow: visible;
-    text-overflow: unset;
-}
-.single-friend.mutual-compact .connnect-btn {
-    margin-left: auto;
-    white-space: nowrap;
-    flex-shrink: 0;
-}
+
+    .single-friend.mutual-compact .profile-photo {
+        width: 56px;
+        height: 56px;
+        object-fit: cover;
+        border-radius: 50%;
+        border: 1px solid #ccc;
+        flex-shrink: 0;
+    }
+
+    .single-friend.mutual-compact .content {
+        display: flex;
+        flex-direction: row;
+        align-items: center;
+        gap: 12px;
+        min-width: 0;
+        flex-wrap: nowrap;
+        justify-content: flex-start;
+    }
+
+    .single-friend.mutual-compact .name {
+        font-size: 1.08em;
+        font-weight: 600;
+        white-space: nowrap;
+        overflow: visible;
+        text-overflow: unset;
+    }
+
+    .single-friend.mutual-compact .connnect-btn {
+        margin-left: auto;
+        white-space: nowrap;
+        flex-shrink: 0;
+    }
 
 /* Сетка 5 в ряд */
 .mutual-likes-row {
     display: grid;
-    grid-template-columns: repeat(2, 1fr);
+    grid-template-columns: repeat(3, 1fr);
     gap: 20px;
 }
+
 .col-1-5, .col-1-5:first-child {
     width: 100% !important;
     min-width: 0 !important;
@@ -95,17 +103,29 @@
     box-sizing: border-box !important;
     padding: 0 !important;
 }
+
 .single-friend.mutual-compact {
     height: 100%;
     display: flex;
     flex-direction: row;
     align-items: center;
 }
-@media (max-width: 900px) {
+
+@media (max-width: 1200px) {
+    .mutual-likes-row {
+        grid-template-columns: repeat(2, 1fr);
+    }
+}
+
+@media (max-width: 700px) {
     .mutual-likes-row {
         grid-template-columns: 1fr;
     }
 }
+
 @media (max-width: 500px) {
-    .col-1-5 { min-width: 100%; max-width: 100%; }
+    .col-1-5 {
+        min-width: 100%;
+        max-width: 100%;
+    }
 }

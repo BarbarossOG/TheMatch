@@ -413,6 +413,29 @@ namespace TheMatch.Controllers
                 users = users
                     .Where(u => !blockedIds.Contains(u.IdПользователя) && !dislikedIds.Contains(u.IdПользователя))
                     .ToList();
+                // Исключаем пользователей с взаимным лайком менее недели назад
+                var myLikes = await _context.ЖурналПриложения
+                    .Where(x => x.IdПользователя1 == currentUser.IdПользователя && (x.IdТипВзаимодействия == 2 || x.IdТипВзаимодействия == 1))
+                    .Select(x => new { x.IdПользователя2, x.ДатаИВремя })
+                    .ToListAsync();
+                var likesToMe = await _context.ЖурналПриложения
+                    .Where(x => x.IdПользователя2 == currentUser.IdПользователя && (x.IdТипВзаимодействия == 2 || x.IdТипВзаимодействия == 1))
+                    .Select(x => new { x.IdПользователя1, x.ДатаИВремя })
+                    .ToListAsync();
+                var mutualLikeDict = new Dictionary<int, DateTime>();
+                foreach (var myLike in myLikes)
+                {
+                    var theirLike = likesToMe.FirstOrDefault(x => x.IdПользователя1 == myLike.IdПользователя2);
+                    if (theirLike != null)
+                    {
+                        // Берём дату самого позднего лайка из пары
+                        var lastLikeDate = myLike.ДатаИВремя > theirLike.ДатаИВремя ? myLike.ДатаИВремя : theirLike.ДатаИВремя;
+                        mutualLikeDict[myLike.IdПользователя2] = lastLikeDate;
+                    }
+                }
+                var now = DateTime.Now;
+                var mutualIdsRecent = mutualLikeDict.Where(x => (now - x.Value).TotalDays < 7).Select(x => x.Key).ToList();
+                users = users.Where(u => !mutualIdsRecent.Contains(u.IdПользователя)).ToList();
                 // Считаем совпадения по интересам
                 var userIds = users.Select(u => u.IdПользователя).ToList();
                 var userHobbies = await _context.ПользователиНазванияУвлечений.Where(x => userIds.Contains(x.IdПользователя)).ToListAsync();

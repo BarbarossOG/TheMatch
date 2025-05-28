@@ -282,4 +282,20 @@
   .member-card {
     padding: 10px 2px;
   }
+}
+
+#saveInterestsBtn {
+    background: #8e44ad;
+    color: #fff;
+    border: none;
+    border-radius: 8px;
+    padding: 12px 0;
+    font-size: 1.1rem;
+    font-weight: 600;
+    cursor: pointer;
+    transition: background 0.2s;
+    width: 100%;
+}
+#saveInterestsBtn:hover {
+    background: #6c3483;
 } 

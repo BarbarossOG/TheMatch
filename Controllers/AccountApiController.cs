@@ -646,5 +646,14 @@ namespace TheMatch.Controllers
 
             return Ok(result);
         }
+
+        [HttpGet("checkemail")]
+        public async Task<IActionResult> CheckEmail([FromQuery] string email)
+        {
+            if (string.IsNullOrWhiteSpace(email))
+                return BadRequest("Email не указан");
+            var exists = await _context.Пользователи.AnyAsync(u => u.ЭлектроннаяПочта.ToLower() == email.Trim().ToLower());
+            return Ok(new { exists });
+        }
     }
 } 

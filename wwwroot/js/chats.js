@@ -79,13 +79,14 @@ document.addEventListener('DOMContentLoaded', function() {
         fetch(`/api/chatapi/messages/${dialogId}`)
             .then(r => r.json())
             .then(arr => {
+                console.log('myId:', myId, arr.map(m => [m.idСообщения, m.idОтправителя, m.прочитано]));
                 if (!arr.length) {
                     messagesBlock.innerHTML = '<div class="chat-placeholder">Сообщений пока нет. Напишите первым!</div>';
                 } else {
                     messagesBlock.innerHTML = arr.map(m => `
-                        <div class="chat-message ${m.idОтправителя===myId?'sent':'received'}">
+                        <div class="chat-message ${m.idОтправителя===myId?'sent':'received'}${m.прочитано ? ' read' : ''}">
                             <div class="text">${escapeHtml(m.текст)}</div>
-                            <div class="date">${formatDate(m.датаОтправки)}</div>
+                            <div class="date">${formatDate(m.датаОтправки)}${m.idОтправителя===myId && m.прочитано ? ' <span style=\"color:#888;font-size:0.95em;vertical-align:middle;\">&#10003;&#10003;</span>' : ''}</div>
                         </div>
                     `).join('');
                 }
@@ -107,7 +108,9 @@ document.addEventListener('DOMContentLoaded', function() {
         if (pollInterval) clearInterval(pollInterval);
         pollInterval = setInterval(() => loadMessages(currentDialogId, false), 4000);
         // Пометить как прочитанные
-        fetch(`/api/chatapi/read/${currentDialogId}`, {method:'POST'});
+        fetch(`/api/chatapi/read/${currentDialogId}`, {method:'POST'}).then(()=>{
+            loadMessages(currentDialogId, false);
+        });
     });
 
     // Отправка сообщения

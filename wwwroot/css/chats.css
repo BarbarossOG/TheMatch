@@ -79,6 +79,14 @@
     border-radius: 16px 16px 16px 4px;
     color: #512da8;
 }
+.chat-message.sent.read {
+    background: #d1b3e0;
+    transition: background 0.2s;
+}
+.chat-message.received.read {
+    background: #d6d1e7;
+    transition: background 0.2s;
+}
 .chat-message .text {
     padding: 10px 16px;
     font-size: 1.08em;

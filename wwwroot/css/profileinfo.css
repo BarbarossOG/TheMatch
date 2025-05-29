@@ -169,4 +169,20 @@
 .filter-checkboxes.small-checkboxes input[type=checkbox]:focus {
     outline: none;
     box-shadow: 0 0 0 2px #cbb6f7;
+}
+
+#saveInterestsBtn {
+    background: #8e44ad;
+    color: #fff;
+    border: none;
+    border-radius: 8px;
+    padding: 12px 0;
+    font-size: 1.1rem;
+    font-weight: 600;
+    cursor: pointer;
+    transition: background 0.2s;
+    width: 100%;
+}
+#saveInterestsBtn:hover {
+    background: #6c3483;
 } 

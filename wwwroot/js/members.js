@@ -6,20 +6,29 @@ document.addEventListener('DOMContentLoaded', function() {
     let members = [];
     let currentIndex = 0;
 
-    // --- Подгружаем интересы ---
-    fetch('/api/accountapi/allhobbies')
+    // --- Проверка допуска к просмотру анкет ---
+    fetch('/api/accountapi/canviewmembers')
         .then(r => r.json())
-        .then(arr => {
-            allInterests = arr;
-            renderInterestsCheckboxes();
-        });
+        .then(res => {
+            if (!res.canView) {
+                document.querySelector('.member-main-container').innerHTML = `<div style="margin:60px auto;max-width:500px;padding:32px 24px;background:#fff;border-radius:16px;box-shadow:0 2px 16px rgba(142,68,173,0.08);font-size:1.25em;text-align:center;color:#8e44ad;">${res.reason}</div>`;
+                return;
+            }
+            // --- Подгружаем интересы ---
+            fetch('/api/accountapi/allhobbies')
+                .then(r => r.json())
+                .then(arr => {
+                    allInterests = arr;
+                    renderInterestsCheckboxes();
+                });
 
-    // --- Подгружаем города ---
-    fetch('/api/accountapi/allcities')
-        .then(r => r.json())
-        .then(arr => {
-            allCities = arr;
-            renderCitiesCheckboxes();
+            // --- Подгружаем города ---
+            fetch('/api/accountapi/allcities')
+                .then(r => r.json())
+                .then(arr => {
+                    allCities = arr;
+                    renderCitiesCheckboxes();
+                });
         });
 
     // --- Рендер чекбоксов интересов ---

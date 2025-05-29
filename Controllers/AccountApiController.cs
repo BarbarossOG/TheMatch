@@ -655,5 +655,23 @@ namespace TheMatch.Controllers
             var exists = await _context.Пользователи.AnyAsync(u => u.ЭлектроннаяПочта.ToLower() == email.Trim().ToLower());
             return Ok(new { exists });
         }
+
+        [HttpGet("canviewmembers")]
+        public async Task<IActionResult> CanViewMembers()
+        {
+            var email = User.FindFirstValue(ClaimTypes.Email);
+            if (string.IsNullOrEmpty(email)) return Unauthorized();
+            var user = await _context.Пользователи.FirstOrDefaultAsync(u => u.ЭлектроннаяПочта == email);
+            if (user == null) return NotFound();
+            var hasPhoto = await _context.ИзображенияПрофиля.AnyAsync(x => x.ID_Пользователя == user.IdПользователя);
+            var hasTraits = await _context.ЧертыПользователя.AnyAsync(x => x.IdПользователя == user.IdПользователя);
+            if (!hasPhoto && !hasTraits)
+                return Ok(new { canView = false, reason = "Загрузите хотя бы 1 фото и пройдите тест, чтобы просматривать анкеты." });
+            if (!hasPhoto)
+                return Ok(new { canView = false, reason = "Загрузите хотя бы 1 фото, чтобы просматривать анкеты." });
+            if (!hasTraits)
+                return Ok(new { canView = false, reason = "Пройдите тест, чтобы просматривать анкеты." });
+            return Ok(new { canView = true });
+        }
     }
 } 

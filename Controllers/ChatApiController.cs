@@ -262,6 +262,15 @@ namespace TheMatch.Controllers
             if (dateEntries.Any())
                 _context.ЖурналПриложения.RemoveRange(dateEntries);
 
+            // Удалить взаимодействия типа 2 (лайк) между пользователями
+            var likeEntries = await _context.ЖурналПриложения
+                .Where(x =>
+                    (x.IdПользователя1 == myId && x.IdПользователя2 == targetUserId && x.IdТипВзаимодействия == 2) ||
+                    (x.IdПользователя1 == targetUserId && x.IdПользователя2 == myId && x.IdТипВзаимодействия == 2)
+                ).ToListAsync();
+            if (likeEntries.Any())
+                _context.ЖурналПриложения.RemoveRange(likeEntries);
+
             await _context.SaveChangesAsync();
             return Ok();
         }

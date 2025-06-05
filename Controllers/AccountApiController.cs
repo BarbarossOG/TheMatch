@@ -483,6 +483,18 @@ namespace TheMatch.Controllers
                         совместимость = compatibility
                     };
                 }).OrderByDescending(x => x.совпадениеИнтересов).ToList();
+                // --- Проверка на взаимное свидание (тип 7) ---
+                var dateTo = await _context.ЖурналПриложения
+                    .Where(x => x.IdПользователя1 == currentUser.IdПользователя && x.IdТипВзаимодействия == 7)
+                    .Select(x => x.IdПользователя2)
+                    .ToListAsync();
+                var dateFrom = await _context.ЖурналПриложения
+                    .Where(x => x.IdПользователя2 == currentUser.IdПользователя && x.IdТипВзаимодействия == 7)
+                    .Select(x => x.IdПользователя1)
+                    .ToListAsync();
+                var mutualDate = dateTo.Intersect(dateFrom).ToList();
+                if (mutualDate.Any())
+                    return Ok(new { canView = false, reason = "У вас есть взаимное свидание. Просмотр анкет недоступен." });
                 return Ok(result);
             }
             catch (Exception ex)
@@ -672,6 +684,32 @@ namespace TheMatch.Controllers
             if (!hasTraits)
                 return Ok(new { canView = false, reason = "Пройдите тест, чтобы просматривать анкеты." });
             return Ok(new { canView = true });
+        }
+
+        [HttpPost("removedate")]
+        public async Task<IActionResult> RemoveMutualDate()
+        {
+            var email = User.FindFirstValue(ClaimTypes.Email);
+            if (string.IsNullOrEmpty(email)) return Unauthorized();
+            var user = await _context.Пользователи.FirstOrDefaultAsync(u => u.ЭлектроннаяПочта == email);
+            if (user == null) return NotFound();
+            var myId = user.IdПользователя;
+            // Найти взаимное свидание
+            var dateTo = await _context.ЖурналПриложения.Where(x => x.IdПользователя1 == myId && x.IdТипВзаимодействия == 7).ToListAsync();
+            var dateFrom = await _context.ЖурналПриложения.Where(x => x.IdПользователя2 == myId && x.IdТипВзаимодействия == 7).ToListAsync();
+            var mutual = dateTo.Where(x => dateFrom.Any(y => y.IdПользователя1 == x.IdПользователя2 && y.IdПользователя2 == x.IdПользователя1)).ToList();
+            if (!mutual.Any()) return Ok(); // Нет взаимного свидания
+            foreach (var entry in mutual)
+            {
+                var reverse = dateFrom.FirstOrDefault(y => y.IdПользователя1 == entry.IdПользователя2 && y.IdПользователя2 == entry.IdПользователя1);
+                if (reverse != null)
+                {
+                    _context.ЖурналПриложения.Remove(entry);
+                    _context.ЖурналПриложения.Remove(reverse);
+                }
+            }
+            await _context.SaveChangesAsync();
+            return Ok();
         }
     }
 } 

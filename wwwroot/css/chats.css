@@ -138,6 +138,38 @@
     background: #6c3483;
 }
 
+.dialog-actions {
+    margin-left: auto;
+    display: flex;
+    gap: 6px;
+    align-items: center;
+}
+.btn-dialog {
+    border: none;
+    background: transparent;
+    color: #8e44ad;
+    font-size: 1.25em;
+    cursor: pointer;
+    padding: 2px 6px;
+    border-radius: 6px;
+    transition: background 0.15s, color 0.15s;
+}
+.btn-dialog:hover {
+    background: #f3e9ff;
+    color: #6c3483;
+}
+.btn-dialog-block {
+    color: #e74c3c;
+}
+.btn-dialog-block:hover {
+    background: #fdecea;
+    color: #c0392b;
+}
+.btn-dialog:disabled {
+    opacity: 0.5;
+    cursor: not-allowed;
+}
+
 @media (max-width: 991px) {
     .chat-dialogs-list, .chat-messages-block {
         min-height: 340px;

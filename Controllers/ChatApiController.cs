@@ -39,7 +39,7 @@ namespace TheMatch.Controllers
             if (user == null) return Unauthorized();
             var myId = user.IdПользователя;
 
-            // Найти всех пользователей с взаимным лайком (как в GetMutualLikes)
+            // Найти всех пользователей с взаимным лайком 
             var myLikes = await _context.ЖурналПриложения
                 .Where(x => x.IdПользователя1 == myId && (x.IdТипВзаимодействия == 2 || x.IdТипВзаимодействия == 1))
                 .Select(x => x.IdПользователя2)
@@ -50,7 +50,40 @@ namespace TheMatch.Controllers
                 .Select(x => x.IdПользователя1)
                 .ToListAsync();
 
-            var mutualIds = myLikes.Intersect(likesToMe).ToList();
+            // Исключить заблокированных мной пользователей
+            var blockedIds = await _context.ЖурналПриложения
+                .Where(x => x.IdПользователя1 == myId && x.IdТипВзаимодействия == 6)
+                .Select(x => x.IdПользователя2)
+                .ToListAsync();
+
+            var mutualIds = myLikes.Intersect(likesToMe).Except(blockedIds).ToList();
+
+            // --- Проверка на взаимное свидание (тип 7) ---
+            var dateTo = await _context.ЖурналПриложения
+                .Where(x => x.IdПользователя1 == myId && x.IdТипВзаимодействия == 7)
+                .Select(x => x.IdПользователя2)
+                .ToListAsync();
+            var dateFrom = await _context.ЖурналПриложения
+                .Where(x => x.IdПользователя2 == myId && x.IdТипВзаимодействия == 7)
+                .Select(x => x.IdПользователя1)
+                .ToListAsync();
+            var mutualDate = dateTo.Intersect(dateFrom).ToList();
+            if (mutualDate.Count == 1) // только один mutual date
+            {
+                var userId = mutualDate.First();
+                var userInfo = await _context.Пользователи
+                    .Where(u => u.IdПользователя == userId)
+                    .Select(u => new {
+                        IdПользователя = u.IdПользователя,
+                        Имя = u.Имя,
+                        Фото = u.ИзображенияПрофиля.FirstOrDefault(i => i.Основное).Ссылка
+                    })
+                    .FirstOrDefaultAsync();
+                if (userInfo != null)
+                    return Ok(new[] { userInfo });
+                else
+                    return Ok(new List<object>());
+            }
 
             if (!mutualIds.Any())
                 return Ok(new List<object>());
@@ -166,6 +199,62 @@ namespace TheMatch.Controllers
             var user = _context.Пользователи.FirstOrDefault(u => u.ЭлектроннаяПочта == email);
             if (user == null) return Unauthorized();
             return Ok(new { id = user.IdПользователя });
+        }
+
+        // 5. Предложить встречаться (тип 7)
+        [HttpPost("date")]
+        public async Task<IActionResult> ProposeDate([FromBody] int targetUserId)
+        {
+            var email = User.FindFirstValue(ClaimTypes.Email);
+            var user = await _context.Пользователи.FirstOrDefaultAsync(u => u.ЭлектроннаяПочта == email);
+            if (user == null) return Unauthorized();
+            var myId = user.IdПользователя;
+            if (myId == targetUserId) return BadRequest("Нельзя выбрать себя");
+
+            // Записать действие в журнал (тип 7)
+            var now = DateTime.Now;
+            var entry = new ЖурналПриложения
+            {
+                IdПользователя1 = myId,
+                IdПользователя2 = targetUserId,
+                IdТипВзаимодействия = 7,
+                ДатаИВремя = now
+            };
+            _context.ЖурналПриложения.Add(entry);
+            await _context.SaveChangesAsync();
+
+            // Проверить встречное действие
+            var theirDate = await _context.ЖурналПриложения.AnyAsync(x => x.IdПользователя1 == targetUserId && x.IdПользователя2 == myId && x.IdТипВзаимодействия == 7);
+            return Ok(new { mutual = theirDate });
+        }
+
+        // 6. Заблокировать пользователя и удалить переписку
+        [HttpPost("block")]
+        public async Task<IActionResult> BlockUser([FromBody] int targetUserId)
+        {
+            var email = User.FindFirstValue(ClaimTypes.Email);
+            var user = await _context.Пользователи.FirstOrDefaultAsync(u => u.ЭлектроннаяПочта == email);
+            if (user == null) return Unauthorized();
+            var myId = user.IdПользователя;
+            if (myId == targetUserId) return BadRequest("Нельзя заблокировать себя");
+
+            // Записать действие в журнал (тип 6 — блокировка)
+            var now = DateTime.Now;
+            var entry = new ЖурналПриложения
+            {
+                IdПользователя1 = myId,
+                IdПользователя2 = targetUserId,
+                IdТипВзаимодействия = 6,
+                ДатаИВремя = now
+            };
+            _context.ЖурналПриложения.Add(entry);
+
+            // Удалить переписку между пользователями
+            var messages = _context.Переписка.Where(m => (m.IdОтправителя == myId && m.IdПолучателя == targetUserId) || (m.IdОтправителя == targetUserId && m.IdПолучателя == myId));
+            _context.Переписка.RemoveRange(messages);
+
+            await _context.SaveChangesAsync();
+            return Ok();
         }
     }
 } 

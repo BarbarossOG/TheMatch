@@ -3,6 +3,9 @@ document.addEventListener('DOMContentLoaded', function() {
     const messagesBlock = document.getElementById('chatMessagesBlock');
     const sendForm = document.getElementById('chatSendForm');
     const messageInput = document.getElementById('chatMessageInput');
+    const actionsBlock = document.getElementById('chatActions');
+    const btnDate = document.getElementById('btnDate');
+    const btnBlock = document.getElementById('btnBlock');
     let currentDialogId = null;
     let pollInterval = null;
     let myId = null;
@@ -55,6 +58,10 @@ document.addEventListener('DOMContentLoaded', function() {
                     <div class="chat-dialog-item${u.idПользователя===currentDialogId?' active':''}" data-id="${u.idПользователя}">
                         <img src="${u.фото||'/images/avatars/standart.jpg'}" class="avatar" alt="">
                         <span class="name">${u.имя}</span>
+                        <span class="dialog-actions${u.idПользователя===currentDialogId?'':' d-none'}">
+                            <button class="btn-dialog btn-dialog-date" title="Встречаться" data-action="date">❤</button>
+                            <button class="btn-dialog btn-dialog-block" title="Заблокировать" data-action="block">🚫</button>
+                        </span>
                     </div>
                 `).join('');
                 // Если initialUserId есть, сразу открыть этот диалог
@@ -111,6 +118,59 @@ document.addEventListener('DOMContentLoaded', function() {
         fetch(`/api/chatapi/read/${currentDialogId}`, {method:'POST'}).then(()=>{
             loadMessages(currentDialogId, false);
         });
+        // Показать кнопки только для активного диалога
+        document.querySelectorAll('.dialog-actions').forEach(el => el.classList.add('d-none'));
+        const actions = item.querySelector('.dialog-actions');
+        if (actions) actions.classList.remove('d-none');
+    });
+
+    // Делегированные обработчики для кнопок в диалоге
+    dialogsList.addEventListener('click', function(e) {
+        const btn = e.target.closest('.btn-dialog');
+        if (!btn) return;
+        const item = btn.closest('.chat-dialog-item');
+        if (!item) return;
+        const dialogId = +item.dataset.id;
+        if (btn.dataset.action === 'date') {
+            btn.disabled = true;
+            fetch('/api/chatapi/date', {
+                method: 'POST',
+                headers: {'Content-Type':'application/json'},
+                body: JSON.stringify(dialogId)
+            })
+            .then(r => r.json())
+            .then(data => {
+                if (data.mutual) {
+                    alert('У вас взаимное желание встречаться! Теперь вы не можете просматривать анкеты и писать другим пользователям.');
+                } else {
+                    alert('Вы предложили встречаться. Ждём ответа собеседника!');
+                }
+            })
+            .finally(()=>{ btn.disabled = false; });
+        }
+        if (btn.dataset.action === 'block') {
+            if (!confirm('Вы уверены, что хотите заблокировать пользователя и удалить переписку?')) return;
+            btn.disabled = true;
+            fetch('/api/chatapi/block', {
+                method: 'POST',
+                headers: {'Content-Type':'application/json'},
+                body: JSON.stringify(dialogId)
+            })
+            .then(r => {
+                if (r.ok) {
+                    alert('Пользователь заблокирован и переписка удалена.');
+                    // Удалить диалог из списка
+                    item.remove();
+                    // Если это был активный диалог — сбросить чат
+                    if (dialogId === currentDialogId) {
+                        sendForm.classList.add('d-none');
+                        messagesBlock.innerHTML = '<div class="chat-placeholder">Пользователь заблокирован</div>';
+                        currentDialogId = null;
+                    }
+                }
+            })
+            .finally(()=>{ btn.disabled = false; });
+        }
     });
 
     // Отправка сообщения

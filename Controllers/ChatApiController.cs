@@ -253,6 +253,15 @@ namespace TheMatch.Controllers
             var messages = _context.Переписка.Where(m => (m.IdОтправителя == myId && m.IdПолучателя == targetUserId) || (m.IdОтправителя == targetUserId && m.IdПолучателя == myId));
             _context.Переписка.RemoveRange(messages);
 
+            // Удалить взаимодействия типа 7 (встречаться) между пользователями
+            var dateEntries = await _context.ЖурналПриложения
+                .Where(x =>
+                    (x.IdПользователя1 == myId && x.IdПользователя2 == targetUserId && x.IdТипВзаимодействия == 7) ||
+                    (x.IdПользователя1 == targetUserId && x.IdПользователя2 == myId && x.IdТипВзаимодействия == 7)
+                ).ToListAsync();
+            if (dateEntries.Any())
+                _context.ЖурналПриложения.RemoveRange(dateEntries);
+
             await _context.SaveChangesAsync();
             return Ok();
         }
